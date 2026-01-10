@@ -268,7 +268,9 @@ export function NavBar() {
                     className="px-6 py-6 border-b border-blue-500/10 bg-gradient-to-r from-blue-500/5 to-transparent"
                   >
                     <h2 className="text-xl font-bold text-white mb-1">Menu</h2>
-                    <p className="text-xs text-slate-400">Quick access to features</p>
+                    <p className="text-xs text-slate-400">
+                      Quick access to features
+                    </p>
                   </motion.div>
 
                   <div className="flex-1 overflow-y-auto">
@@ -293,10 +295,16 @@ export function NavBar() {
                             className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-blue-500/15 transition-all duration-200 font-medium text-slate-100 hover:text-blue-300 group"
                             onClick={closeMenu}
                           >
-                            <span className="text-xl group-hover:scale-110 transition-transform">📦</span>
+                            <span className="text-xl group-hover:scale-110 transition-transform">
+                              📦
+                            </span>
                             <div>
-                              <div className="text-sm font-semibold">Marketplace</div>
-                              <div className="text-xs text-slate-500">Browse assets</div>
+                              <div className="text-sm font-semibold">
+                                Marketplace
+                              </div>
+                              <div className="text-xs text-slate-500">
+                                Browse assets
+                              </div>
                             </div>
                           </Link>
                         </motion.div>
@@ -311,10 +319,16 @@ export function NavBar() {
                             className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-blue-500/15 transition-all duration-200 font-medium text-slate-100 hover:text-blue-300 group"
                             onClick={closeMenu}
                           >
-                            <span className="text-xl group-hover:scale-110 transition-transform">🆘</span>
+                            <span className="text-xl group-hover:scale-110 transition-transform">
+                              🆘
+                            </span>
                             <div>
-                              <div className="text-sm font-semibold">Support</div>
-                              <div className="text-xs text-slate-500">Get help</div>
+                              <div className="text-sm font-semibold">
+                                Support
+                              </div>
+                              <div className="text-xs text-slate-500">
+                                Get help
+                              </div>
                             </div>
                           </Link>
                         </motion.div>
@@ -329,10 +343,14 @@ export function NavBar() {
                             className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-blue-500/15 transition-all duration-200 font-medium text-slate-100 hover:text-blue-300 group"
                             onClick={closeMenu}
                           >
-                            <span className="text-xl group-hover:scale-110 transition-transform">ℹ️</span>
+                            <span className="text-xl group-hover:scale-110 transition-transform">
+                              ℹ️
+                            </span>
                             <div>
                               <div className="text-sm font-semibold">About</div>
-                              <div className="text-xs text-slate-500">Learn more</div>
+                              <div className="text-xs text-slate-500">
+                                Learn more
+                              </div>
                             </div>
                           </Link>
                         </motion.div>
@@ -388,10 +406,16 @@ export function NavBar() {
                                 className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-blue-500/15 transition-all duration-200 font-medium text-slate-100 hover:text-blue-300 group"
                                 onClick={closeMenu}
                               >
-                                <span className="text-xl group-hover:scale-110 transition-transform">📊</span>
+                                <span className="text-xl group-hover:scale-110 transition-transform">
+                                  📊
+                                </span>
                                 <div>
-                                  <div className="text-sm font-semibold">Dashboard</div>
-                                  <div className="text-xs text-slate-500">View stats</div>
+                                  <div className="text-sm font-semibold">
+                                    Dashboard
+                                  </div>
+                                  <div className="text-xs text-slate-500">
+                                    View stats
+                                  </div>
                                 </div>
                               </Link>
                             </motion.div>
@@ -406,10 +430,16 @@ export function NavBar() {
                                 className="flex items-center gap-3 px-4 py-3 rounded-xl bg-gradient-to-r from-blue-500/30 to-blue-500/10 hover:from-blue-500/40 hover:to-blue-500/20 transition-all duration-200 font-semibold text-blue-300 group border border-blue-500/30"
                                 onClick={closeMenu}
                               >
-                                <span className="text-xl group-hover:scale-110 transition-transform">⬆️</span>
+                                <span className="text-xl group-hover:scale-110 transition-transform">
+                                  ⬆️
+                                </span>
                                 <div>
-                                  <div className="text-sm font-bold">Upload Asset</div>
-                                  <div className="text-xs text-blue-400/70">Create new</div>
+                                  <div className="text-sm font-bold">
+                                    Upload Asset
+                                  </div>
+                                  <div className="text-xs text-blue-400/70">
+                                    Create new
+                                  </div>
                                 </div>
                               </Link>
                             </motion.div>
@@ -437,10 +467,16 @@ export function NavBar() {
                                 className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-blue-500/15 transition-all duration-200 font-medium text-slate-100 hover:text-blue-300 group"
                                 onClick={closeMenu}
                               >
-                                <span className="text-xl group-hover:scale-110 transition-transform">👥</span>
+                                <span className="text-xl group-hover:scale-110 transition-transform">
+                                  👥
+                                </span>
                                 <div>
-                                  <div className="text-sm font-semibold">Groups</div>
-                                  <div className="text-xs text-slate-500">Manage groups</div>
+                                  <div className="text-sm font-semibold">
+                                    Groups
+                                  </div>
+                                  <div className="text-xs text-slate-500">
+                                    Manage groups
+                                  </div>
                                 </div>
                               </Link>
                             </motion.div>
@@ -455,10 +491,16 @@ export function NavBar() {
                                 className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-blue-500/15 transition-all duration-200 font-medium text-slate-100 hover:text-blue-300 group"
                                 onClick={closeMenu}
                               >
-                                <span className="text-xl group-hover:scale-110 transition-transform">💬</span>
+                                <span className="text-xl group-hover:scale-110 transition-transform">
+                                  💬
+                                </span>
                                 <div className="flex-1">
-                                  <div className="text-sm font-semibold">Messages</div>
-                                  <div className="text-xs text-slate-500">Conversations</div>
+                                  <div className="text-sm font-semibold">
+                                    Messages
+                                  </div>
+                                  <div className="text-xs text-slate-500">
+                                    Conversations
+                                  </div>
                                 </div>
                                 {unreadCount > 0 && (
                                   <motion.span
@@ -496,10 +538,16 @@ export function NavBar() {
                                 className="flex items-center gap-3 px-4 py-3 rounded-xl bg-gradient-to-r from-amber-500/20 to-amber-500/5 hover:from-amber-500/30 hover:to-amber-500/10 transition-all duration-200 font-semibold text-amber-400 border border-amber-500/20 group"
                                 onClick={closeMenu}
                               >
-                                <span className="text-xl group-hover:scale-110 transition-transform">⚙️</span>
+                                <span className="text-xl group-hover:scale-110 transition-transform">
+                                  ⚙️
+                                </span>
                                 <div>
-                                  <div className="text-sm font-bold">Admin Panel</div>
-                                  <div className="text-xs text-amber-300/60">Manage</div>
+                                  <div className="text-sm font-bold">
+                                    Admin Panel
+                                  </div>
+                                  <div className="text-xs text-amber-300/60">
+                                    Manage
+                                  </div>
                                 </div>
                               </Link>
                             </motion.div>
@@ -528,10 +576,16 @@ export function NavBar() {
                               className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-blue-500/15 transition-all duration-200 font-medium text-slate-100 hover:text-blue-300 group"
                               onClick={closeMenu}
                             >
-                              <span className="text-xl group-hover:scale-110 transition-transform">🔑</span>
+                              <span className="text-xl group-hover:scale-110 transition-transform">
+                                🔑
+                              </span>
                               <div>
-                                <div className="text-sm font-semibold">Sign In</div>
-                                <div className="text-xs text-slate-500">Login</div>
+                                <div className="text-sm font-semibold">
+                                  Sign In
+                                </div>
+                                <div className="text-xs text-slate-500">
+                                  Login
+                                </div>
                               </div>
                             </Link>
                           </motion.div>
@@ -546,10 +600,16 @@ export function NavBar() {
                               className="flex items-center gap-3 px-4 py-3 rounded-xl bg-gradient-to-r from-blue-500/30 to-blue-500/10 hover:from-blue-500/40 hover:to-blue-500/20 transition-all duration-200 font-semibold text-blue-300 group border border-blue-500/30"
                               onClick={closeMenu}
                             >
-                              <span className="text-xl group-hover:scale-110 transition-transform">✨</span>
+                              <span className="text-xl group-hover:scale-110 transition-transform">
+                                ✨
+                              </span>
                               <div>
-                                <div className="text-sm font-bold">Create Account</div>
-                                <div className="text-xs text-blue-400/70">Join now</div>
+                                <div className="text-sm font-bold">
+                                  Create Account
+                                </div>
+                                <div className="text-xs text-blue-400/70">
+                                  Join now
+                                </div>
                               </div>
                             </Link>
                           </motion.div>
@@ -572,7 +632,9 @@ export function NavBar() {
                         }}
                         className="w-full flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-red-500/20 transition-all duration-200 font-medium text-red-400 group"
                       >
-                        <span className="text-xl group-hover:scale-110 transition-transform">🚪</span>
+                        <span className="text-xl group-hover:scale-110 transition-transform">
+                          🚪
+                        </span>
                         <div className="text-left">
                           <div className="text-sm font-semibold">Sign Out</div>
                           <div className="text-xs text-red-300/60">Logout</div>
@@ -605,7 +667,7 @@ export function NavBar() {
             </>
           )}
         </AnimatePresence>,
-        document.body
+        document.body,
       )}
     </>
   );
