@@ -5,9 +5,17 @@ import {
   getBytes,
   deleteObject,
   getMetadata,
+  listAll,
 } from "firebase/storage";
 
 const ASSETS_BUCKET = "assets";
+
+export interface AssetFile {
+  name: string;
+  path: string;
+  size: number;
+  type: string;
+}
 
 // Upload asset file to Firebase Storage
 export async function uploadAssetFile(
