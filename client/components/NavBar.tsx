@@ -191,6 +191,12 @@ export function NavBar() {
               Marketplace
             </Link>
             <Link
+              to="/support"
+              className="block px-4 py-2 hover:bg-secondary/40 transition-colors font-medium text-sm"
+            >
+              Support
+            </Link>
+            <Link
               to="/about"
               className="block px-4 py-2 hover:bg-secondary/40 transition-colors font-medium text-sm"
             >
