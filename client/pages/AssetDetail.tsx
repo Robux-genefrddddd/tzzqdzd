@@ -149,6 +149,69 @@ export default function AssetDetail() {
     }
   };
 
+  const handleDownloadAsset = async () => {
+    if (!asset || !asset.filePaths || asset.filePaths.length === 0) {
+      toast.error("No files available for download");
+      return;
+    }
+
+    setDownloading(true);
+
+    try {
+      // If there's only one file, download it directly
+      if (asset.filePaths.length === 1) {
+        const filePath = asset.filePaths[0];
+        const fileName = filePath.split("/").pop() || "asset";
+
+        const blob = await downloadAssetFile(filePath);
+        forceDownloadFile(blob, fileName);
+
+        // Increment download count
+        if (id) {
+          await incrementAssetDownloads(id);
+          setAsset((prev) => prev ? { ...prev, downloads: prev.downloads + 1 } : null);
+        }
+
+        toast.success("Download started");
+      } else {
+        // If multiple files, download all as ZIP
+        const { zip } = await import("client-zip");
+
+        const files: Array<[string, Blob]> = [];
+        for (const filePath of asset.filePaths) {
+          try {
+            const blob = await downloadAssetFile(filePath);
+            const fileName = filePath.split("/").pop() || "file";
+            files.push([fileName, blob]);
+          } catch (err) {
+            console.error(`Error downloading file ${filePath}:`, err);
+          }
+        }
+
+        if (files.length === 0) {
+          toast.error("Failed to download files");
+          return;
+        }
+
+        const zipBlob = await zip(files);
+        forceDownloadFile(zipBlob, `${asset.name}.zip`);
+
+        // Increment download count
+        if (id) {
+          await incrementAssetDownloads(id);
+          setAsset((prev) => prev ? { ...prev, downloads: prev.downloads + 1 } : null);
+        }
+
+        toast.success("Download started");
+      }
+    } catch (error) {
+      console.error("Error downloading asset:", error);
+      toast.error("Failed to download asset");
+    } finally {
+      setDownloading(false);
+    }
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
