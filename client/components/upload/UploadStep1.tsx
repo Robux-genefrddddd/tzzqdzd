@@ -149,8 +149,8 @@ export function UploadStep1({
       </div>
 
       {/* Files Upload */}
-      <div className="space-y-3">
-        <label className="block text-sm font-medium text-foreground">
+      <div className="space-y-2">
+        <label className="block text-xs font-medium text-foreground">
           Asset Files <span className="text-destructive">*</span>
         </label>
         <div
@@ -158,10 +158,10 @@ export function UploadStep1({
           onDragLeave={handleDrag}
           onDragOver={handleDrag}
           onDrop={handleDrop}
-          className={`relative border-2 border-dashed rounded-lg p-8 text-center transition-all cursor-pointer ${
+          className={`relative border-2 border-dashed rounded-lg p-5 text-center transition-all cursor-pointer ${
             dragActive
-              ? "border-primary bg-primary/5"
-              : "border-border/30 hover:border-border/60 hover:bg-secondary/20"
+              ? "border-primary/40 bg-primary/5"
+              : "border-border/30 hover:border-border/40 hover:bg-secondary/10"
           }`}
         >
           <input
@@ -175,17 +175,17 @@ export function UploadStep1({
             }}
             className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
           />
-          <div className="space-y-3">
+          <div className="space-y-2">
             <div className="flex justify-center">
-              <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-                <UploadIcon size={24} className="text-primary" />
+              <div className="w-10 h-10 rounded-lg bg-muted/20 flex items-center justify-center">
+                <UploadIcon size={20} className="text-muted-foreground/50" />
               </div>
             </div>
             <div>
-              <p className="text-sm font-medium text-foreground">
+              <p className="text-xs font-medium text-foreground">
                 Drag and drop your files here
               </p>
-              <p className="text-xs text-muted-foreground">
+              <p className="text-xs text-muted-foreground/60">
                 or click to select (ZIP, 3D Models, Scripts, Images, Audio,
                 etc.)
               </p>
