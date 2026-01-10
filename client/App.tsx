@@ -90,12 +90,18 @@ const App = () => (
         <WarningNotificationModal />
         <BrowserRouter>
           <Routes>
+            {/* Ban Notice - no layout, fullscreen */}
+            <Route path="/banned" element={<BanNotice />} />
+
+            {/* Protected routes with ban guard */}
             <Route
               path="/"
               element={
-                <Layout>
-                  <Index />
-                </Layout>
+                <BanGuard>
+                  <Layout>
+                    <Index />
+                  </Layout>
+                </BanGuard>
               }
             />
             <Route
