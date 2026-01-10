@@ -34,7 +34,7 @@ export default function CreatorProfile() {
         // Fetch creator's public assets (published only)
         const allAssets = await getUserAssets(id);
         const publishedAssets = allAssets.filter(
-          (asset) => asset.status === "published"
+          (asset) => asset.status === "published",
         );
         setAssets(publishedAssets);
       } catch (err) {
@@ -63,7 +63,9 @@ export default function CreatorProfile() {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center space-y-4 max-w-md">
-          <h1 className="text-2xl font-bold text-foreground">Creator Not Found</h1>
+          <h1 className="text-2xl font-bold text-foreground">
+            Creator Not Found
+          </h1>
           <p className="text-muted-foreground">
             {error || "This creator doesn't exist"}
           </p>
@@ -85,7 +87,9 @@ export default function CreatorProfile() {
     totalDownloads: assets.reduce((sum, asset) => sum + asset.downloads, 0),
     avgRating:
       assets.length > 0
-        ? (assets.reduce((sum, asset) => sum + asset.rating, 0) / assets.length).toFixed(1)
+        ? (
+            assets.reduce((sum, asset) => sum + asset.rating, 0) / assets.length
+          ).toFixed(1)
         : 0,
   };
 
@@ -117,8 +121,12 @@ export default function CreatorProfile() {
             {/* Creator Info */}
             <div className="flex-1">
               <div className="mb-2">
-                <h1 className="text-3xl font-bold mb-1">{creator.displayName}</h1>
-                <p className="text-sm text-muted-foreground">@{creator.username}</p>
+                <h1 className="text-3xl font-bold mb-1">
+                  {creator.displayName}
+                </h1>
+                <p className="text-sm text-muted-foreground">
+                  @{creator.username}
+                </p>
               </div>
 
               {/* Role Badge */}
@@ -138,7 +146,9 @@ export default function CreatorProfile() {
               {/* Stats Grid */}
               <div className="grid grid-cols-3 gap-4">
                 <div className="flex flex-col">
-                  <span className="text-xs text-muted-foreground mb-1">Assets</span>
+                  <span className="text-xs text-muted-foreground mb-1">
+                    Assets
+                  </span>
                   <span className="text-lg font-bold">{stats.totalAssets}</span>
                 </div>
                 <div className="flex flex-col">
@@ -147,7 +157,9 @@ export default function CreatorProfile() {
                   </span>
                   <div className="flex items-center gap-1">
                     <Download size={14} />
-                    <span className="text-lg font-bold">{stats.totalDownloads}</span>
+                    <span className="text-lg font-bold">
+                      {stats.totalDownloads}
+                    </span>
                   </div>
                 </div>
                 <div className="flex flex-col">

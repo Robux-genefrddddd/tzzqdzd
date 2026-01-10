@@ -371,56 +371,56 @@ export default function AssetDetail() {
                 className="w-full h-full object-cover"
               />
 
-            {/* Top-right action menu */}
-            <TooltipProvider>
-              <div className="absolute top-3 right-3 flex items-center gap-2">
-                {/* Price Badge */}
-                <span
-                  className={`px-2.5 py-1 rounded-md text-xs font-medium ${
-                    asset.price && asset.price > 0
-                      ? "bg-green-500/20 text-green-400"
-                      : "bg-accent/20 text-accent"
-                  }`}
-                >
-                  {priceLabel}
-                </span>
+              {/* Top-right action menu */}
+              <TooltipProvider>
+                <div className="absolute top-3 right-3 flex items-center gap-2">
+                  {/* Price Badge */}
+                  <span
+                    className={`px-2.5 py-1 rounded-md text-xs font-medium ${
+                      asset.price && asset.price > 0
+                        ? "bg-green-500/20 text-green-400"
+                        : "bg-accent/20 text-accent"
+                    }`}
+                  >
+                    {priceLabel}
+                  </span>
 
-                {/* 3-dot Menu */}
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <button className="p-2 rounded-lg bg-black/40 hover:bg-black/60 text-white transition-colors backdrop-blur-sm border border-white/10">
-                      <MoreVertical size={16} />
-                    </button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end" className="w-48">
-                    <DropdownMenuItem onClick={handleToggleFavorite}>
-                      <Heart
-                        size={14}
-                        className="mr-2"
-                        fill={isFav ? "currentColor" : "none"}
-                      />
-                      {isFav ? "Remove from Favorites" : "Add to Favorites"}
-                    </DropdownMenuItem>
-                    <DropdownMenuItem onClick={copyAssetLink}>
-                      <Copy size={14} className="mr-2" />
-                      Copy Link
-                    </DropdownMenuItem>
-                    {user && user.uid === asset.authorId && (
-                      <>
-                        <hr className="my-1" />
-                        <DropdownMenuItem
-                          onClick={handleDeleteAsset}
-                          disabled={deletingAsset}
-                          className="text-red-400 focus:text-red-400"
-                        >
-                          <Trash2 size={14} className="mr-2" />
-                          {deletingAsset ? "Deleting..." : "Delete Asset"}
-                        </DropdownMenuItem>
-                      </>
-                    )}
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              </div>
+                  {/* 3-dot Menu */}
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <button className="p-2 rounded-lg bg-black/40 hover:bg-black/60 text-white transition-colors backdrop-blur-sm border border-white/10">
+                        <MoreVertical size={16} />
+                      </button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end" className="w-48">
+                      <DropdownMenuItem onClick={handleToggleFavorite}>
+                        <Heart
+                          size={14}
+                          className="mr-2"
+                          fill={isFav ? "currentColor" : "none"}
+                        />
+                        {isFav ? "Remove from Favorites" : "Add to Favorites"}
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={copyAssetLink}>
+                        <Copy size={14} className="mr-2" />
+                        Copy Link
+                      </DropdownMenuItem>
+                      {user && user.uid === asset.authorId && (
+                        <>
+                          <hr className="my-1" />
+                          <DropdownMenuItem
+                            onClick={handleDeleteAsset}
+                            disabled={deletingAsset}
+                            className="text-red-400 focus:text-red-400"
+                          >
+                            <Trash2 size={14} className="mr-2" />
+                            {deletingAsset ? "Deleting..." : "Delete Asset"}
+                          </DropdownMenuItem>
+                        </>
+                      )}
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </div>
               </TooltipProvider>
             </div>
           </div>
@@ -447,7 +447,9 @@ export default function AssetDetail() {
                       />
                     ))}
                   </div>
-                  <span className="font-semibold">{asset.rating.toFixed(1)}</span>
+                  <span className="font-semibold">
+                    {asset.rating.toFixed(1)}
+                  </span>
                   <span className="text-muted-foreground">
                     ({asset.reviews})
                   </span>
@@ -575,9 +577,7 @@ export default function AssetDetail() {
                       {review.createdAt.toLocaleDateString()}
                     </p>
                   </div>
-                  <p className="text-sm text-foreground/85">
-                    {review.message}
-                  </p>
+                  <p className="text-sm text-foreground/85">{review.message}</p>
                 </div>
               ))}
             </div>
@@ -587,7 +587,9 @@ export default function AssetDetail() {
               <div className="mt-4 pt-4 border-t border-border/20">
                 {userReview ? (
                   <form onSubmit={handleSubmitReview} className="space-y-2">
-                    <p className="text-xs font-semibold mb-3">Edit Your Review</p>
+                    <p className="text-xs font-semibold mb-3">
+                      Edit Your Review
+                    </p>
                     <div className="flex gap-1 mb-2">
                       {[1, 2, 3, 4, 5].map((star) => (
                         <button

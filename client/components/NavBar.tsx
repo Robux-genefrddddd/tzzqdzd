@@ -440,7 +440,10 @@ export function NavBar() {
                                 className="flex items-center gap-3 px-3 py-2 rounded-md text-sm text-foreground hover:text-primary hover:bg-white/5 transition-colors duration-150 group"
                                 onClick={closeMenu}
                               >
-                                <FileUp size={16} className="text-muted-foreground group-hover:text-primary flex-shrink-0" />
+                                <FileUp
+                                  size={16}
+                                  className="text-muted-foreground group-hover:text-primary flex-shrink-0"
+                                />
                                 <span className="font-medium">Upload</span>
                               </Link>
                             </motion.div>
@@ -490,7 +493,9 @@ export function NavBar() {
                                   size={16}
                                   className="text-muted-foreground group-hover:text-primary flex-shrink-0"
                                 />
-                                <span className="font-medium flex-1">Messages</span>
+                                <span className="font-medium flex-1">
+                                  Messages
+                                </span>
                                 {unreadCount > 0 && (
                                   <motion.span
                                     initial={{ scale: 0 }}
@@ -527,7 +532,10 @@ export function NavBar() {
                                 className="flex items-center gap-3 px-3 py-2 rounded-md text-sm text-accent hover:text-accent/80 hover:bg-white/5 transition-colors duration-150 group"
                                 onClick={closeMenu}
                               >
-                                <Shield size={16} className="text-accent flex-shrink-0" />
+                                <Shield
+                                  size={16}
+                                  className="text-accent flex-shrink-0"
+                                />
                                 <span className="font-medium">Admin</span>
                               </Link>
                             </motion.div>
@@ -574,7 +582,10 @@ export function NavBar() {
                               className="flex items-center gap-3 px-3 py-2 rounded-md text-sm text-foreground hover:text-primary hover:bg-white/5 transition-colors duration-150 group"
                               onClick={closeMenu}
                             >
-                              <Plus size={16} className="text-muted-foreground group-hover:text-primary flex-shrink-0" />
+                              <Plus
+                                size={16}
+                                className="text-muted-foreground group-hover:text-primary flex-shrink-0"
+                              />
                               <span className="font-medium">Sign Up</span>
                             </Link>
                           </motion.div>
@@ -597,7 +608,10 @@ export function NavBar() {
                         }}
                         className="w-full flex items-center gap-3 px-3 py-2 rounded-md text-sm text-muted-foreground hover:text-foreground hover:bg-white/5 transition-colors duration-150 group"
                       >
-                        <LogOut size={16} className="text-muted-foreground flex-shrink-0" />
+                        <LogOut
+                          size={16}
+                          className="text-muted-foreground flex-shrink-0"
+                        />
                         <span className="font-medium">Sign Out</span>
                       </button>
                     </motion.div>
