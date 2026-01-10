@@ -128,6 +128,16 @@ const App = () => (
               }
             />
             <Route
+              path="/creator/:id"
+              element={
+                <BanGuard>
+                  <Layout>
+                    <CreatorProfile />
+                  </Layout>
+                </BanGuard>
+              }
+            />
+            <Route
               path="/login"
               element={
                 <Layout>
