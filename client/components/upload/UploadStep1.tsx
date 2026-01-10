@@ -196,30 +196,30 @@ export function UploadStep1({
 
       {/* Files List */}
       {files.length > 0 && (
-        <div className="space-y-3">
-          <label className="text-sm font-medium text-foreground">
+        <div className="space-y-2">
+          <label className="text-xs font-medium text-foreground">
             Uploaded Files ({files.length})
           </label>
-          <div className="space-y-2">
+          <div className="space-y-1.5">
             {files.map((file) => (
               <div
                 key={file.id}
-                className="flex items-center justify-between p-3 bg-secondary/20 border border-border/30 rounded-lg"
+                className="flex items-center justify-between p-2.5 bg-secondary/10 border border-border/20 rounded-lg"
               >
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-foreground truncate">
+                  <p className="text-xs font-medium text-foreground truncate">
                     {file.name}
                   </p>
-                  <p className="text-xs text-muted-foreground">
+                  <p className="text-xs text-muted-foreground/60">
                     {formatFileSize(file.size)}
                   </p>
                 </div>
                 <button
                   type="button"
                   onClick={() => onFileRemove(file.id)}
-                  className="ml-3 p-2 hover:bg-destructive/20 rounded-lg transition-colors"
+                  className="ml-2 p-1.5 hover:bg-destructive/10 rounded transition-colors"
                 >
-                  <X size={16} className="text-muted-foreground" />
+                  <X size={14} className="text-muted-foreground/60" />
                 </button>
               </div>
             ))}
