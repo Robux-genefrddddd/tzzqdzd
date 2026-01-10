@@ -99,16 +99,16 @@ export function NavBar({
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden border-t border-border/50 py-3 space-y-1 bg-secondary/30">
+          <div className="md:hidden border-t border-border/20 py-3 space-y-1 bg-secondary/20">
             <Link
               to="/marketplace"
-              className="block px-4 py-2 hover:bg-secondary transition-colors font-medium text-sm"
+              className="block px-4 py-2 hover:bg-secondary/40 transition-colors font-medium text-sm"
             >
               Marketplace
             </Link>
             <Link
               to="/about"
-              className="block px-4 py-2 hover:bg-secondary transition-colors font-medium text-sm"
+              className="block px-4 py-2 hover:bg-secondary/40 transition-colors font-medium text-sm"
             >
               About
             </Link>
@@ -116,13 +116,13 @@ export function NavBar({
               <>
                 <Link
                   to="/dashboard"
-                  className="block px-4 py-2 hover:bg-secondary transition-colors font-medium text-sm"
+                  className="block px-4 py-2 hover:bg-secondary/40 transition-colors font-medium text-sm"
                 >
                   Dashboard
                 </Link>
                 <button
                   onClick={onLogout}
-                  className="w-full text-left px-4 py-2 text-foreground/80 hover:text-foreground hover:bg-secondary transition-colors font-medium text-sm"
+                  className="w-full text-left px-4 py-2 text-foreground/80 hover:text-foreground hover:bg-secondary/40 transition-colors font-medium text-sm"
                 >
                   Sign Out
                 </button>
@@ -131,13 +131,13 @@ export function NavBar({
               <>
                 <Link
                   to="/login"
-                  className="block px-4 py-2 hover:bg-secondary transition-colors font-medium text-sm"
+                  className="block px-4 py-2 hover:bg-secondary/40 transition-colors font-medium text-sm"
                 >
                   Sign In
                 </Link>
                 <Link
                   to="/register"
-                  className="block px-4 py-2 bg-primary text-primary-foreground font-medium text-sm hover:opacity-90 transition-all"
+                  className="block px-4 py-2 bg-primary text-primary-foreground font-medium text-sm rounded-xl hover:opacity-90 transition-all"
                 >
                   Sign Up
                 </Link>
