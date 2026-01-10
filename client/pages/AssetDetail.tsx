@@ -69,6 +69,84 @@ export default function AssetDetail() {
     fetchAssetDetails();
   }, [id, user]);
 
+  const handleSubmitReview = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!user || !userProfile) {
+      toast.error("Please sign in to leave a review");
+      return;
+    }
+
+    if (!reviewMessage.trim()) {
+      toast.error("Please write a review message");
+      return;
+    }
+
+    if (rating < 1 || rating > 5) {
+      toast.error("Please select a rating between 1 and 5 stars");
+      return;
+    }
+
+    if (!id) return;
+
+    setSubmittingReview(true);
+
+    try {
+      if (userReview) {
+        // Update existing review
+        await updateReview(userReview.id, rating, reviewMessage);
+        toast.success("Review updated successfully");
+        setUserReview({
+          ...userReview,
+          rating,
+          message: reviewMessage,
+          createdAt: new Date(),
+        });
+      } else {
+        // Create new review
+        await createReview(id, user.uid, userProfile.displayName, rating, reviewMessage);
+        toast.success("Review posted successfully");
+
+        // Reload reviews
+        const updatedReviews = await getAssetReviews(id);
+        setReviews(updatedReviews);
+
+        const newUserReview = await getUserReviewForAsset(id, user.uid);
+        setUserReview(newUserReview);
+      }
+
+      setReviewMessage("");
+      setRating(5);
+    } catch (error: any) {
+      console.error("Error submitting review:", error);
+      toast.error(error.message || "Failed to submit review");
+    } finally {
+      setSubmittingReview(false);
+    }
+  };
+
+  const handleDeleteReview = async () => {
+    if (!userReview) return;
+
+    if (!confirm("Are you sure you want to delete your review?")) return;
+
+    try {
+      await deleteReview(userReview.id);
+      toast.success("Review deleted");
+      setUserReview(null);
+      setReviewMessage("");
+      setRating(5);
+
+      if (id) {
+        const updatedReviews = await getAssetReviews(id);
+        setReviews(updatedReviews);
+      }
+    } catch (error) {
+      console.error("Error deleting review:", error);
+      toast.error("Failed to delete review");
+    }
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
