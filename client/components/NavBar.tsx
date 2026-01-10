@@ -44,7 +44,11 @@ function RoleBadge({ role }: { role?: string }) {
       <Tooltip>
         <TooltipTrigger asChild>
           <div className="p-1 hover:scale-110 transition-transform cursor-help">
-            <Shield size={16} className="text-red-400" />
+            <img
+              src="https://cdn.builder.io/api/v1/image/assets%2F6efe5c975de742218614020f75c6e644%2Fb5f004c16bc84ddd977be6eea56f8f20?format=webp&width=800"
+              alt="Admin"
+              className="w-4 h-4"
+            />
           </div>
         </TooltipTrigger>
         <TooltipContent side="bottom" className="text-xs">
