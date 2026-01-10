@@ -35,6 +35,8 @@ const ASSET_CATEGORIES = [
 ];
 
 export default function Upload() {
+  const navigate = useNavigate();
+  const { user, userProfile } = useAuth();
   const [files, setFiles] = useState<FilePreview[]>([]);
   const [formData, setFormData] = useState({
     name: "",
@@ -45,6 +47,7 @@ export default function Upload() {
   });
   const [dragActive, setDragActive] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [uploadSuccess, setUploadSuccess] = useState(false);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
