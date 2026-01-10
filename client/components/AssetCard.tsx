@@ -58,7 +58,9 @@ export function AssetCard({ asset }: AssetCardProps) {
             <div className="flex items-center justify-between text-xs text-muted-foreground border-t border-border/40 pt-2 mb-2">
               <div className="flex items-center gap-1">
                 <Star size={12} className="fill-accent text-accent" />
-                <span className="font-medium text-foreground text-xs">{asset.rating.toFixed(1)}</span>
+                <span className="font-medium text-foreground text-xs">
+                  {asset.rating.toFixed(1)}
+                </span>
                 <span className="text-muted-foreground">({asset.reviews})</span>
               </div>
               <div className="flex items-center gap-1 text-muted-foreground">

@@ -12,7 +12,9 @@ export function Footer() {
           <div className="col-span-2 md:col-span-1">
             <div className="flex items-center gap-2 mb-3">
               <div className="w-6 h-6 bg-accent rounded-sm flex items-center justify-center flex-shrink-0">
-                <span className="font-bold text-primary-foreground text-xs">a</span>
+                <span className="font-bold text-primary-foreground text-xs">
+                  a
+                </span>
               </div>
               <span className="font-semibold text-sm">AssetHub</span>
             </div>
@@ -23,20 +25,31 @@ export function Footer() {
 
           {/* Product */}
           <div>
-            <h4 className="font-semibold mb-3 text-foreground text-xs uppercase tracking-wide">Product</h4>
+            <h4 className="font-semibold mb-3 text-foreground text-xs uppercase tracking-wide">
+              Product
+            </h4>
             <ul className="space-y-1.5">
               <li>
-                <Link to="/marketplace" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
+                <Link
+                  to="/marketplace"
+                  className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+                >
                   Marketplace
                 </Link>
               </li>
               <li>
-                <Link to="/upload" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
+                <Link
+                  to="/upload"
+                  className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+                >
                   Upload
                 </Link>
               </li>
               <li>
-                <Link to="/collections" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
+                <Link
+                  to="/collections"
+                  className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+                >
                   Collections
                 </Link>
               </li>
@@ -45,20 +58,31 @@ export function Footer() {
 
           {/* Company */}
           <div>
-            <h4 className="font-semibold mb-3 text-foreground text-xs uppercase tracking-wide">Company</h4>
+            <h4 className="font-semibold mb-3 text-foreground text-xs uppercase tracking-wide">
+              Company
+            </h4>
             <ul className="space-y-1.5">
               <li>
-                <Link to="/about" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
+                <Link
+                  to="/about"
+                  className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+                >
                   About
                 </Link>
               </li>
               <li>
-                <Link to="/blog" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
+                <Link
+                  to="/blog"
+                  className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+                >
                   Blog
                 </Link>
               </li>
               <li>
-                <Link to="/contact" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
+                <Link
+                  to="/contact"
+                  className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+                >
                   Contact
                 </Link>
               </li>
@@ -67,20 +91,31 @@ export function Footer() {
 
           {/* Legal */}
           <div>
-            <h4 className="font-semibold mb-3 text-foreground text-xs uppercase tracking-wide">Legal</h4>
+            <h4 className="font-semibold mb-3 text-foreground text-xs uppercase tracking-wide">
+              Legal
+            </h4>
             <ul className="space-y-1.5">
               <li>
-                <Link to="/privacy" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
+                <Link
+                  to="/privacy"
+                  className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+                >
                   Privacy
                 </Link>
               </li>
               <li>
-                <Link to="/terms" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
+                <Link
+                  to="/terms"
+                  className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+                >
                   Terms
                 </Link>
               </li>
               <li>
-                <Link to="/cookies" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
+                <Link
+                  to="/cookies"
+                  className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+                >
                   Cookies
                 </Link>
               </li>

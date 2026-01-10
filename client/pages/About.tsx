@@ -10,7 +10,8 @@ export default function About() {
           <div className="max-w-3xl space-y-4">
             <h1 className="text-4xl md:text-5xl font-bold">About AssetHub</h1>
             <p className="text-base text-muted-foreground max-w-2xl">
-              A trusted digital asset marketplace for creators, developers, and studios.
+              A trusted digital asset marketplace for creators, developers, and
+              studios.
             </p>
           </div>
         </div>
@@ -23,10 +24,13 @@ export default function About() {
             <div>
               <h2 className="text-2xl font-bold mb-4">Our Mission</h2>
               <p className="text-sm text-muted-foreground mb-3 leading-relaxed">
-                AssetHub is a marketplace built by creators, for creators. We believe high-quality digital assets should be accessible to everyone.
+                AssetHub is a marketplace built by creators, for creators. We
+                believe high-quality digital assets should be accessible to
+                everyone.
               </p>
               <p className="text-sm text-muted-foreground leading-relaxed">
-                Our commitment: quality curation, fair pricing, and zero compromises on security.
+                Our commitment: quality curation, fair pricing, and zero
+                compromises on security.
               </p>
             </div>
             <div className="rounded-sm overflow-hidden border border-border/50">
@@ -51,7 +55,8 @@ export default function About() {
               </div>
               <h3 className="font-semibold text-sm">Quality</h3>
               <p className="text-xs text-muted-foreground">
-                Every asset is reviewed for quality, compatibility, and compliance.
+                Every asset is reviewed for quality, compatibility, and
+                compliance.
               </p>
             </div>
             <div className="space-y-3">
@@ -105,7 +110,8 @@ export default function About() {
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-2xl font-bold mb-4">Get Started</h2>
           <p className="text-sm text-muted-foreground mb-6 max-w-2xl mx-auto">
-            Join creators and developers using AssetHub to find and share digital assets.
+            Join creators and developers using AssetHub to find and share
+            digital assets.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link

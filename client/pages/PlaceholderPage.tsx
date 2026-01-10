@@ -7,7 +7,11 @@ interface PlaceholderPageProps {
   backTo?: string;
 }
 
-export function PlaceholderPage({ title, description, backTo = "/" }: PlaceholderPageProps) {
+export function PlaceholderPage({
+  title,
+  description,
+  backTo = "/",
+}: PlaceholderPageProps) {
   return (
     <div className="min-h-screen bg-background flex items-center justify-center py-12">
       <div className="container mx-auto px-4 text-center">
@@ -35,7 +39,8 @@ export function PlaceholderPage({ title, description, backTo = "/" }: Placeholde
 
           <div className="pt-12 border-t border-border">
             <p className="text-sm text-muted-foreground">
-              This page is coming soon. Let us know if you'd like us to prioritize it!
+              This page is coming soon. Let us know if you'd like us to
+              prioritize it!
             </p>
           </div>
         </div>

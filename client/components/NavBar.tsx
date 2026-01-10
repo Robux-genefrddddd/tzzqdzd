@@ -8,7 +8,11 @@ interface NavBarProps {
   onLogout?: () => void;
 }
 
-export function NavBar({ isAuthenticated = false, user, onLogout }: NavBarProps) {
+export function NavBar({
+  isAuthenticated = false,
+  user,
+  onLogout,
+}: NavBarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
@@ -19,9 +23,13 @@ export function NavBar({ isAuthenticated = false, user, onLogout }: NavBarProps)
           <Link to="/" className="flex-shrink-0">
             <div className="flex items-center gap-2.5">
               <div className="w-8 h-8 bg-accent rounded-lg flex items-center justify-center flex-shrink-0 shadow-md">
-                <span className="font-bold text-primary-foreground text-sm">a</span>
+                <span className="font-bold text-primary-foreground text-sm">
+                  a
+                </span>
               </div>
-              <span className="font-bold text-base hidden sm:inline tracking-tight">AssetHub</span>
+              <span className="font-bold text-base hidden sm:inline tracking-tight">
+                AssetHub
+              </span>
             </div>
           </Link>
 

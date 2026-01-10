@@ -10,13 +10,15 @@ const allAssets: Asset[] = [
     name: "Modern UI Kit",
     description: "A comprehensive UI kit for modern applications",
     type: "asset",
-    imageUrl: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=400&h=300&fit=crop",
+    imageUrl:
+      "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=400&h=300&fit=crop",
     productLink: "https://create.roblox.com/store/asset/1",
     price: null,
     category: "UI Design",
     authorId: "author1",
     authorName: "Design Pro",
-    authorAvatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=40&h=40&fit=crop",
+    authorAvatar:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=40&h=40&fit=crop",
     downloads: 2340,
     rating: 4.8,
     reviews: 127,
@@ -28,13 +30,15 @@ const allAssets: Asset[] = [
     name: "3D Model Pack",
     description: "High-quality 3D models for your projects",
     type: "model",
-    imageUrl: "https://images.unsplash.com/photo-1633356122544-f134324ef6cb?w=400&h=300&fit=crop",
+    imageUrl:
+      "https://images.unsplash.com/photo-1633356122544-f134324ef6cb?w=400&h=300&fit=crop",
     productLink: "https://create.roblox.com/store/asset/2",
     price: 29.99,
     category: "3D Models",
     authorId: "author2",
     authorName: "3D Master",
-    authorAvatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop",
+    authorAvatar:
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop",
     downloads: 1560,
     rating: 4.9,
     reviews: 89,
@@ -46,13 +50,15 @@ const allAssets: Asset[] = [
     name: "JavaScript Utilities",
     description: "Essential JavaScript utilities and helpers",
     type: "script",
-    imageUrl: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400&h=300&fit=crop",
+    imageUrl:
+      "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400&h=300&fit=crop",
     productLink: "https://create.roblox.com/store/asset/3",
     price: null,
     category: "Code",
     authorId: "author3",
     authorName: "Dev Scripts",
-    authorAvatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=40&h=40&fit=crop",
+    authorAvatar:
+      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=40&h=40&fit=crop",
     downloads: 3120,
     rating: 4.7,
     reviews: 156,
@@ -64,13 +70,15 @@ const allAssets: Asset[] = [
     name: "Animation Pack",
     description: "Smooth and professional animations",
     type: "asset",
-    imageUrl: "https://images.unsplash.com/photo-1626921235308-f88c12b71d93?w=400&h=300&fit=crop",
+    imageUrl:
+      "https://images.unsplash.com/photo-1626921235308-f88c12b71d93?w=400&h=300&fit=crop",
     productLink: "https://create.roblox.com/store/asset/4",
     price: 19.99,
     category: "Animations",
     authorId: "author4",
     authorName: "Motion Design",
-    authorAvatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop",
+    authorAvatar:
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop",
     downloads: 890,
     rating: 4.6,
     reviews: 72,
@@ -82,13 +90,15 @@ const allAssets: Asset[] = [
     name: "React Components Library",
     description: "Reusable React components for rapid development",
     type: "script",
-    imageUrl: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400&h=300&fit=crop",
+    imageUrl:
+      "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400&h=300&fit=crop",
     productLink: "https://create.roblox.com/store/asset/5",
     price: 49.99,
     category: "Code",
     authorId: "author5",
     authorName: "React Dev",
-    authorAvatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=40&h=40&fit=crop",
+    authorAvatar:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=40&h=40&fit=crop",
     downloads: 1200,
     rating: 4.9,
     reviews: 98,
@@ -100,13 +110,15 @@ const allAssets: Asset[] = [
     name: "Game Assets Bundle",
     description: "Complete game assets for indie developers",
     type: "asset",
-    imageUrl: "https://images.unsplash.com/photo-1518611505868-48510c2e85ea?w=400&h=300&fit=crop",
+    imageUrl:
+      "https://images.unsplash.com/photo-1518611505868-48510c2e85ea?w=400&h=300&fit=crop",
     productLink: "https://create.roblox.com/store/asset/6",
     price: null,
     category: "Game Development",
     authorId: "author6",
     authorName: "Game Studio",
-    authorAvatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop",
+    authorAvatar:
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop",
     downloads: 4560,
     rating: 4.7,
     reviews: 234,
@@ -118,13 +130,15 @@ const allAssets: Asset[] = [
     name: "Character Rigging Service",
     description: "Professional character rigging for animation",
     type: "model",
-    imageUrl: "https://images.unsplash.com/photo-1633356122544-f134324ef6cb?w=400&h=300&fit=crop",
+    imageUrl:
+      "https://images.unsplash.com/photo-1633356122544-f134324ef6cb?w=400&h=300&fit=crop",
     productLink: "https://create.roblox.com/store/asset/7",
     price: 79.99,
     category: "3D Models",
     authorId: "author7",
     authorName: "Animation Pro",
-    authorAvatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=40&h=40&fit=crop",
+    authorAvatar:
+      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=40&h=40&fit=crop",
     downloads: 340,
     rating: 5.0,
     reviews: 45,
@@ -136,13 +150,15 @@ const allAssets: Asset[] = [
     name: "Icon Set - 500 Icons",
     description: "Comprehensive icon set for web and mobile",
     type: "asset",
-    imageUrl: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=400&h=300&fit=crop",
+    imageUrl:
+      "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=400&h=300&fit=crop",
     productLink: "https://create.roblox.com/store/asset/8",
     price: null,
     category: "UI Design",
     authorId: "author8",
     authorName: "Icon Master",
-    authorAvatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=40&h=40&fit=crop",
+    authorAvatar:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=40&h=40&fit=crop",
     downloads: 5670,
     rating: 4.8,
     reviews: 312,
@@ -151,8 +167,20 @@ const allAssets: Asset[] = [
   },
 ];
 
-const assetTypes: AssetType[] = ["model", "script", "asset", "resource", "product"];
-const categories = ["UI Design", "3D Models", "Code", "Animations", "Game Development"];
+const assetTypes: AssetType[] = [
+  "model",
+  "script",
+  "asset",
+  "resource",
+  "product",
+];
+const categories = [
+  "UI Design",
+  "3D Models",
+  "Code",
+  "Animations",
+  "Game Development",
+];
 
 export default function Marketplace() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -173,7 +201,7 @@ export default function Marketplace() {
       result = result.filter(
         (asset) =>
           asset.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          asset.description.toLowerCase().includes(searchQuery.toLowerCase())
+          asset.description.toLowerCase().includes(searchQuery.toLowerCase()),
       );
     }
 
@@ -189,9 +217,13 @@ export default function Marketplace() {
 
     // Price range filter
     if (filters.priceRange === "free") {
-      result = result.filter((asset) => asset.price === null || asset.price === 0);
+      result = result.filter(
+        (asset) => asset.price === null || asset.price === 0,
+      );
     } else if (filters.priceRange === "paid") {
-      result = result.filter((asset) => asset.price !== null && asset.price > 0);
+      result = result.filter(
+        (asset) => asset.price !== null && asset.price > 0,
+      );
     }
 
     // Sort
@@ -206,7 +238,10 @@ export default function Marketplace() {
     return result;
   }, [searchQuery, filters]);
 
-  const handleFilterChange = (key: keyof AssetFilter, value: string | undefined) => {
+  const handleFilterChange = (
+    key: keyof AssetFilter,
+    value: string | undefined,
+  ) => {
     setFilters((prev) => ({
       ...prev,
       [key]: value,
@@ -237,7 +272,8 @@ export default function Marketplace() {
         <div className="container mx-auto px-4">
           <h1 className="text-3xl md:text-4xl font-bold mb-2">Marketplace</h1>
           <p className="text-sm text-muted-foreground max-w-2xl">
-            Browse thousands of assets created by our community. Filter by type, category, or price.
+            Browse thousands of assets created by our community. Filter by type,
+            category, or price.
           </p>
         </div>
       </section>
@@ -263,7 +299,10 @@ export default function Marketplace() {
               {/* Search */}
               <div className="mb-4">
                 <div className="relative">
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" size={16} />
+                  <Search
+                    className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"
+                    size={16}
+                  />
                   <input
                     type="text"
                     placeholder="Search..."
@@ -276,10 +315,14 @@ export default function Marketplace() {
 
               {/* Type Filter */}
               <div className="mb-4">
-                <label className="text-xs font-medium block mb-2 uppercase tracking-wide text-muted-foreground">Type</label>
+                <label className="text-xs font-medium block mb-2 uppercase tracking-wide text-muted-foreground">
+                  Type
+                </label>
                 <select
                   value={filters.type || ""}
-                  onChange={(e) => handleFilterChange("type", e.target.value || undefined)}
+                  onChange={(e) =>
+                    handleFilterChange("type", e.target.value || undefined)
+                  }
                   className="w-full px-3 py-1.5 rounded-sm bg-secondary border border-border/50 focus:outline-none focus:ring-1 focus:ring-accent text-xs"
                 >
                   <option value="">All Types</option>
@@ -293,10 +336,14 @@ export default function Marketplace() {
 
               {/* Category Filter */}
               <div className="mb-4">
-                <label className="text-xs font-medium block mb-2 uppercase tracking-wide text-muted-foreground">Category</label>
+                <label className="text-xs font-medium block mb-2 uppercase tracking-wide text-muted-foreground">
+                  Category
+                </label>
                 <select
                   value={filters.category || ""}
-                  onChange={(e) => handleFilterChange("category", e.target.value || undefined)}
+                  onChange={(e) =>
+                    handleFilterChange("category", e.target.value || undefined)
+                  }
                   className="w-full px-3 py-1.5 rounded-sm bg-secondary border border-border/50 focus:outline-none focus:ring-1 focus:ring-accent text-xs"
                 >
                   <option value="">All Categories</option>
@@ -310,10 +357,14 @@ export default function Marketplace() {
 
               {/* Price Filter */}
               <div className="mb-4">
-                <label className="text-xs font-medium block mb-2 uppercase tracking-wide text-muted-foreground">Price</label>
+                <label className="text-xs font-medium block mb-2 uppercase tracking-wide text-muted-foreground">
+                  Price
+                </label>
                 <select
                   value={filters.priceRange}
-                  onChange={(e) => handleFilterChange("priceRange", e.target.value as any)}
+                  onChange={(e) =>
+                    handleFilterChange("priceRange", e.target.value as any)
+                  }
                   className="w-full px-3 py-1.5 rounded-sm bg-secondary border border-border/50 focus:outline-none focus:ring-1 focus:ring-accent text-xs"
                 >
                   <option value="all">All Prices</option>
@@ -324,10 +375,14 @@ export default function Marketplace() {
 
               {/* Sort Filter */}
               <div>
-                <label className="text-xs font-medium block mb-2 uppercase tracking-wide text-muted-foreground">Sort</label>
+                <label className="text-xs font-medium block mb-2 uppercase tracking-wide text-muted-foreground">
+                  Sort
+                </label>
                 <select
                   value={filters.sortBy}
-                  onChange={(e) => handleFilterChange("sortBy", e.target.value as any)}
+                  onChange={(e) =>
+                    handleFilterChange("sortBy", e.target.value as any)
+                  }
                   className="w-full px-3 py-1.5 rounded-sm bg-secondary border border-border/50 focus:outline-none focus:ring-1 focus:ring-accent text-xs"
                 >
                   <option value="newest">Newest</option>
@@ -351,7 +406,10 @@ export default function Marketplace() {
               <div className="mt-3 space-y-3 p-3 rounded-sm border border-border/50 bg-secondary/30">
                 <div>
                   <div className="relative mb-4">
-                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" size={16} />
+                    <Search
+                      className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"
+                      size={16}
+                    />
                     <input
                       type="text"
                       placeholder="Search..."
@@ -361,10 +419,14 @@ export default function Marketplace() {
                     />
                   </div>
 
-                  <label className="text-xs font-medium block mb-2 uppercase tracking-wide text-muted-foreground">Type</label>
+                  <label className="text-xs font-medium block mb-2 uppercase tracking-wide text-muted-foreground">
+                    Type
+                  </label>
                   <select
                     value={filters.type || ""}
-                    onChange={(e) => handleFilterChange("type", e.target.value || undefined)}
+                    onChange={(e) =>
+                      handleFilterChange("type", e.target.value || undefined)
+                    }
                     className="w-full px-3 py-1.5 rounded-sm bg-secondary border border-border/50 focus:outline-none focus:ring-1 focus:ring-accent text-xs mb-3"
                   >
                     <option value="">All Types</option>
@@ -375,10 +437,17 @@ export default function Marketplace() {
                     ))}
                   </select>
 
-                  <label className="text-xs font-medium block mb-2 uppercase tracking-wide text-muted-foreground">Category</label>
+                  <label className="text-xs font-medium block mb-2 uppercase tracking-wide text-muted-foreground">
+                    Category
+                  </label>
                   <select
                     value={filters.category || ""}
-                    onChange={(e) => handleFilterChange("category", e.target.value || undefined)}
+                    onChange={(e) =>
+                      handleFilterChange(
+                        "category",
+                        e.target.value || undefined,
+                      )
+                    }
                     className="w-full px-3 py-1.5 rounded-sm bg-secondary border border-border/50 focus:outline-none focus:ring-1 focus:ring-accent text-xs mb-3"
                   >
                     <option value="">All Categories</option>
@@ -389,10 +458,14 @@ export default function Marketplace() {
                     ))}
                   </select>
 
-                  <label className="text-xs font-medium block mb-2 uppercase tracking-wide text-muted-foreground">Price</label>
+                  <label className="text-xs font-medium block mb-2 uppercase tracking-wide text-muted-foreground">
+                    Price
+                  </label>
                   <select
                     value={filters.priceRange}
-                    onChange={(e) => handleFilterChange("priceRange", e.target.value as any)}
+                    onChange={(e) =>
+                      handleFilterChange("priceRange", e.target.value as any)
+                    }
                     className="w-full px-3 py-1.5 rounded-sm bg-secondary border border-border/50 focus:outline-none focus:ring-1 focus:ring-accent text-xs mb-3"
                   >
                     <option value="all">All Prices</option>
@@ -400,10 +473,14 @@ export default function Marketplace() {
                     <option value="paid">Paid Only</option>
                   </select>
 
-                  <label className="text-xs font-medium block mb-2 uppercase tracking-wide text-muted-foreground">Sort</label>
+                  <label className="text-xs font-medium block mb-2 uppercase tracking-wide text-muted-foreground">
+                    Sort
+                  </label>
                   <select
                     value={filters.sortBy}
-                    onChange={(e) => handleFilterChange("sortBy", e.target.value as any)}
+                    onChange={(e) =>
+                      handleFilterChange("sortBy", e.target.value as any)
+                    }
                     className="w-full px-3 py-1.5 rounded-sm bg-secondary border border-border/50 focus:outline-none focus:ring-1 focus:ring-accent text-xs"
                   >
                     <option value="newest">Newest</option>
@@ -429,7 +506,8 @@ export default function Marketplace() {
             {/* Results Header */}
             <div className="mb-6">
               <h2 className="font-medium text-sm">
-                {filteredAssets.length} Asset{filteredAssets.length !== 1 ? "s" : ""} Found
+                {filteredAssets.length} Asset
+                {filteredAssets.length !== 1 ? "s" : ""} Found
               </h2>
             </div>
 

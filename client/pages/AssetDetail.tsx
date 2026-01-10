@@ -62,7 +62,9 @@ export default function AssetDetail() {
           <div>
             <h2 className="text-2xl font-bold mb-4">About This Asset</h2>
             <p className="text-muted-foreground leading-relaxed">
-              This is a comprehensive UI kit designed for modern web and mobile applications. It includes components, patterns, and design guidelines.
+              This is a comprehensive UI kit designed for modern web and mobile
+              applications. It includes components, patterns, and design
+              guidelines.
             </p>
           </div>
 
@@ -96,7 +98,9 @@ export default function AssetDetail() {
         {/* Related Assets - Placeholder */}
         <div className="mt-16">
           <h2 className="text-2xl font-bold mb-8">More from Creator</h2>
-          <p className="text-muted-foreground">Related assets will be displayed here</p>
+          <p className="text-muted-foreground">
+            Related assets will be displayed here
+          </p>
         </div>
       </div>
     </div>

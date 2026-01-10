@@ -10,13 +10,15 @@ const featuredAssets: Asset[] = [
     name: "UI Component Library",
     description: "Comprehensive UI components for modern applications",
     type: "asset",
-    imageUrl: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=400&h=300&fit=crop",
+    imageUrl:
+      "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=400&h=300&fit=crop",
     productLink: "https://create.roblox.com/store/asset/1",
     price: null,
     category: "UI Design",
     authorId: "author1",
     authorName: "Design Studio",
-    authorAvatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=40&h=40&fit=crop",
+    authorAvatar:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=40&h=40&fit=crop",
     downloads: 2340,
     rating: 4.8,
     reviews: 127,
@@ -29,13 +31,15 @@ const featuredAssets: Asset[] = [
     name: "3D Model Collection",
     description: "High-quality 3D models for rendering and animation",
     type: "model",
-    imageUrl: "https://images.unsplash.com/photo-1633356122544-f134324ef6cb?w=400&h=300&fit=crop",
+    imageUrl:
+      "https://images.unsplash.com/photo-1633356122544-f134324ef6cb?w=400&h=300&fit=crop",
     productLink: "https://create.roblox.com/store/asset/2",
     price: 29.99,
     category: "3D Models",
     authorId: "author2",
     authorName: "Model Works",
-    authorAvatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop",
+    authorAvatar:
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop",
     downloads: 1560,
     rating: 4.9,
     reviews: 89,
@@ -48,13 +52,15 @@ const featuredAssets: Asset[] = [
     name: "JavaScript Utilities",
     description: "Essential utilities and helpers for JavaScript development",
     type: "script",
-    imageUrl: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400&h=300&fit=crop",
+    imageUrl:
+      "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400&h=300&fit=crop",
     productLink: "https://create.roblox.com/store/asset/3",
     price: null,
     category: "Code",
     authorId: "author3",
     authorName: "Dev Scripts",
-    authorAvatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=40&h=40&fit=crop",
+    authorAvatar:
+      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=40&h=40&fit=crop",
     downloads: 3120,
     rating: 4.7,
     reviews: 156,
@@ -67,13 +73,15 @@ const featuredAssets: Asset[] = [
     name: "Motion Graphics Pack",
     description: "Professional animation and motion design assets",
     type: "asset",
-    imageUrl: "https://images.unsplash.com/photo-1626921235308-f88c12b71d93?w=400&h=300&fit=crop",
+    imageUrl:
+      "https://images.unsplash.com/photo-1626921235308-f88c12b71d93?w=400&h=300&fit=crop",
     productLink: "https://create.roblox.com/store/asset/4",
     price: 19.99,
     category: "Animations",
     authorId: "author4",
     authorName: "Motion Studio",
-    authorAvatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop",
+    authorAvatar:
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop",
     downloads: 890,
     rating: 4.6,
     reviews: 72,
@@ -103,8 +111,9 @@ export default function Index() {
               </h1>
 
               <p className="text-base text-muted-foreground max-w-2xl">
-                Professional marketplace for 3D models, scripts, UI components, animations, and more.
-                From indie creators to established studios — find what you need.
+                Professional marketplace for 3D models, scripts, UI components,
+                animations, and more. From indie creators to established studios
+                — find what you need.
               </p>
             </div>
 
@@ -153,7 +162,13 @@ export default function Index() {
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
-            {["3D Models", "Scripts", "UI Design", "Animations", "Resources"].map((cat) => (
+            {[
+              "3D Models",
+              "Scripts",
+              "UI Design",
+              "Animations",
+              "Resources",
+            ].map((cat) => (
               <Link
                 key={cat}
                 to="/marketplace"
@@ -172,7 +187,9 @@ export default function Index() {
           <div className="flex items-center justify-between mb-8">
             <div>
               <h2 className="text-lg font-bold">Featured Assets</h2>
-              <p className="text-xs text-muted-foreground mt-1">Recently added and trending</p>
+              <p className="text-xs text-muted-foreground mt-1">
+                Recently added and trending
+              </p>
             </div>
             <Link
               to="/marketplace"
