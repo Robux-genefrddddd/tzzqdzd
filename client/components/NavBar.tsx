@@ -511,9 +511,9 @@ export function NavBar() {
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             transition={{ delay: 0.35 }}
-                            className="px-4 py-6 border-t border-border/20"
+                            className="px-3 py-3 border-t border-border/10"
                           >
-                            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-4 px-2">
+                            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-tight px-2 mb-2">
                               Admin
                             </p>
                             <motion.div
@@ -524,13 +524,11 @@ export function NavBar() {
                             >
                               <Link
                                 to="/admin"
-                                className="flex items-center gap-3 px-4 py-2.5 rounded-lg bg-accent/10 hover:bg-accent/20 transition-colors duration-150 text-accent border border-accent/20 group"
+                                className="flex items-center gap-3 px-3 py-2 rounded-md text-sm text-accent hover:text-accent/80 hover:bg-white/5 transition-colors duration-150 group"
                                 onClick={closeMenu}
                               >
-                                <Shield size={18} className="text-accent" />
-                                <span className="text-sm font-semibold">
-                                  Admin Panel
-                                </span>
+                                <Shield size={16} className="text-accent flex-shrink-0" />
+                                <span className="font-medium">Admin</span>
                               </Link>
                             </motion.div>
                           </motion.div>
