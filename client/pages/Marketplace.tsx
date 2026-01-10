@@ -13,6 +13,13 @@ import {
   LayoutGrid,
 } from "lucide-react";
 import { getPublishedAssets, type Asset } from "@/lib/assetService";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const CATEGORIES = [
   { name: "3D Models", icon: Box },
@@ -79,61 +86,61 @@ export default function Marketplace() {
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="container mx-auto px-4 py-8 md:py-12">
+      <div className="container mx-auto px-6 py-10 md:py-12">
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-4xl md:text-5xl font-bold mb-2">Marketplace</h1>
-          <p className="text-lg text-muted-foreground">
+        <div className="mb-10">
+          <h1 className="text-3xl font-bold mb-2">Marketplace</h1>
+          <p className="text-sm text-muted-foreground">
             Discover and download high-quality digital assets for your projects
           </p>
         </div>
 
         {/* Search Bar */}
-        <div className="mb-8">
+        <div className="mb-10">
           <div className="relative">
             <Search
-              className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"
-              size={20}
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground/60"
+              size={18}
             />
             <input
               type="text"
               placeholder="Search assets..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 bg-secondary/50 border border-border rounded-lg focus:outline-none focus:border-primary transition-colors"
+              className="input-base pl-10 pr-4"
             />
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery("")}
-                className="absolute right-3 top-1/2 -translate-y-1/2"
+                className="absolute right-3 top-1/2 -translate-y-1/2 hover:text-foreground transition-colors"
               >
-                <X size={20} className="text-muted-foreground" />
+                <X size={18} className="text-muted-foreground/60" />
               </button>
             )}
           </div>
         </div>
 
-        <div className="flex gap-6">
+        <div className="flex gap-8">
           {/* Filters Sidebar */}
           <aside
             className={`${
               mobileFiltersOpen ? "block" : "hidden"
-            } md:block w-full md:w-[190px] flex-shrink-0`}
+            } md:block w-full md:w-[200px] flex-shrink-0`}
           >
-            <div className="sticky top-24 space-y-6">
+            <div className="sticky top-20 space-y-8">
               {/* Category Filter */}
               <div>
-                <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3 px-1">
+                <h3 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground/80 mb-4">
                   Category
                 </h3>
-                <div className="space-y-1">
+                <div className="space-y-2">
                   {/* All Categories */}
                   <button
                     onClick={() => setSelectedCategory(undefined)}
-                    className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-md text-sm transition-all duration-150 border-l-2 ${
+                    className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-all duration-150 border-l-2 ${
                       !selectedCategory
-                        ? "border-l-primary text-foreground bg-transparent hover:bg-white/5"
-                        : "border-l-transparent text-muted-foreground hover:text-foreground hover:bg-white/5"
+                        ? "border-l-primary text-foreground bg-white/5 hover:bg-white/8"
+                        : "border-l-transparent text-muted-foreground/80 hover:text-foreground hover:bg-white/5"
                     }`}
                   >
                     <LayoutGrid size={16} className="flex-shrink-0" />
@@ -145,10 +152,10 @@ export default function Marketplace() {
                     <button
                       key={name}
                       onClick={() => setSelectedCategory(name)}
-                      className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-md text-sm transition-all duration-150 border-l-2 ${
+                      className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-all duration-150 border-l-2 ${
                         selectedCategory === name
-                          ? "border-l-primary text-foreground bg-transparent hover:bg-white/5"
-                          : "border-l-transparent text-muted-foreground hover:text-foreground hover:bg-white/5"
+                          ? "border-l-primary text-foreground bg-white/5 hover:bg-white/8"
+                          : "border-l-transparent text-muted-foreground/80 hover:text-foreground hover:bg-white/5"
                       }`}
                     >
                       <Icon size={16} className="flex-shrink-0" />
@@ -160,26 +167,31 @@ export default function Marketplace() {
 
               {/* Sort Filter */}
               <div>
-                <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3 px-1">
+                <h3 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground/80 mb-4">
                   Sort By
                 </h3>
-                <select
-                  value={sortBy}
-                  onChange={(e) => setSortBy(e.target.value)}
-                  className="w-full px-3 py-2 bg-secondary/30 border border-border rounded-md focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all text-sm text-foreground"
-                >
-                  <option value="newest">Newest</option>
-                  <option value="popular">Most Popular</option>
-                  <option value="rating">Highest Rated</option>
-                  <option value="price-low">Price: Low to High</option>
-                  <option value="price-high">Price: High to Low</option>
-                </select>
+                <Select value={sortBy} onValueChange={setSortBy}>
+                  <SelectTrigger className="bg-white/5 border-white/10 hover:border-white/15">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="newest">Newest</SelectItem>
+                    <SelectItem value="popular">Most Popular</SelectItem>
+                    <SelectItem value="rating">Highest Rated</SelectItem>
+                    <SelectItem value="price-low">
+                      Price: Low to High
+                    </SelectItem>
+                    <SelectItem value="price-high">
+                      Price: High to Low
+                    </SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
 
               {/* Close Mobile Filters */}
               <button
                 onClick={() => setMobileFiltersOpen(false)}
-                className="md:hidden w-full px-4 py-2 bg-primary text-primary-foreground rounded-lg font-medium"
+                className="md:hidden w-full px-4 py-2 bg-primary text-primary-foreground rounded-lg font-medium text-sm"
               >
                 Done
               </button>
@@ -191,29 +203,33 @@ export default function Marketplace() {
             {/* Mobile Filter Button */}
             <button
               onClick={() => setMobileFiltersOpen(true)}
-              className="md:hidden mb-6 px-4 py-2 bg-secondary/50 border border-border rounded-lg font-medium w-full"
+              className="md:hidden mb-8 px-4 py-2 bg-white/5 border border-white/10 rounded-lg font-medium text-sm w-full hover:bg-white/8 transition-colors"
             >
               Filters & Sort
             </button>
 
             {loading ? (
-              <div className="flex items-center justify-center py-12">
+              <div className="flex items-center justify-center py-16">
                 <div className="text-center space-y-4">
-                  <div className="w-12 h-12 border-4 border-primary/20 border-t-primary rounded-full animate-spin mx-auto"></div>
-                  <p className="text-muted-foreground">Loading assets...</p>
+                  <div className="w-10 h-10 border-3 border-primary/20 border-t-primary rounded-full animate-spin mx-auto"></div>
+                  <p className="text-sm text-muted-foreground">
+                    Loading assets...
+                  </p>
                 </div>
               </div>
             ) : filteredAssets.length === 0 ? (
-              <div className="bg-secondary/30 border border-border rounded-lg p-12 text-center space-y-4">
-                <p className="text-lg text-muted-foreground">No assets found</p>
+              <div className="border border-white/5 rounded-lg p-16 text-center space-y-3 bg-white/2">
+                <p className="text-base font-medium text-foreground/80">
+                  No assets found
+                </p>
                 <p className="text-sm text-muted-foreground">
                   Try adjusting your search or filters
                 </p>
               </div>
             ) : (
               <>
-                <div className="mb-6 flex items-center justify-between">
-                  <p className="text-sm text-muted-foreground">
+                <div className="mb-8 flex items-center justify-between">
+                  <p className="text-sm text-muted-foreground/80">
                     Showing {filteredAssets.length}{" "}
                     {filteredAssets.length === 1 ? "asset" : "assets"}
                   </p>
