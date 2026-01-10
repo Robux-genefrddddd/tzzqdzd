@@ -9,6 +9,9 @@ import {
 import { auth, db } from "./firebase";
 import { doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
 
+// Default profile image URL for all users
+export const DEFAULT_PROFILE_IMAGE = "https://tr.rbxcdn.com/180DAY-bd2c1a5fc86fd014cbbbaaafdd777643/420/420/Hat/Webp/noFilter";
+
 export interface UserProfile {
   uid: string;
   username: string;
