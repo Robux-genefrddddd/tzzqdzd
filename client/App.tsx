@@ -33,8 +33,45 @@ import NotFound from "./pages/NotFound";
 import Groups from "./pages/Groups";
 import GroupDetail from "./pages/GroupDetail";
 import Messages from "./pages/Messages";
+import BanNotice from "./pages/BanNotice";
+import { useEffect, ReactNode } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
+import { getUserActiveWarnings } from "@/lib/warningService";
 
 const queryClient = new QueryClient();
+
+// Guard component to check if user is banned
+const BanGuard = ({ children }: { children: ReactNode }) => {
+  const navigate = useNavigate();
+  const { user, loading } = useAuth();
+
+  useEffect(() => {
+    const checkBanStatus = async () => {
+      if (!loading && user) {
+        const warnings = await getUserActiveWarnings(user.uid);
+        const hasBan = warnings.some((w) => w.type === "ban" || w.type === "suspension");
+        if (hasBan) {
+          navigate("/banned");
+        }
+      }
+    };
+
+    checkBanStatus();
+  }, [user, loading, navigate]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-center">
+          <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary" />
+        </div>
+      </div>
+    );
+  }
+
+  return <>{children}</>;
+};
 
 const Layout = ({ children }: { children: React.ReactNode }) => (
   <div className="min-h-screen flex flex-col">
