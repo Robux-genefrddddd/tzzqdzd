@@ -17,32 +17,27 @@ const getRoleInfo = (role: string) => {
     case "founder":
       return {
         label: "Founder",
-        color: "bg-yellow-500/20 text-yellow-400",
-        icon: Crown,
+        icon: "https://cdn.builder.io/api/v1/image/assets%2F6efe5c975de742218614020f75c6e644%2Fb430cdb925bf47f09a9d7c95a02f3bd0?format=webp&width=800",
       };
     case "admin":
       return {
         label: "Admin",
-        color: "bg-red-500/20 text-red-400",
-        icon: Shield,
+        icon: "https://cdn.builder.io/api/v1/image/assets%2F6efe5c975de742218614020f75c6e644%2Fb5f004c16bc84ddd977be6eea56f8f20?format=webp&width=800",
       };
     case "partner":
       return {
         label: "Partner",
-        color: "bg-blue-500/20 text-blue-400",
-        icon: Users,
+        icon: "https://cdn3.emoji.gg/emojis/42747-roblox-verified.png",
       };
     case "support":
       return {
         label: "Support",
-        color: "bg-green-500/20 text-green-400",
-        icon: Users,
+        icon: "https://cdn3.emoji.gg/emojis/42747-roblox-verified.png",
       };
     default:
       return {
         label: role,
-        color: "bg-primary/20 text-primary",
-        icon: Users,
+        icon: "https://cdn3.emoji.gg/emojis/42747-roblox-verified.png",
       };
   }
 };
