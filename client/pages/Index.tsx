@@ -153,10 +153,10 @@ export default function Index() {
       </section>
 
       {/* Categories Section */}
-      <section className="border-b border-border/50 py-12 md:py-16">
+      <section className="border-b border-border/20 py-12 md:py-16">
         <div className="container mx-auto px-4">
           <div className="mb-8">
-            <h2 className="text-lg font-bold">Categories</h2>
+            <h2 className="text-lg font-bold">Browse by Category</h2>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
@@ -170,7 +170,7 @@ export default function Index() {
               <Link
                 key={cat}
                 to="/marketplace"
-                className="p-4 bg-card border border-border/50 rounded-sm hover:border-border/80 transition-all text-sm font-medium text-center"
+                className="p-4 bg-secondary/30 border border-border/30 rounded-2xl hover:border-border/50 hover:bg-secondary/50 transition-all text-sm font-medium text-center"
               >
                 {cat}
               </Link>
