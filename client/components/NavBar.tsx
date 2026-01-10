@@ -204,18 +204,16 @@ export function NavBar() {
                 </DropdownMenu>
               </div>
             ) : (
-              !loading && (
-                <div className="hidden sm:flex items-center gap-2">
-                  <Link to="/login">
-                    <Button variant="ghost" size="sm">
-                      Sign In
-                    </Button>
-                  </Link>
-                  <Link to="/register">
-                    <Button size="sm">Sign Up</Button>
-                  </Link>
-                </div>
-              )
+              <div className="hidden sm:flex items-center gap-2">
+                <Link to="/login">
+                  <Button variant="ghost" size="sm">
+                    Sign In
+                  </Button>
+                </Link>
+                <Link to="/register">
+                  <Button size="sm">Sign Up</Button>
+                </Link>
+              </div>
             )}
 
             {/* Mobile Menu Button */}
