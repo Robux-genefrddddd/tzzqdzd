@@ -56,20 +56,22 @@ export async function getUserWarnings(userId: string): Promise<Warning[]> {
 // Get active warnings for a user
 export async function getUserActiveWarnings(userId: string): Promise<Warning[]> {
   try {
+    // Only filter by userId in the query, then filter by isActive client-side
     const q = query(
       collection(db, WARNINGS_COLLECTION),
       where("userId", "==", userId),
-      where("isActive", "==", true),
-      orderBy("createdAt", "desc"),
     );
     const querySnapshot = await getDocs(q);
 
-    const warnings = querySnapshot.docs.map((doc) => ({
-      id: doc.id,
-      ...doc.data(),
-      createdAt: doc.data().createdAt?.toDate?.() || new Date(),
-      expiresAt: doc.data().expiresAt?.toDate?.() || undefined,
-    })) as Warning[];
+    const warnings = querySnapshot.docs
+      .map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+        createdAt: doc.data().createdAt?.toDate?.() || new Date(),
+        expiresAt: doc.data().expiresAt?.toDate?.() || undefined,
+      }))
+      .filter((w) => w.isActive)
+      .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime()) as Warning[];
 
     return warnings;
   } catch (error) {
