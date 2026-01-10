@@ -144,15 +144,16 @@ export function subscribeToUserNotifications(
     const q = query(
       collection(db, NOTIFICATIONS_COLLECTION),
       where("userId", "==", userId),
-      orderBy("createdAt", "desc"),
     );
 
     return onSnapshot(q, (snapshot) => {
-      const notifications = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-        createdAt: doc.data().createdAt?.toDate?.() || new Date(),
-      })) as Notification[];
+      const notifications = snapshot.docs
+        .map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+          createdAt: doc.data().createdAt?.toDate?.() || new Date(),
+        }))
+        .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime()) as Notification[];
 
       onNotificationsUpdate(notifications);
     });
