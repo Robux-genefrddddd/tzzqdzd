@@ -93,157 +93,138 @@ export function NavBar() {
   return (
     <nav className="sticky top-0 z-50 bg-background/95 backdrop-blur-lg border-b border-border/20">
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-14">
           {/* Logo */}
           <Link to="/" className="flex-shrink-0">
-            <div className="flex items-center gap-2.5">
+            <div className="flex items-center gap-2">
               <img
                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Roblox_Logo.svg/2048px-Roblox_Logo.svg.png"
                 alt="Roblox"
-                className="h-6 object-contain"
+                className="h-5 object-contain"
               />
-              <span className="font-bold text-sm hidden sm:inline tracking-tight text-foreground">
+              <span className="font-bold text-xs tracking-tight text-foreground">
                 RbxAssets
               </span>
             </div>
           </Link>
 
-          {/* Desktop Menu */}
-          <div className="hidden md:flex items-center gap-6">
-            <Link
-              to="/marketplace"
-              className="text-foreground/80 hover:text-foreground transition-colors text-sm font-medium"
-            >
-              Marketplace
-            </Link>
-            <Link
-              to="/support"
-              className="text-foreground/80 hover:text-foreground transition-colors text-sm font-medium"
-            >
-              Support
-            </Link>
-            <Link
-              to="/about"
-              className="text-foreground/80 hover:text-foreground transition-colors text-sm font-medium"
-            >
-              About
-            </Link>
-          </div>
+          {/* Spacer */}
+          <div className="flex-1" />
 
-          {/* Auth Section */}
-          <div className="flex items-center gap-3">
-            {isAuthenticated && userProfile ? (
-              <div className="hidden sm:flex items-center gap-3">
-                {/* User Profile Badge */}
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <button className="flex items-center gap-2 px-3 py-2 bg-secondary/40 border border-border/40 rounded-xl hover:bg-secondary/60 transition-all cursor-pointer group">
-                      <img
-                        src={
-                          userProfile.profileImage ||
-                          "https://api.dicebear.com/7.x/avataaars/svg?seed=" +
-                            userProfile.username
-                        }
-                        alt={userProfile.username}
-                        className="w-6 h-6 rounded-full object-cover"
-                      />
-                      <div className="flex items-center gap-1.5">
-                        <span className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">
-                          {userProfile.username}
-                        </span>
-                        <RoleBadge role={userProfile.role} />
-                      </div>
-                    </button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end" className="w-48">
-                    <div className="px-4 py-2 border-b border-border/20">
-                      <p className="text-sm font-semibold text-foreground">
-                        {userProfile.displayName}
-                      </p>
-                      <p className="text-xs text-muted-foreground">
-                        {userProfile.email}
-                      </p>
-                    </div>
-                    <DropdownMenuItem asChild>
-                      <Link to="/dashboard" className="cursor-pointer">
-                        Dashboard
-                      </Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem asChild>
-                      <Link to="/upload" className="cursor-pointer">
-                        Upload Asset
-                      </Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem asChild>
-                      <Link to="/groups" className="cursor-pointer">
-                        <Users size={16} className="mr-2" />
-                        Groups
-                      </Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem asChild>
-                      <Link
-                        to="/messages"
-                        className="cursor-pointer flex items-center justify-between"
-                      >
-                        <div className="flex items-center">
-                          <Mail size={16} className="mr-2" />
-                          Messages
-                        </div>
-                        {unreadCount > 0 && (
-                          <span className="ml-auto bg-destructive text-destructive-foreground text-xs font-semibold rounded-full w-5 h-5 flex items-center justify-center">
-                            {unreadCount > 9 ? "9+" : unreadCount}
-                          </span>
-                        )}
-                      </Link>
-                    </DropdownMenuItem>
-                    {(userProfile.role === "founder" ||
-                      userProfile.role === "admin") && (
-                      <>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem asChild>
-                          <Link
-                            to="/admin"
-                            className="cursor-pointer text-amber-400"
-                          >
-                            <Shield size={16} className="mr-2" />
-                            Admin Panel
-                          </Link>
-                        </DropdownMenuItem>
-                      </>
-                    )}
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem
-                      onClick={handleLogout}
-                      className="cursor-pointer text-red-400 focus:bg-red-500/20"
+          {/* User Profile Badge (Desktop) */}
+          {isAuthenticated && userProfile && (
+            <div className="hidden sm:block">
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <button className="flex items-center gap-1.5 px-2 py-1.5 bg-secondary/40 border border-border/40 rounded-lg hover:bg-secondary/60 transition-all cursor-pointer group text-xs">
+                    <img
+                      src={
+                        userProfile.profileImage ||
+                        "https://api.dicebear.com/7.x/avataaars/svg?seed=" +
+                          userProfile.username
+                      }
+                      alt={userProfile.username}
+                      className="w-5 h-5 rounded-full object-cover"
+                    />
+                    <span className="font-semibold text-foreground group-hover:text-primary transition-colors">
+                      {userProfile.username}
+                    </span>
+                    <RoleBadge role={userProfile.role} />
+                  </button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-48">
+                  <div className="px-4 py-2 border-b border-border/20">
+                    <p className="text-sm font-semibold text-foreground">
+                      {userProfile.displayName}
+                    </p>
+                    <p className="text-xs text-muted-foreground">
+                      {userProfile.email}
+                    </p>
+                  </div>
+                  <DropdownMenuItem asChild>
+                    <Link to="/dashboard" className="cursor-pointer">
+                      Dashboard
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link to="/upload" className="cursor-pointer">
+                      Upload Asset
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem asChild>
+                    <Link to="/groups" className="cursor-pointer">
+                      <Users size={16} className="mr-2" />
+                      Groups
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link
+                      to="/messages"
+                      className="cursor-pointer flex items-center justify-between"
                     >
-                      <LogOut size={16} className="mr-2" />
-                      Sign Out
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              </div>
-            ) : (
-              <div className="hidden sm:flex items-center gap-2">
-                <Link to="/login">
-                  <Button variant="ghost" size="sm">
-                    Sign In
-                  </Button>
-                </Link>
-                <Link to="/register">
-                  <Button size="sm">Sign Up</Button>
-                </Link>
-              </div>
-            )}
+                      <div className="flex items-center">
+                        <Mail size={16} className="mr-2" />
+                        Messages
+                      </div>
+                      {unreadCount > 0 && (
+                        <span className="ml-auto bg-destructive text-destructive-foreground text-xs font-semibold rounded-full w-5 h-5 flex items-center justify-center">
+                          {unreadCount > 9 ? "9+" : unreadCount}
+                        </span>
+                      )}
+                    </Link>
+                  </DropdownMenuItem>
+                  {(userProfile.role === "founder" ||
+                    userProfile.role === "admin") && (
+                    <>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem asChild>
+                        <Link
+                          to="/admin"
+                          className="cursor-pointer text-amber-400"
+                        >
+                          <Shield size={16} className="mr-2" />
+                          Admin Panel
+                        </Link>
+                      </DropdownMenuItem>
+                    </>
+                  )}
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem
+                    onClick={handleLogout}
+                    className="cursor-pointer text-red-400 focus:bg-red-500/20"
+                  >
+                    <LogOut size={16} className="mr-2" />
+                    Sign Out
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
+          )}
 
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-2 hover:bg-secondary/50 rounded-lg transition-colors"
-            >
-              {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
-            </button>
-          </div>
+          {/* Auth Buttons (Desktop) */}
+          {!isAuthenticated && (
+            <div className="hidden sm:flex items-center gap-1.5">
+              <Link to="/login">
+                <Button variant="ghost" size="sm" className="text-xs">
+                  Sign In
+                </Button>
+              </Link>
+              <Link to="/register">
+                <Button size="sm" className="text-xs">
+                  Sign Up
+                </Button>
+              </Link>
+            </div>
+          )}
+
+          {/* Menu Button */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="p-1.5 hover:bg-secondary/50 rounded-lg transition-colors"
+          >
+            {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
         </div>
 
         {/* Mobile Menu */}
