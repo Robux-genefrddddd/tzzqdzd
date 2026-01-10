@@ -91,26 +91,26 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="container mx-auto px-4 py-6 md:py-8">
+      <div className="container mx-auto px-4 py-4 md:py-5">
         {/* Header */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-3 mb-5">
           <div>
-            <h1 className="text-2xl md:text-3xl font-bold mb-1">Dashboard</h1>
-            <p className="text-sm text-muted-foreground">
+            <h1 className="text-xl md:text-2xl font-bold mb-0.5">Dashboard</h1>
+            <p className="text-xs text-muted-foreground">
               Welcome back, {userProfile?.displayName || "Creator"}! Manage your
               assets and track your success.
             </p>
           </div>
           <Link to="/upload">
             <Button size="sm" className="gap-2">
-              <UploadIcon size={18} />
-              Upload Asset
+              <UploadIcon size={16} />
+              Upload
             </Button>
           </Link>
         </div>
 
         {/* Tabs */}
-        <div className="flex gap-4 mb-6 border-b border-border overflow-x-auto">
+        <div className="flex gap-3 mb-5 border-b border-border overflow-x-auto">
           {[
             { id: "overview", label: "Overview" },
             { id: "assets", label: "My Assets" },
