@@ -320,17 +320,30 @@ export default function AdminPanel() {
             Audit Logs ({auditLogs.length})
           </button>
           {userProfile?.role === "founder" && (
-            <button
-              onClick={() => setActiveTab("maintenance")}
-              className={`flex items-center gap-2 px-4 py-3 font-medium border-b-2 transition-colors whitespace-nowrap ${
-                activeTab === "maintenance"
-                  ? "border-primary text-primary"
-                  : "border-transparent text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              <AlertTriangle size={18} />
-              Settings
-            </button>
+            <>
+              <button
+                onClick={() => setActiveTab("messages")}
+                className={`flex items-center gap-2 px-4 py-3 font-medium border-b-2 transition-colors whitespace-nowrap ${
+                  activeTab === "messages"
+                    ? "border-primary text-primary"
+                    : "border-transparent text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                <Mail size={18} />
+                Messages ({broadcastMessages.length})
+              </button>
+              <button
+                onClick={() => setActiveTab("maintenance")}
+                className={`flex items-center gap-2 px-4 py-3 font-medium border-b-2 transition-colors whitespace-nowrap ${
+                  activeTab === "maintenance"
+                    ? "border-primary text-primary"
+                    : "border-transparent text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                <AlertTriangle size={18} />
+                Settings
+              </button>
+            </>
           )}
         </div>
 
