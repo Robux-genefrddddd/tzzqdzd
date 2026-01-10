@@ -79,9 +79,13 @@ export async function registerUser(
 
     // Provide better error messages
     if (error.code === "auth/email-already-in-use") {
-      throw new Error("An account with this email already exists. Please sign in instead.");
+      throw new Error(
+        "An account with this email already exists. Please sign in instead.",
+      );
     } else if (error.code === "auth/weak-password") {
-      throw new Error("Password is too weak. Please use at least 8 characters.");
+      throw new Error(
+        "Password is too weak. Please use at least 8 characters.",
+      );
     } else if (error.code === "auth/invalid-email") {
       throw new Error("Invalid email address. Please check and try again.");
     } else if (error.message?.includes("displayName")) {
@@ -111,15 +115,21 @@ export async function loginUser(
 
     // Provide better error messages
     if (error.code === "auth/invalid-credential") {
-      throw new Error("Invalid email or password. Please check your credentials and try again.");
+      throw new Error(
+        "Invalid email or password. Please check your credentials and try again.",
+      );
     } else if (error.code === "auth/user-not-found") {
-      throw new Error("No account found with this email. Please create an account first.");
+      throw new Error(
+        "No account found with this email. Please create an account first.",
+      );
     } else if (error.code === "auth/wrong-password") {
       throw new Error("Incorrect password. Please try again.");
     } else if (error.code === "auth/invalid-email") {
       throw new Error("Invalid email address.");
     } else if (error.code === "auth/too-many-requests") {
-      throw new Error("Too many failed login attempts. Please try again later.");
+      throw new Error(
+        "Too many failed login attempts. Please try again later.",
+      );
     }
 
     throw error;

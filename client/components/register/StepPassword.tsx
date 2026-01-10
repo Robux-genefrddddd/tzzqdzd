@@ -35,10 +35,7 @@ export function StepPassword({
 
       {error && (
         <div className="flex items-center gap-2.5 p-3 bg-destructive/15 border border-destructive/30 rounded-lg">
-          <AlertCircle
-            size={16}
-            className="text-destructive flex-shrink-0"
-          />
+          <AlertCircle size={16} className="text-destructive flex-shrink-0" />
           <p className="text-xs text-destructive">{error}</p>
         </div>
       )}

@@ -6,11 +6,7 @@ interface StepEmailProps {
   error?: string;
 }
 
-export function StepEmail({
-  email,
-  onEmailChange,
-  error,
-}: StepEmailProps) {
+export function StepEmail({ email, onEmailChange, error }: StepEmailProps) {
   return (
     <div className="space-y-5">
       <div className="text-center">
@@ -24,10 +20,7 @@ export function StepEmail({
 
       {error && (
         <div className="flex items-center gap-2.5 p-3 bg-destructive/15 border border-destructive/30 rounded-lg">
-          <AlertCircle
-            size={16}
-            className="text-destructive flex-shrink-0"
-          />
+          <AlertCircle size={16} className="text-destructive flex-shrink-0" />
           <p className="text-xs text-destructive">{error}</p>
         </div>
       )}

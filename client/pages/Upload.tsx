@@ -172,7 +172,8 @@ export default function Upload() {
               Upload Successful! ✓
             </h1>
             <p className="text-muted-foreground">
-              Your asset has been published and is now visible in the marketplace.
+              Your asset has been published and is now visible in the
+              marketplace.
             </p>
           </div>
         </div>
@@ -185,7 +186,9 @@ export default function Upload() {
       <div className="max-w-2xl mx-auto">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-foreground mb-2">Upload Asset</h1>
+          <h1 className="text-3xl font-bold text-foreground mb-2">
+            Upload Asset
+          </h1>
           <p className="text-muted-foreground">
             Share your creation with the RbxAssets community
           </p>
@@ -230,7 +233,10 @@ export default function Upload() {
           {/* Error Message */}
           {error && (
             <div className="mb-6 flex items-start gap-3 p-4 bg-destructive/15 border border-destructive/30 rounded-lg">
-              <AlertCircle size={18} className="text-destructive flex-shrink-0 mt-0.5" />
+              <AlertCircle
+                size={18}
+                className="text-destructive flex-shrink-0 mt-0.5"
+              />
               <p className="text-sm text-destructive">{error}</p>
             </div>
           )}
@@ -294,7 +300,9 @@ export default function Upload() {
                 {/* Banner Preview */}
                 {bannerUrl && (
                   <div className="space-y-2">
-                    <p className="text-sm font-medium text-foreground">Banner</p>
+                    <p className="text-sm font-medium text-foreground">
+                      Banner
+                    </p>
                     <img
                       src={bannerUrl}
                       alt="Banner preview"
@@ -313,14 +321,18 @@ export default function Upload() {
                       </p>
                     </div>
                     <div>
-                      <p className="text-xs text-muted-foreground">Description</p>
+                      <p className="text-xs text-muted-foreground">
+                        Description
+                      </p>
                       <p className="text-sm text-foreground whitespace-pre-wrap">
                         {formData.description}
                       </p>
                     </div>
                     <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <p className="text-xs text-muted-foreground">Category</p>
+                        <p className="text-xs text-muted-foreground">
+                          Category
+                        </p>
                         <p className="text-sm font-medium text-foreground">
                           {formData.category}
                         </p>

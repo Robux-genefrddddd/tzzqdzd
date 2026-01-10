@@ -50,7 +50,10 @@ export default function Login() {
           {/* Error Message */}
           {error && (
             <div className="flex items-start gap-3 p-4 bg-destructive/15 border border-destructive/30 rounded-lg">
-              <AlertCircle size={18} className="text-destructive flex-shrink-0 mt-0.5" />
+              <AlertCircle
+                size={18}
+                className="text-destructive flex-shrink-0 mt-0.5"
+              />
               <div className="flex-1">
                 <p className="text-sm text-destructive font-medium">{error}</p>
                 {error.includes("No account") && (

@@ -23,7 +23,7 @@ export default function About() {
         const staffRoles = ["founder", "admin", "partner", "support"];
         const q = query(
           collection(db, "users"),
-          where("role", "in", staffRoles)
+          where("role", "in", staffRoles),
         );
         const querySnapshot = await getDocs(q);
 
@@ -49,15 +49,35 @@ export default function About() {
   const getRoleInfo = (role: string) => {
     switch (role) {
       case "founder":
-        return { label: "Founder", color: "bg-yellow-500/20 text-yellow-400", icon: Crown };
+        return {
+          label: "Founder",
+          color: "bg-yellow-500/20 text-yellow-400",
+          icon: Crown,
+        };
       case "admin":
-        return { label: "Admin", color: "bg-red-500/20 text-red-400", icon: Shield };
+        return {
+          label: "Admin",
+          color: "bg-red-500/20 text-red-400",
+          icon: Shield,
+        };
       case "partner":
-        return { label: "Partner", color: "bg-blue-500/20 text-blue-400", icon: Users };
+        return {
+          label: "Partner",
+          color: "bg-blue-500/20 text-blue-400",
+          icon: Users,
+        };
       case "support":
-        return { label: "Support", color: "bg-green-500/20 text-green-400", icon: Users };
+        return {
+          label: "Support",
+          color: "bg-green-500/20 text-green-400",
+          icon: Users,
+        };
       default:
-        return { label: role, color: "bg-primary/20 text-primary", icon: Users };
+        return {
+          label: role,
+          color: "bg-primary/20 text-primary",
+          icon: Users,
+        };
     }
   };
 
@@ -276,7 +296,9 @@ function TeamCard({ member }: { member: TeamMember }) {
         </h3>
         <p className="text-xs text-muted-foreground">@{member.username}</p>
         <div className="mt-2 flex justify-center">
-          <div className={`flex items-center gap-1 px-2 py-1 rounded text-xs font-semibold ${roleInfo.color}`}>
+          <div
+            className={`flex items-center gap-1 px-2 py-1 rounded text-xs font-semibold ${roleInfo.color}`}
+          >
             <RoleIcon size={12} />
             {roleInfo.label}
           </div>

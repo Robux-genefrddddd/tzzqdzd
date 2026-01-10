@@ -56,8 +56,12 @@ export default function AssetDetail() {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center space-y-4 max-w-md">
-          <h1 className="text-2xl font-bold text-foreground">Asset Not Found</h1>
-          <p className="text-muted-foreground">{error || "This asset doesn't exist"}</p>
+          <h1 className="text-2xl font-bold text-foreground">
+            Asset Not Found
+          </h1>
+          <p className="text-muted-foreground">
+            {error || "This asset doesn't exist"}
+          </p>
           <Link to="/marketplace">
             <button className="px-6 py-2 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-all inline-flex items-center gap-2">
               Back to Marketplace
@@ -108,9 +112,7 @@ export default function AssetDetail() {
               <div className="flex items-center gap-2 text-sm text-muted-foreground">
                 <div className="flex items-center gap-1">
                   <Star size={14} className="fill-accent text-accent" />
-                  <span className="font-medium">
-                    {asset.rating.toFixed(1)}
-                  </span>
+                  <span className="font-medium">{asset.rating.toFixed(1)}</span>
                 </div>
                 <span>({asset.reviews} reviews)</span>
               </div>

@@ -165,19 +165,25 @@ export default function AdminPanel() {
   };
 
   // Filter users based on search
-  const filteredUsers = users.filter((u) =>
-    u.displayName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    u.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    u.email.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredUsers = users.filter(
+    (u) =>
+      u.displayName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      u.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      u.email.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 
-  if (!userProfile || (userProfile.role !== "founder" && userProfile.role !== "admin")) {
+  if (
+    !userProfile ||
+    (userProfile.role !== "founder" && userProfile.role !== "admin")
+  ) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="text-center space-y-4">
           <AlertCircle size={48} className="mx-auto text-destructive" />
           <h1 className="text-2xl font-bold">Access Denied</h1>
-          <p className="text-muted-foreground">You don't have permission to access this panel</p>
+          <p className="text-muted-foreground">
+            You don't have permission to access this panel
+          </p>
         </div>
       </div>
     );
@@ -240,7 +246,10 @@ export default function AdminPanel() {
           <div className="space-y-4">
             {/* Search */}
             <div className="relative">
-              <Search size={18} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground" />
+              <Search
+                size={18}
+                className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground"
+              />
               <Input
                 placeholder="Search users..."
                 value={searchTerm}
@@ -306,19 +315,27 @@ export default function AdminPanel() {
                   <div className="space-y-3 text-sm">
                     <div>
                       <p className="text-muted-foreground">Name</p>
-                      <p className="font-medium text-foreground">{selectedUser.displayName}</p>
+                      <p className="font-medium text-foreground">
+                        {selectedUser.displayName}
+                      </p>
                     </div>
                     <div>
                       <p className="text-muted-foreground">Username</p>
-                      <p className="font-medium text-foreground">@{selectedUser.username}</p>
+                      <p className="font-medium text-foreground">
+                        @{selectedUser.username}
+                      </p>
                     </div>
                     <div>
                       <p className="text-muted-foreground">Email</p>
-                      <p className="font-medium text-foreground">{selectedUser.email}</p>
+                      <p className="font-medium text-foreground">
+                        {selectedUser.email}
+                      </p>
                     </div>
                     <div>
                       <p className="text-muted-foreground">Role</p>
-                      <p className="font-medium text-foreground capitalize">{selectedUser.role}</p>
+                      <p className="font-medium text-foreground capitalize">
+                        {selectedUser.role}
+                      </p>
                     </div>
                     <div>
                       <p className="text-muted-foreground">Created</p>
@@ -342,7 +359,9 @@ export default function AdminPanel() {
                   {!selectedUser.isBanned ? (
                     <>
                       <div className="space-y-2">
-                        <label className="text-sm font-medium">Ban Reason</label>
+                        <label className="text-sm font-medium">
+                          Ban Reason
+                        </label>
                         <Textarea
                           value={banReason}
                           onChange={(e) => setBanReason(e.target.value)}

@@ -130,7 +130,9 @@ export default function Register() {
       : currentStep === 1
         ? email && email.includes("@")
         : currentStep === 2
-          ? password.length >= 8 && confirmPassword && password === confirmPassword
+          ? password.length >= 8 &&
+            confirmPassword &&
+            password === confirmPassword
           : true;
 
   return (
@@ -201,11 +203,7 @@ export default function Register() {
 
             {/* Step 2: Email */}
             {currentStep === 1 && (
-              <StepEmail
-                email={email}
-                onEmailChange={setEmail}
-                error={error}
-              />
+              <StepEmail email={email} onEmailChange={setEmail} error={error} />
             )}
 
             {/* Step 3: Password */}
