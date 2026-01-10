@@ -38,7 +38,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             username: authUser.displayName?.split(" ")[0] || "Creator",
             email: authUser.email || "",
             displayName: authUser.displayName || "User",
-            profileImage: authUser.photoURL || undefined,
+            profileImage: authUser.photoURL || DEFAULT_PROFILE_IMAGE,
             createdAt: new Date(),
             memberRank: "starter",
           });
