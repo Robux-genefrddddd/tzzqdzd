@@ -12,6 +12,43 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
+function RoleBadge({ role }: { role?: string }) {
+  if (!role || role === "member") return null;
+
+  if (role === "founder") {
+    return (
+      <div className="flex items-center gap-1 px-2 py-1 bg-yellow-500/20 rounded-lg">
+        <Crown size={14} className="text-yellow-400" />
+        <span className="text-xs font-semibold text-yellow-400">Founder</span>
+      </div>
+    );
+  }
+
+  if (role === "admin") {
+    return (
+      <div className="flex items-center gap-1 px-2 py-1 bg-red-500/20 rounded-lg">
+        <Shield size={14} className="text-red-400" />
+        <span className="text-xs font-semibold text-red-400">Admin</span>
+      </div>
+    );
+  }
+
+  if (role === "partner") {
+    return (
+      <div className="flex items-center gap-1 px-2 py-1 bg-blue-500/20 rounded-lg">
+        <img
+          src="https://i.ibb.co/n8cZTc4P/G50-Qy3-Ga-MAAih-Up-removebg-preview.png"
+          alt="Partner"
+          className="w-4 h-4"
+        />
+        <span className="text-xs font-semibold text-blue-400">Partner</span>
+      </div>
+    );
+  }
+
+  return null;
+}
+
 export function NavBar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { isAuthenticated, userProfile, loading } = useAuth();
