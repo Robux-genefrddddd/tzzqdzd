@@ -118,8 +118,8 @@ export default function Upload() {
         return;
       }
 
-      // Create asset
-      await createAsset(user.uid, userProfile.displayName, {
+      // Create asset first
+      const assetId = await createAsset(user.uid, userProfile.displayName, {
         name: formData.name,
         description: formData.description,
         category: (formData.category as any) || "Other",
@@ -133,7 +133,28 @@ export default function Upload() {
           .split(",")
           .map((tag) => tag.trim())
           .filter((tag) => tag),
+        filePaths: [],
       });
+
+      // Upload files to Firebase Storage
+      const filePaths: string[] = [];
+      for (const filePreview of files) {
+        if (filePreview.file) {
+          try {
+            const filePath = await uploadAssetFile(assetId, filePreview.file);
+            filePaths.push(filePath);
+          } catch (uploadError) {
+            console.error(`Error uploading file ${filePreview.name}:`, uploadError);
+            toast.error(`Failed to upload file: ${filePreview.name}`);
+          }
+        }
+      }
+
+      // Update asset with file paths
+      if (filePaths.length > 0) {
+        const { updateAsset } = await import("@/lib/assetService");
+        await updateAsset(assetId, { filePaths });
+      }
 
       toast.success("Asset uploaded successfully!");
       setUploadSuccess(true);
