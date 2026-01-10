@@ -61,7 +61,11 @@ export default function BanNotice() {
   }
 
   if (!warning) {
-    navigate("/");
+    if (!user) {
+      navigate("/login");
+    } else {
+      navigate("/");
+    }
     return null;
   }
 
