@@ -52,6 +52,7 @@ export default function AssetDetail() {
   const [downloading, setDownloading] = useState(false);
   const [isFav, setIsFav] = useState(false);
   const [deletingAsset, setDeletingAsset] = useState(false);
+  const [showFilePreview, setShowFilePreview] = useState(false);
 
   useEffect(() => {
     const fetchAssetDetails = async () => {
