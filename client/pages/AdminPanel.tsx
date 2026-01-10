@@ -410,6 +410,62 @@ export default function AdminPanel() {
               )}
             </div>
           </div>
+        ) : activeTab === "maintenance" && userProfile?.role === "founder" ? (
+          <div className="space-y-6">
+            <div className="p-6 bg-card border border-border/30 rounded-xl">
+              <h3 className="text-lg font-semibold mb-4">
+                Maintenance Mode Settings
+              </h3>
+
+              <div className="space-y-4">
+                <div className="p-4 bg-secondary/20 border border-border/30 rounded-lg">
+                  <div className="flex items-center justify-between mb-4">
+                    <div>
+                      <p className="font-semibold">Status</p>
+                      <p className="text-sm text-muted-foreground">
+                        {maintenanceStatus?.enabled
+                          ? "Site is in maintenance mode"
+                          : "Site is operating normally"}
+                      </p>
+                    </div>
+                    <span
+                      className={`px-3 py-1 rounded-lg text-xs font-semibold ${
+                        maintenanceStatus?.enabled
+                          ? "bg-yellow-500/20 text-yellow-600"
+                          : "bg-green-500/20 text-green-600"
+                      }`}
+                    >
+                      {maintenanceStatus?.enabled ? "ACTIVE" : "INACTIVE"}
+                    </span>
+                  </div>
+
+                  {maintenanceStatus?.updatedAt && (
+                    <p className="text-xs text-muted-foreground">
+                      Last updated:{" "}
+                      {maintenanceStatus.updatedAt.toLocaleDateString()} at{" "}
+                      {maintenanceStatus.updatedAt.toLocaleTimeString()}
+                    </p>
+                  )}
+                </div>
+
+                <Button
+                  onClick={() => setShowMaintenanceModal(true)}
+                  className="w-full"
+                >
+                  {maintenanceStatus?.enabled ? "Disable" : "Enable"} Maintenance
+                  Mode
+                </Button>
+              </div>
+            </div>
+
+            <div className="p-4 bg-blue-500/10 border border-blue-500/20 rounded-xl">
+              <p className="text-sm text-blue-600/90">
+                When maintenance mode is enabled, visitors will see a maintenance
+                notice. Use this when performing critical updates or
+                maintenance.
+              </p>
+            </div>
+          </div>
         ) : (
           <div className="space-y-3">
             {auditLogs.length === 0 ? (
