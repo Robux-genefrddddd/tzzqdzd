@@ -82,7 +82,7 @@ export function NavBar({ isAuthenticated = false, user, onLogout }: NavBarProps)
             {/* Mobile Menu Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-1.5 hover:bg-secondary rounded-sm transition-colors"
+              className="md:hidden p-2 hover:bg-secondary/50 rounded-lg transition-colors"
             >
               {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
