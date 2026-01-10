@@ -278,10 +278,10 @@ export default function AdminPanel() {
         </div>
 
         {/* Tabs */}
-        <div className="flex gap-1 mb-6 border-b border-border/20">
+        <div className="flex gap-1 mb-6 border-b border-border/20 overflow-x-auto">
           <button
             onClick={() => setActiveTab("users")}
-            className={`flex items-center gap-2 px-4 py-3 font-medium border-b-2 transition-colors ${
+            className={`flex items-center gap-2 px-4 py-3 font-medium border-b-2 transition-colors whitespace-nowrap ${
               activeTab === "users"
                 ? "border-primary text-primary"
                 : "border-transparent text-muted-foreground hover:text-foreground"
@@ -292,7 +292,7 @@ export default function AdminPanel() {
           </button>
           <button
             onClick={() => setActiveTab("logs")}
-            className={`flex items-center gap-2 px-4 py-3 font-medium border-b-2 transition-colors ${
+            className={`flex items-center gap-2 px-4 py-3 font-medium border-b-2 transition-colors whitespace-nowrap ${
               activeTab === "logs"
                 ? "border-primary text-primary"
                 : "border-transparent text-muted-foreground hover:text-foreground"
@@ -301,6 +301,19 @@ export default function AdminPanel() {
             <Clock size={18} />
             Audit Logs ({auditLogs.length})
           </button>
+          {userProfile?.role === "founder" && (
+            <button
+              onClick={() => setActiveTab("maintenance")}
+              className={`flex items-center gap-2 px-4 py-3 font-medium border-b-2 transition-colors whitespace-nowrap ${
+                activeTab === "maintenance"
+                  ? "border-primary text-primary"
+                  : "border-transparent text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              <AlertTriangle size={18} />
+              Settings
+            </button>
+          )}
         </div>
 
         {loading ? (
