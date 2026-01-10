@@ -45,12 +45,12 @@ export default function Messages() {
     <div className="min-h-screen bg-background flex flex-col">
       {/* Header - Fixed at top */}
       <div className="border-b border-border/20 sticky top-0 z-10">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="flex items-center gap-3">
-            <Mail size={32} className="text-primary" />
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <div className="flex items-center gap-2">
+            <Mail size={20} className="text-primary" />
             <div>
-              <h1 className="text-3xl font-bold text-foreground">Messages</h1>
-              <p className="text-muted-foreground text-sm mt-1">
+              <h1 className="text-2xl font-bold text-foreground">Messages</h1>
+              <p className="text-muted-foreground text-xs mt-0.5">
                 Group invitations and notifications
               </p>
             </div>
