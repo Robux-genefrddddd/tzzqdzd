@@ -129,42 +129,42 @@ export function NavBar() {
 
   return (
     <>
-      <nav className="sticky top-0 z-40 bg-background/95 backdrop-blur-lg border-b border-border/20">
-        <div className="flex items-center justify-between h-14 px-4">
-          <div className="flex items-center gap-3 flex-1">
+      <nav className="sticky top-0 z-40 bg-background/98 backdrop-blur-sm border-b border-white/5">
+        <div className="flex items-center justify-between h-14 px-6">
+          <div className="flex items-center gap-4 flex-1">
             <button
               onClick={toggleMenu}
-              className="p-2 hover:bg-secondary/40 rounded-lg transition-all duration-200 flex-shrink-0 group"
+              className="p-1.5 hover:bg-white/8 rounded-lg transition-all duration-200 flex-shrink-0 group"
             >
               {menuOpen ? (
                 <X
-                  size={20}
+                  size={18}
                   className="text-foreground group-hover:text-primary transition-colors"
                 />
               ) : (
                 <Menu
-                  size={20}
+                  size={18}
                   className="text-foreground group-hover:text-primary transition-colors"
                 />
               )}
             </button>
-            <Link to="/" className="flex items-center gap-2">
+            <Link to="/" className="flex items-center gap-2.5 group">
               <img
                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Roblox_Logo.svg/2048px-Roblox_Logo.svg.png"
                 alt="Roblox"
                 className="h-5 object-contain"
               />
-              <span className="font-bold text-xs tracking-tight text-foreground">
+              <span className="font-semibold text-sm tracking-tight text-foreground group-hover:text-primary transition-colors">
                 RbxAssets
               </span>
             </Link>
           </div>
 
-          <div className="flex items-center gap-2 flex-shrink-0">
+          <div className="flex items-center gap-1.5 flex-shrink-0">
             {isAuthenticated && userProfile ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <button className="flex items-center gap-1.5 px-2 py-1.5 bg-secondary/40 border border-border/40 rounded-lg hover:bg-secondary/60 transition-all cursor-pointer group text-xs">
+                  <button className="flex items-center gap-2 px-3 py-1.5 border border-white/10 rounded-lg hover:bg-white/5 transition-all cursor-pointer group">
                     <img
                       src={
                         userProfile.profileImage ||
@@ -172,9 +172,9 @@ export function NavBar() {
                           userProfile.username
                       }
                       alt={userProfile.username}
-                      className="w-5 h-5 rounded-full object-cover"
+                      className="w-5 h-5 rounded-full object-cover flex-shrink-0"
                     />
-                    <span className="font-semibold text-foreground group-hover:text-primary transition-colors hidden sm:inline">
+                    <span className="font-medium text-sm text-foreground group-hover:text-primary transition-colors hidden sm:inline">
                       {userProfile.username}
                     </span>
                     <RoleBadge role={userProfile.role} />
