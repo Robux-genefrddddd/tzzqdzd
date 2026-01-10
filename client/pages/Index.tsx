@@ -184,9 +184,9 @@ export default function Index() {
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between mb-8">
             <div>
-              <h2 className="text-lg font-bold">Featured Assets</h2>
+              <h2 className="text-lg font-bold">Featured & Trending</h2>
               <p className="text-xs text-muted-foreground mt-1">
-                Recently added and trending
+                Hand-picked assets from quality creators
               </p>
             </div>
             <Link
@@ -197,7 +197,7 @@ export default function Index() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {featuredAssets.map((asset) => (
               <AssetCard key={asset.id} asset={asset} />
             ))}
