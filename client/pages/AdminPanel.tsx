@@ -521,6 +521,89 @@ export default function AdminPanel() {
         )}
       </div>
 
+      {/* Maintenance Mode Modal */}
+      {showMaintenanceModal && (
+        <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4">
+          <div className="bg-card border border-border/40 rounded-2xl w-full max-w-md shadow-2xl">
+            {/* Header */}
+            <div className="flex items-center justify-between p-6 border-b border-border/20">
+              <h2 className="text-xl font-bold">
+                {maintenanceStatus?.enabled
+                  ? "Disable Maintenance Mode"
+                  : "Enable Maintenance Mode"}
+              </h2>
+              <button
+                onClick={() => setShowMaintenanceModal(false)}
+                className="p-1 hover:bg-secondary/50 rounded-lg transition-colors"
+              >
+                <X size={20} />
+              </button>
+            </div>
+
+            {/* Content */}
+            <div className="p-6 space-y-4">
+              {!maintenanceStatus?.enabled && (
+                <>
+                  <div>
+                    <label className="block text-sm font-medium mb-2">
+                      Maintenance Message (Optional)
+                    </label>
+                    <Textarea
+                      value={maintenanceMessage}
+                      onChange={(e) => setMaintenanceMessage(e.target.value)}
+                      placeholder="We're currently performing maintenance. We'll be back soon!"
+                      rows={4}
+                      className="w-full"
+                    />
+                    <p className="text-xs text-muted-foreground mt-2">
+                      This message will be shown to visitors while maintenance
+                      mode is active.
+                    </p>
+                  </div>
+
+                  <div className="p-3 bg-blue-500/10 border border-blue-500/20 rounded-lg">
+                    <p className="text-sm text-blue-600/90">
+                      When enabled, the site will display a maintenance page to
+                      all visitors.
+                    </p>
+                  </div>
+                </>
+              )}
+
+              {maintenanceStatus?.enabled && (
+                <div className="p-3 bg-yellow-500/10 border border-yellow-500/20 rounded-lg">
+                  <p className="text-sm text-yellow-600/90">
+                    Are you sure you want to disable maintenance mode? The site
+                    will immediately become accessible to all users.
+                  </p>
+                </div>
+              )}
+            </div>
+
+            {/* Footer */}
+            <div className="border-t border-border/20 p-6 bg-card space-y-3">
+              <Button
+                onClick={handleMaintenanceModeChange}
+                disabled={updatingMaintenance}
+                className="w-full"
+                variant={maintenanceStatus?.enabled ? "destructive" : "default"}
+              >
+                {maintenanceStatus?.enabled
+                  ? "Disable Maintenance"
+                  : "Enable Maintenance"}
+              </Button>
+              <Button
+                onClick={() => setShowMaintenanceModal(false)}
+                variant="outline"
+                className="w-full"
+              >
+                Cancel
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* User Detail Modal */}
       <UserDetailModal
         user={selectedUser}
