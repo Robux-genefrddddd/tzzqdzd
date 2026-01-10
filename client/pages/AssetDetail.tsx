@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { Star, Download, Heart, ArrowRight, Loader, Trash2, FileDown } from "lucide-react";
-import { getAsset, incrementAssetDownloads } from "@/lib/assetService";
+import { getAsset, incrementAssetDownloads, deleteAsset } from "@/lib/assetService";
 import { getUserProfile } from "@/lib/auth";
 import { useAuth } from "@/contexts/AuthContext";
 import {
@@ -14,6 +14,11 @@ import {
   type Review,
 } from "@/lib/reviewService";
 import { downloadAssetFile, forceDownloadFile } from "@/lib/fileService";
+import {
+  isFavorited,
+  addFavorite,
+  removeFavorite,
+} from "@/lib/favoritesService";
 import { toast } from "sonner";
 import type { Asset } from "@/lib/assetService";
 
