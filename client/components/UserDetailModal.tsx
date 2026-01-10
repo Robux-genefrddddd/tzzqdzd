@@ -120,8 +120,12 @@ export function UserDetailModal({
   };
 
   const handleBanUser = async () => {
-    if (user.role === "founder" || user.role === "admin") {
-      toast.error("Cannot ban admin or founder accounts");
+    // Prevent banning admins and founders (protects higher roles)
+    if (
+      (user.role === "founder" && currentUserRole !== "founder") ||
+      (user.role === "admin" && currentUserRole === "member")
+    ) {
+      toast.error("Insufficient permissions to ban this user");
       return;
     }
 
