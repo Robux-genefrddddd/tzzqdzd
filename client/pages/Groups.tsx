@@ -29,15 +29,15 @@ export default function Groups() {
     userProfile?.role === "partner" || userProfile?.role === "admin";
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <div className="border-b border-border/20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div className="min-h-screen bg-background flex flex-col">
+      {/* Header - Compact */}
+      <div className="border-b border-border/30 bg-card/50">
+        <div className="max-w-6xl mx-auto px-4 py-5">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-4xl font-bold text-foreground">My Groups</h1>
-              <p className="text-muted-foreground mt-2">
-                Connect and collaborate with other partners
+              <h1 className="text-lg font-bold text-foreground">My Groups</h1>
+              <p className="text-xs text-muted-foreground mt-1">
+                Collaborate and connect
               </p>
             </div>
             {canCreateGroup && <CreateGroupDialog />}
@@ -45,23 +45,25 @@ export default function Groups() {
         </div>
       </div>
 
-      {/* Groups Grid */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      {/* Groups List */}
+      <div className="flex-1 max-w-6xl w-full mx-auto px-4 py-6">
         {groups.length === 0 ? (
-          <div className="text-center py-12">
-            <p className="text-muted-foreground mb-4">
-              {canCreateGroup
-                ? "No groups yet. Create one to get started!"
-                : "You haven't been invited to any groups yet."}
-            </p>
-            {canCreateGroup && (
-              <CreateGroupDialog
-                onGroupCreated={(groupId) => navigate(`/groups/${groupId}`)}
-              />
-            )}
+          <div className="flex items-center justify-center h-full">
+            <div className="text-center">
+              <p className="text-sm text-muted-foreground mb-3">
+                {canCreateGroup
+                  ? "No groups yet. Create one to get started!"
+                  : "You haven't been invited to any groups yet."}
+              </p>
+              {canCreateGroup && (
+                <CreateGroupDialog
+                  onGroupCreated={(groupId) => navigate(`/groups/${groupId}`)}
+                />
+              )}
+            </div>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
             {groups.map((group) => (
               <GroupCard
                 key={group.id}
