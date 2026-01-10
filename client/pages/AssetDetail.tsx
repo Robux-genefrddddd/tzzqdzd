@@ -24,6 +24,7 @@ import type { Asset } from "@/lib/assetService";
 
 export default function AssetDetail() {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
   const { user, userProfile } = useAuth();
   const [asset, setAsset] = useState<Asset | null>(null);
   const [authorProfile, setAuthorProfile] = useState<any>(null);
