@@ -35,7 +35,7 @@ export interface Asset {
   downloads: number;
   rating: number;
   reviews: number;
-  status: "draft" | "published" | "archived";
+  status: "draft" | "uploading" | "verification" | "published" | "archived" | "rejected";
   tags: string[];
   createdAt: Date;
   updatedAt: Date;
@@ -50,25 +50,26 @@ export async function getPublishedAssets(
   limitCount: number = 50,
 ) {
   try {
-    const constraints = [
-      where("status", "==", "published"),
-      orderBy("updatedAt", "desc"),
-      limit(limitCount),
-    ];
+    const constraints = [where("status", "==", "published")];
 
     if (categoryFilter) {
-      constraints.splice(1, 0, where("category", "==", categoryFilter));
+      constraints.push(where("category", "==", categoryFilter));
     }
 
     const q = query(collection(db, ASSETS_COLLECTION), ...constraints);
     const querySnapshot = await getDocs(q);
 
-    return querySnapshot.docs.map((doc) => ({
+    const assets = querySnapshot.docs.map((doc) => ({
       id: doc.id,
       ...doc.data(),
       createdAt: doc.data().createdAt?.toDate?.() || new Date(),
       updatedAt: doc.data().updatedAt?.toDate?.() || new Date(),
     })) as Asset[];
+
+    // Sort by updatedAt descending and limit results on the client side
+    return assets
+      .sort((a, b) => b.updatedAt.getTime() - a.updatedAt.getTime())
+      .slice(0, limitCount);
   } catch (error) {
     console.error("Error fetching published assets:", error);
     return [];
@@ -81,16 +82,18 @@ export async function getUserAssets(userId: string) {
     const q = query(
       collection(db, ASSETS_COLLECTION),
       where("authorId", "==", userId),
-      orderBy("updatedAt", "desc"),
     );
     const querySnapshot = await getDocs(q);
 
-    return querySnapshot.docs.map((doc) => ({
+    const assets = querySnapshot.docs.map((doc) => ({
       id: doc.id,
       ...doc.data(),
       createdAt: doc.data().createdAt?.toDate?.() || new Date(),
       updatedAt: doc.data().updatedAt?.toDate?.() || new Date(),
     })) as Asset[];
+
+    // Sort by updatedAt descending on the client side
+    return assets.sort((a, b) => b.updatedAt.getTime() - a.updatedAt.getTime());
   } catch (error) {
     console.error("Error fetching user assets:", error);
     return [];
@@ -195,17 +198,20 @@ export async function getFeaturedAssets(limitCount: number = 6) {
       collection(db, ASSETS_COLLECTION),
       where("status", "==", "published"),
       where("featured", "==", true),
-      orderBy("downloads", "desc"),
-      limit(limitCount),
     );
     const querySnapshot = await getDocs(q);
 
-    return querySnapshot.docs.map((doc) => ({
+    const assets = querySnapshot.docs.map((doc) => ({
       id: doc.id,
       ...doc.data(),
       createdAt: doc.data().createdAt?.toDate?.() || new Date(),
       updatedAt: doc.data().updatedAt?.toDate?.() || new Date(),
     })) as Asset[];
+
+    // Sort by downloads descending and limit results on the client side
+    return assets
+      .sort((a, b) => b.downloads - a.downloads)
+      .slice(0, limitCount);
   } catch (error) {
     console.error("Error fetching featured assets:", error);
     return [];

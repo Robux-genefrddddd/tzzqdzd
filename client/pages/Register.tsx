@@ -1,7 +1,36 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Mail, Lock, User, ArrowRight, AlertCircle } from "lucide-react";
+import {
+  Mail,
+  Lock,
+  User,
+  ArrowRight,
+  AlertCircle,
+  Shield,
+  MessageCircle,
+} from "lucide-react";
 import { registerUser } from "@/lib/auth";
+
+const ROLES = [
+  {
+    id: "member",
+    name: "Creator",
+    description: "Create and sell assets",
+    icon: "🎨",
+  },
+  {
+    id: "partner",
+    name: "Partner",
+    description: "Collaborate with team",
+    icon: "🤝",
+  },
+  {
+    id: "support",
+    name: "Support Staff",
+    description: "Help our community",
+    icon: "💬",
+  },
+];
 
 export default function Register() {
   const navigate = useNavigate();
@@ -10,6 +39,7 @@ export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [selectedRole, setSelectedRole] = useState<string>("member");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -29,7 +59,13 @@ export default function Register() {
 
     setIsLoading(true);
     try {
-      await registerUser(email, password, username, displayName || username);
+      await registerUser(
+        email,
+        password,
+        username,
+        displayName || username,
+        selectedRole as "member" | "partner" | "admin" | "founder" | "support",
+      );
       navigate("/dashboard");
     } catch (err: any) {
       setError(err.message || "Failed to create account. Please try again.");
@@ -68,7 +104,36 @@ export default function Register() {
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-5">
+            {/* Role Selection */}
+            <div className="space-y-2">
+              <label className="block text-sm font-medium text-foreground">
+                Choose your role
+              </label>
+              <div className="grid grid-cols-3 gap-2">
+                {ROLES.map((role) => (
+                  <button
+                    key={role.id}
+                    type="button"
+                    onClick={() => setSelectedRole(role.id)}
+                    className={`p-3 rounded-lg border-2 transition-all text-center ${
+                      selectedRole === role.id
+                        ? "border-primary bg-primary/10"
+                        : "border-border/30 bg-background hover:border-border/60"
+                    }`}
+                  >
+                    <div className="text-2xl mb-1">{role.icon}</div>
+                    <p className="text-xs font-semibold text-foreground">
+                      {role.name}
+                    </p>
+                    <p className="text-xs text-muted-foreground mt-1">
+                      {role.description}
+                    </p>
+                  </button>
+                ))}
+              </div>
+            </div>
+
             {/* Username */}
             <div className="space-y-2">
               <label

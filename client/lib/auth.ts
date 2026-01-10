@@ -20,10 +20,14 @@ export interface UserProfile {
   displayName: string;
   createdAt: Date;
   memberRank: "starter" | "creator" | "pro" | "studio";
+  role: "member" | "partner" | "admin" | "founder" | "support";
   assetsCreated: number;
   assetsDownloaded: number;
   earnings: number;
   profileImage?: string;
+  isBanned: boolean;
+  banReason?: string;
+  banDate?: Date;
 }
 
 export async function registerUser(
@@ -31,6 +35,7 @@ export async function registerUser(
   password: string,
   username: string,
   displayName: string,
+  role: "member" | "partner" | "admin" | "founder" | "support" = "member",
 ): Promise<UserProfile> {
   try {
     // Create auth user
@@ -56,9 +61,11 @@ export async function registerUser(
       profileImage: DEFAULT_PROFILE_IMAGE,
       createdAt: new Date(),
       memberRank: "starter",
+      role,
       assetsCreated: 0,
       assetsDownloaded: 0,
       earnings: 0,
+      isBanned: false,
     };
 
     await setDoc(doc(db, "users", user.uid), userProfile);

@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import { Upload as UploadIcon, X, Plus } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import { Upload as UploadIcon, X, Plus, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -12,6 +12,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useAuth } from "@/contexts/AuthContext";
+import { createAsset } from "@/lib/assetService";
+import { toast } from "sonner";
 
 interface FilePreview {
   id: string;
@@ -32,6 +35,8 @@ const ASSET_CATEGORIES = [
 ];
 
 export default function Upload() {
+  const navigate = useNavigate();
+  const { user, userProfile } = useAuth();
   const [files, setFiles] = useState<FilePreview[]>([]);
   const [formData, setFormData] = useState({
     name: "",
@@ -42,6 +47,7 @@ export default function Upload() {
   });
   const [dragActive, setDragActive] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [uploadSuccess, setUploadSuccess] = useState(false);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -106,6 +112,13 @@ export default function Upload() {
     setIsSubmitting(true);
 
     try {
+      // Check authentication
+      if (!user || !userProfile) {
+        toast.error("You must be logged in to upload assets");
+        navigate("/login");
+        return;
+      }
+
       // Validate form
       if (
         !formData.name ||
@@ -113,38 +126,108 @@ export default function Upload() {
         !formData.category ||
         files.length === 0
       ) {
-        alert(
+        toast.error(
           "Please fill in all required fields and upload at least one file",
         );
         setIsSubmitting(false);
         return;
       }
 
-      // Here you would typically send the data to your backend
-      console.log("Form submitted:", {
-        ...formData,
-        files,
+      // Create asset with verification status
+      const assetId = await createAsset(user.uid, userProfile.displayName, {
+        name: formData.name,
+        description: formData.description,
+        category:
+          (formData.category as
+            | "3D Models"
+            | "UI Design"
+            | "Scripts"
+            | "Animations"
+            | "Plugins"
+            | "Sounds"
+            | "Images"
+            | "Other") || "Other",
+        price: parseFloat(formData.price) || 0,
+        imageUrl:
+          "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500&h=500&fit=crop",
+        authorId: user.uid,
+        authorName: userProfile.displayName,
+        downloads: 0,
+        rating: 0,
+        reviews: 0,
+        status: "uploading" as const,
+        tags: formData.tags
+          .split(",")
+          .map((tag) => tag.trim())
+          .filter((tag) => tag),
       });
 
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      // Simulate verification delay (in real app, this would be backend check)
+      await new Promise((resolve) => setTimeout(resolve, 2000));
 
-      alert("Asset uploaded successfully!");
-      setFormData({
-        name: "",
-        description: "",
-        category: "",
-        price: "",
-        tags: "",
-      });
-      setFiles([]);
+      toast.success(
+        "Asset uploaded! ✓ Now in verification process. You'll see it in your dashboard once approved.",
+      );
+
+      setUploadSuccess(true);
+
+      // Reset form
+      setTimeout(() => {
+        setFormData({
+          name: "",
+          description: "",
+          category: "",
+          price: "",
+          tags: "",
+        });
+        setFiles([]);
+        setUploadSuccess(false);
+        navigate("/dashboard");
+      }, 1500);
     } catch (error) {
       console.error("Upload error:", error);
-      alert("Failed to upload asset. Please try again.");
+      toast.error("Failed to upload asset. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
   };
+
+  if (uploadSuccess) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="container mx-auto px-4">
+          <div className="max-w-2xl mx-auto text-center space-y-6">
+            <div className="flex justify-center">
+              <div className="w-20 h-20 rounded-full bg-green-500/20 flex items-center justify-center animate-fade-in">
+                <CheckCircle size={48} className="text-green-400" />
+              </div>
+            </div>
+            <div className="space-y-3">
+              <h1 className="text-4xl font-bold text-foreground">
+                Upload Successful! ✓
+              </h1>
+              <p className="text-lg text-muted-foreground">
+                Your asset has been uploaded and is now in verification process.
+              </p>
+              <p className="text-base text-muted-foreground max-w-xl mx-auto">
+                Our team will review it to ensure it meets our quality standards
+                and is virus-free. Once approved, it will appear on the
+                marketplace and in your dashboard.
+              </p>
+            </div>
+            <div className="pt-6 flex flex-col sm:flex-row gap-4 justify-center">
+              <Link to="/dashboard">
+                <Button>Go to Dashboard</Button>
+              </Link>
+              <Link to="/marketplace">
+                <Button variant="outline">View Marketplace</Button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background">

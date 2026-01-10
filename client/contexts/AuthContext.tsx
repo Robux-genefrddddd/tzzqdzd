@@ -10,6 +10,9 @@ interface UserProfile {
   profileImage?: string;
   createdAt: Date;
   memberRank?: "starter" | "creator" | "pro" | "studio";
+  role: "member" | "partner" | "admin" | "founder" | "support";
+  isBanned?: boolean;
+  banReason?: string;
 }
 
 interface AuthContextType {
@@ -41,6 +44,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             profileImage: authUser.photoURL || DEFAULT_PROFILE_IMAGE,
             createdAt: new Date(),
             memberRank: "starter",
+            role: "member",
           });
         } catch (error) {
           console.error("Error fetching user profile:", error);
