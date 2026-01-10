@@ -94,7 +94,7 @@ export default function BanNotice() {
     <div className="min-h-screen bg-black flex items-center justify-center p-4">
       <div className="w-full max-w-2xl space-y-6">
         {/* Main Card */}
-        <div className="bg-gray-900/80 border border-gray-800 rounded-lg p-8 space-y-6">
+        <div className="bg-gray-800/60 border border-gray-700 rounded-lg p-8 space-y-6 backdrop-blur-sm">
           {/* Title */}
           <div className="space-y-3">
             <div className="flex items-center gap-3">
