@@ -100,24 +100,16 @@ export default function Support() {
         <div className="space-y-4">
           {tickets.length === 0 ? (
             <div className="bg-secondary/30 border border-border rounded-lg p-12 text-center space-y-4">
-              <MessageSquare
-                size={48}
-                className="mx-auto text-muted-foreground"
-              />
               <div>
                 <p className="text-lg font-semibold text-foreground mb-2">
-                  No support tickets yet
+                  No tickets yet
                 </p>
                 <p className="text-sm text-muted-foreground mb-6">
-                  If you need help, create a new support ticket and our team
-                  will assist you shortly.
+                  Create a ticket to get help from our team
                 </p>
               </div>
               <Link to="/support/new">
-                <Button>
-                  <Plus size={16} className="mr-2" />
-                  Create Your First Ticket
-                </Button>
+                <Button>Create First Ticket</Button>
               </Link>
             </div>
           ) : (
