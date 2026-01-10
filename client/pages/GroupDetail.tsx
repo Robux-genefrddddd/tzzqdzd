@@ -114,7 +114,7 @@ export default function GroupDetail() {
       </div>
 
       {/* Tab Content - Full Height */}
-      <div className="flex-1 overflow-hidden max-w-5xl w-full mx-auto px-3 py-2">
+      <div className="flex-1 overflow-hidden max-w-5xl w-full mx-auto px-4 py-3">
         {activeTab === "chat" && (
           <div className="h-full">
             <GroupChat groupId={group.id} />
