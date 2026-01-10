@@ -9,6 +9,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { NavBar } from "@/components/NavBar";
 import { Footer } from "@/components/Footer";
 import { AuthProvider } from "@/contexts/AuthContext";
+import { WarningNotificationModal } from "@/components/WarningNotificationModal";
 import Index from "./pages/Index";
 import Marketplace from "./pages/Marketplace";
 import AssetDetail from "./pages/AssetDetail";
