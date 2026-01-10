@@ -73,13 +73,6 @@ export function AssetCard({ asset }: AssetCardProps) {
 
             {/* Author */}
             <div className="flex items-center gap-1.5 border-t border-border/10 pt-2.5 mb-3">
-              {asset.authorAvatar && (
-                <img
-                  src={asset.authorAvatar}
-                  alt={asset.authorName}
-                  className="w-4 h-4 rounded object-cover flex-shrink-0"
-                />
-              )}
               <p className="text-xs text-muted-foreground/70 truncate">
                 {asset.authorName}
               </p>
