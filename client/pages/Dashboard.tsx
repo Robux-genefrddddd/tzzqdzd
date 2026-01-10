@@ -206,9 +206,7 @@ export default function Dashboard() {
                   <p className="text-xl font-bold text-foreground">
                     {stats.avgRating}
                   </p>
-                  <p className="text-xs text-muted-foreground mt-0.5">
-                    Rating
-                  </p>
+                  <p className="text-xs text-muted-foreground mt-0.5">Rating</p>
                 </div>
               </div>
             </div>
@@ -293,7 +291,8 @@ export default function Dashboard() {
           <div className="space-y-3">
             <div className="flex justify-between items-center">
               <p className="text-xs text-muted-foreground">
-                {assets.length} published {assets.length === 1 ? "asset" : "assets"}
+                {assets.length} published{" "}
+                {assets.length === 1 ? "asset" : "assets"}
               </p>
               <Link to="/upload">
                 <Button size="sm" className="text-xs">
