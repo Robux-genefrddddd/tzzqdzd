@@ -152,7 +152,9 @@ export default function SupportTicketDetail() {
                 Ticket #{ticket.id.substring(0, 8).toUpperCase()}
               </p>
             </div>
-            <span className={`px-3 py-1 text-sm font-medium rounded ${getStatusColor(ticket.status)}`}>
+            <span
+              className={`px-3 py-1 text-sm font-medium rounded ${getStatusColor(ticket.status)}`}
+            >
               {ticket.status}
             </span>
           </div>
@@ -167,7 +169,9 @@ export default function SupportTicketDetail() {
             </div>
             <div className="bg-secondary/30 border border-border rounded-lg p-3">
               <p className="text-xs text-muted-foreground">Priority</p>
-              <p className={`text-sm font-semibold ${getPriorityColor(ticket.priority)}`}>
+              <p
+                className={`text-sm font-semibold ${getPriorityColor(ticket.priority)}`}
+              >
                 {ticket.priority}
               </p>
             </div>

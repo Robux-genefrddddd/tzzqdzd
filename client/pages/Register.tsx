@@ -1,6 +1,14 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Mail, Lock, User, ArrowRight, AlertCircle, Shield, MessageCircle } from "lucide-react";
+import {
+  Mail,
+  Lock,
+  User,
+  ArrowRight,
+  AlertCircle,
+  Shield,
+  MessageCircle,
+} from "lucide-react";
 import { registerUser } from "@/lib/auth";
 
 const ROLES = [

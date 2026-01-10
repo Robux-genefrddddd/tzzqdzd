@@ -21,7 +21,12 @@ export type TicketCategory =
   | "other";
 
 export type TicketPriority = "low" | "normal" | "high" | "critical";
-export type TicketStatus = "open" | "in-progress" | "waiting" | "resolved" | "closed";
+export type TicketStatus =
+  | "open"
+  | "in-progress"
+  | "waiting"
+  | "resolved"
+  | "closed";
 
 export interface TicketMessage {
   id: string;
@@ -113,7 +118,9 @@ export async function getUserTickets(userId: string): Promise<Ticket[]> {
     })) as Ticket[];
 
     // Sort by updatedAt descending on the client side
-    return tickets.sort((a, b) => b.updatedAt.getTime() - a.updatedAt.getTime());
+    return tickets.sort(
+      (a, b) => b.updatedAt.getTime() - a.updatedAt.getTime(),
+    );
   } catch (error) {
     console.error("Error fetching user tickets:", error);
     return [];
@@ -138,7 +145,9 @@ export async function getAllTickets(): Promise<Ticket[]> {
     })) as Ticket[];
 
     // Sort by updatedAt descending on the client side
-    return tickets.sort((a, b) => b.updatedAt.getTime() - a.updatedAt.getTime());
+    return tickets.sort(
+      (a, b) => b.updatedAt.getTime() - a.updatedAt.getTime(),
+    );
   } catch (error) {
     console.error("Error fetching tickets:", error);
     return [];

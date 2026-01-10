@@ -106,13 +106,17 @@ export default function Support() {
         <div className="space-y-4">
           {tickets.length === 0 ? (
             <div className="bg-secondary/30 border border-border rounded-lg p-12 text-center space-y-4">
-              <MessageSquare size={48} className="mx-auto text-muted-foreground" />
+              <MessageSquare
+                size={48}
+                className="mx-auto text-muted-foreground"
+              />
               <div>
                 <p className="text-lg font-semibold text-foreground mb-2">
                   No support tickets yet
                 </p>
                 <p className="text-sm text-muted-foreground mb-6">
-                  If you need help, create a new support ticket and our team will assist you shortly.
+                  If you need help, create a new support ticket and our team
+                  will assist you shortly.
                 </p>
               </div>
               <Link to="/support/new">
@@ -145,13 +149,19 @@ export default function Support() {
                       </p>
                       <div className="flex items-center gap-3 mt-3 text-xs text-muted-foreground">
                         <span className="capitalize">
-                          Category: <span className="text-foreground">{ticket.category.replace("-", " ")}</span>
+                          Category:{" "}
+                          <span className="text-foreground">
+                            {ticket.category.replace("-", " ")}
+                          </span>
                         </span>
-                        <span className={`capitalize font-semibold ${getPriorityColor(ticket.priority)}`}>
+                        <span
+                          className={`capitalize font-semibold ${getPriorityColor(ticket.priority)}`}
+                        >
                           Priority: {ticket.priority}
                         </span>
                         <span>
-                          {ticket.messages.length} message{ticket.messages.length !== 1 ? "s" : ""}
+                          {ticket.messages.length} message
+                          {ticket.messages.length !== 1 ? "s" : ""}
                         </span>
                       </div>
                     </div>

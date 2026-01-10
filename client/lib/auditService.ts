@@ -9,7 +9,12 @@ import {
   Timestamp,
 } from "firebase/firestore";
 
-export type AuditAction = "user_banned" | "user_unbanned" | "role_changed" | "ticket_resolved" | "ticket_assigned";
+export type AuditAction =
+  | "user_banned"
+  | "user_unbanned"
+  | "role_changed"
+  | "ticket_resolved"
+  | "ticket_assigned";
 
 export interface AuditLog {
   id: string;
@@ -101,7 +106,7 @@ export async function banUser(
 ): Promise<void> {
   try {
     const { updateUserProfile } = await import("./auth");
-    
+
     // Update user ban status
     await updateUserProfile(userId, {
       isBanned: true,
@@ -132,7 +137,7 @@ export async function unbanUser(
 ): Promise<void> {
   try {
     const { updateUserProfile } = await import("./auth");
-    
+
     // Update user ban status
     await updateUserProfile(userId, {
       isBanned: false,
@@ -141,13 +146,7 @@ export async function unbanUser(
     });
 
     // Log action
-    await logAction(
-      "user_unbanned",
-      adminId,
-      adminName,
-      userId,
-      userName,
-    );
+    await logAction("user_unbanned", adminId, adminName, userId, userName);
   } catch (error) {
     console.error("Error unbanning user:", error);
     throw error;

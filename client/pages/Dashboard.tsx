@@ -362,23 +362,27 @@ export default function Dashboard() {
                             asset.status === "published"
                               ? "bg-green-500/20 text-green-400"
                               : asset.status === "verification"
-                              ? "bg-yellow-500/20 text-yellow-400"
-                              : asset.status === "uploading"
-                              ? "bg-blue-500/20 text-blue-400"
-                              : "bg-gray-500/20 text-gray-400"
+                                ? "bg-yellow-500/20 text-yellow-400"
+                                : asset.status === "uploading"
+                                  ? "bg-blue-500/20 text-blue-400"
+                                  : "bg-gray-500/20 text-gray-400"
                           }`}
                         >
                           {asset.status === "published"
                             ? "Published"
                             : asset.status === "verification"
-                            ? "Verifying"
-                            : asset.status === "uploading"
-                            ? "Uploading"
-                            : "Draft"}
+                              ? "Verifying"
+                              : asset.status === "uploading"
+                                ? "Uploading"
+                                : "Draft"}
                         </span>
                         <DropdownMenu>
                           <DropdownMenuTrigger asChild>
-                            <Button variant="outline" size="sm" className="text-xs">
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="text-xs"
+                            >
                               Actions
                             </Button>
                           </DropdownMenuTrigger>

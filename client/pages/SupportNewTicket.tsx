@@ -36,7 +36,7 @@ export default function SupportNewTicket() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!subject.trim() || !description.trim()) {
       toast.error("Please fill in all fields");
       return;
@@ -94,7 +94,8 @@ export default function SupportNewTicket() {
                 Your support ticket has been created successfully.
               </p>
               <p className="text-base text-muted-foreground max-w-xl mx-auto">
-                Our support team will review your ticket and respond as soon as possible.
+                Our support team will review your ticket and respond as soon as
+                possible.
               </p>
             </div>
           </div>
@@ -130,7 +131,10 @@ export default function SupportNewTicket() {
               <Label htmlFor="category" className="text-base font-semibold">
                 Category *
               </Label>
-              <Select value={category} onValueChange={(value) => setCategory(value as TicketCategory)}>
+              <Select
+                value={category}
+                onValueChange={(value) => setCategory(value as TicketCategory)}
+              >
                 <SelectTrigger>
                   <SelectValue />
                 </SelectTrigger>
@@ -178,11 +182,7 @@ export default function SupportNewTicket() {
 
             {/* Buttons */}
             <div className="flex gap-4 pt-4">
-              <Button
-                type="submit"
-                disabled={isSubmitting}
-                className="flex-1"
-              >
+              <Button type="submit" disabled={isSubmitting} className="flex-1">
                 {isSubmitting ? "Creating ticket..." : "Create Ticket"}
               </Button>
               <button

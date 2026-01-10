@@ -263,7 +263,9 @@ export default function AdminPanel() {
                   {selectedUser.isBanned ? (
                     <>
                       <div className="space-y-2">
-                        <p className="text-sm text-muted-foreground">Ban Reason</p>
+                        <p className="text-sm text-muted-foreground">
+                          Ban Reason
+                        </p>
                         <p className="text-sm">{selectedUser.banReason}</p>
                       </div>
                       <Button
@@ -295,7 +297,10 @@ export default function AdminPanel() {
                 </div>
               ) : (
                 <div className="text-center py-8">
-                  <Eye className="mx-auto text-muted-foreground mb-2" size={32} />
+                  <Eye
+                    className="mx-auto text-muted-foreground mb-2"
+                    size={32}
+                  />
                   <p className="text-sm text-muted-foreground">
                     Select a user to view details
                   </p>
@@ -326,11 +331,17 @@ export default function AdminPanel() {
                       </p>
                     </div>
                     <p className="text-xs text-muted-foreground">
-                      By: <span className="text-foreground">{log.performedByName}</span>
+                      By:{" "}
+                      <span className="text-foreground">
+                        {log.performedByName}
+                      </span>
                     </p>
                     {log.targetUserName && (
                       <p className="text-xs text-muted-foreground">
-                        User: <span className="text-foreground">{log.targetUserName}</span>
+                        User:{" "}
+                        <span className="text-foreground">
+                          {log.targetUserName}
+                        </span>
                       </p>
                     )}
                     {log.reason && (
