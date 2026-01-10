@@ -630,6 +630,25 @@ export default function Dashboard() {
           setUpdateFileDialogOpen(false);
         }}
       />
+
+      {/* Schedule Upload Dialog */}
+      {user && (
+        <ScheduleUploadDialog
+          asset={scheduleUploadAsset}
+          userId={user.uid}
+          isOpen={scheduleUploadDialogOpen}
+          onClose={() => {
+            setScheduleUploadDialogOpen(false);
+            setScheduleUploadAsset(null);
+          }}
+          onSuccess={async () => {
+            const scheduled = await getUserScheduledUploads(user.uid);
+            setScheduledUploads(scheduled);
+            setScheduleUploadAsset(null);
+            setScheduleUploadDialogOpen(false);
+          }}
+        />
+      )}
     </div>
   );
 }
