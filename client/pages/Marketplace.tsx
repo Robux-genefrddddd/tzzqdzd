@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { AssetCard } from "@/components/AssetCard";
-import { Search, X, Cube, Palette, Code, Zap, Music, Image as ImageIcon, MoreHorizontal, LayoutGrid } from "lucide-react";
+import { Search, X, Box, Palette, Code, Zap, Music, Image as ImageIcon, MoreHorizontal, LayoutGrid } from "lucide-react";
 import { getPublishedAssets, type Asset } from "@/lib/assetService";
 
 const CATEGORIES = [
-  { name: "3D Models", icon: Cube },
+  { name: "3D Models", icon: Box },
   { name: "UI Design", icon: Palette },
   { name: "Scripts", icon: Code },
   { name: "Animations", icon: Zap },
