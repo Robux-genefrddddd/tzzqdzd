@@ -35,6 +35,7 @@ export default function Upload() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [uploadSuccess, setUploadSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [isValidatingFiles, setIsValidatingFiles] = useState(false);
 
   // Form state
   const [bannerUrl, setBannerUrl] = useState("");
@@ -51,29 +52,43 @@ export default function Upload() {
   const handleAddFiles = async (newFiles: File[]) => {
     const validFiles: FilePreview[] = [];
 
-    for (const file of newFiles) {
-      // Validate image before adding
-      if (file.type.startsWith("image/")) {
-        const validationResult = await validateImage(file);
-        if (!validationResult.approved) {
-          const errorMsg = getValidationErrorMessage(validationResult);
-          toast.error(`${file.name}: ${errorMsg}`);
-          continue;
+    // Show loading indicator
+    setIsValidatingFiles(true);
+    toast.loading(`Validating ${newFiles.length} file(s)...`);
+
+    try {
+      for (const file of newFiles) {
+        // Validate image before adding
+        if (file.type.startsWith("image/")) {
+          const validationResult = await validateImage(file);
+          if (!validationResult.approved) {
+            const errorMsg = getValidationErrorMessage(validationResult);
+            toast.error(`${file.name}: ${errorMsg}`);
+            continue;
+          }
+          toast.success(`✓ ${file.name} approved`);
         }
-        toast.success(`${file.name} is safe to upload`);
+
+        const filePreview: FilePreview = {
+          id: Math.random().toString(36),
+          name: file.name,
+          size: file.size,
+          type: file.type,
+          file: file, // Store the actual file for upload
+        };
+        validFiles.push(filePreview);
       }
 
-      const filePreview: FilePreview = {
-        id: Math.random().toString(36),
-        name: file.name,
-        size: file.size,
-        type: file.type,
-        file: file, // Store the actual file for upload
-      };
-      validFiles.push(filePreview);
+      if (validFiles.length > 0) {
+        setFiles((prev) => [...prev, ...validFiles]);
+        toast.success(`${validFiles.length} file(s) ready for upload`);
+      }
+    } catch (err) {
+      toast.error("Validation error. Please try again.");
+      console.error("File validation error:", err);
+    } finally {
+      setIsValidatingFiles(false);
     }
-
-    setFiles((prev) => [...prev, ...validFiles]);
   };
 
   const handleRemoveFile = (id: string) => {
