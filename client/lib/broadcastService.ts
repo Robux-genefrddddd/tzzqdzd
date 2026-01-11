@@ -80,7 +80,9 @@ export async function getAllBroadcastMessages(): Promise<BroadcastMessage[]> {
 }
 
 // Get broadcast messages for a specific user
-export async function getUserBroadcastMessages(userId: string): Promise<BroadcastMessage[]> {
+export async function getUserBroadcastMessages(
+  userId: string,
+): Promise<BroadcastMessage[]> {
   try {
     const q = query(
       collection(db, BROADCAST_COLLECTION),

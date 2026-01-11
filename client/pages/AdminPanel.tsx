@@ -37,7 +37,12 @@ import {
   getAllBroadcastMessages,
   deleteBroadcastMessage,
 } from "@/lib/broadcastService";
-import { getAllTickets, Ticket, getTicket, markTicketMessagesAsRead } from "@/lib/ticketService";
+import {
+  getAllTickets,
+  Ticket,
+  getTicket,
+  markTicketMessagesAsRead,
+} from "@/lib/ticketService";
 import { Loader } from "@/components/ui/loader";
 
 interface User {
@@ -636,7 +641,9 @@ export default function AdminPanel() {
                       <div className="flex items-start justify-between gap-3">
                         <div className="flex-1 min-w-0">
                           <div className="flex items-center gap-2 flex-wrap mb-2">
-                            <span className={`px-2 py-1 rounded border text-xs font-semibold ${getCategoryColor(ticket.category)}`}>
+                            <span
+                              className={`px-2 py-1 rounded border text-xs font-semibold ${getCategoryColor(ticket.category)}`}
+                            >
                               {ticket.category.replace(/-/g, " ").toUpperCase()}
                             </span>
                             <span

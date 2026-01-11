@@ -17,7 +17,9 @@ export default function Messages() {
   const { userProfile, loading: authLoading, user } = useAuth();
   const { invites, loading } = useGroupInvites(userProfile?.uid);
   const [displayedInvites, setDisplayedInvites] = useState(invites);
-  const [broadcastMessages, setBroadcastMessages] = useState<BroadcastMessage[]>([]);
+  const [broadcastMessages, setBroadcastMessages] = useState<
+    BroadcastMessage[]
+  >([]);
   const [broadcastLoading, setBroadcastLoading] = useState(false);
 
   useEffect(() => {
@@ -39,7 +41,7 @@ export default function Messages() {
 
   const loadBroadcastMessages = async () => {
     if (!userProfile?.uid) return;
-    
+
     try {
       setBroadcastLoading(true);
       const messages = await getUserBroadcastMessages(userProfile.uid);
@@ -66,7 +68,7 @@ export default function Messages() {
 
   const handleMarkBroadcastAsRead = async (messageId: string) => {
     if (!user?.uid) return;
-    
+
     try {
       await markBroadcastMessageAsRead(messageId, user.uid);
       // Update local state to reflect read status
@@ -145,7 +147,9 @@ export default function Messages() {
                       <div className="flex-shrink-0 mt-0.5">
                         <Bell
                           size={18}
-                          className={isRead ? "text-muted-foreground" : "text-primary"}
+                          className={
+                            isRead ? "text-muted-foreground" : "text-primary"
+                          }
                         />
                       </div>
                       <div className="flex-1 min-w-0">

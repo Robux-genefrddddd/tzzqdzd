@@ -208,8 +208,13 @@ export function TicketDetailModal({
                     const badge = getRoleBadge(msg.senderRole);
 
                     return (
-                      <div key={msg.id} className={`flex ${isUser ? "justify-end" : "justify-start"}`}>
-                        <div className={`flex gap-2 max-w-xs ${isUser ? "flex-row-reverse" : ""}`}>
+                      <div
+                        key={msg.id}
+                        className={`flex ${isUser ? "justify-end" : "justify-start"}`}
+                      >
+                        <div
+                          className={`flex gap-2 max-w-xs ${isUser ? "flex-row-reverse" : ""}`}
+                        >
                           {/* Message Bubble */}
                           <div className="flex flex-col gap-1 flex-1">
                             {/* Sender Name with Role Logo */}
@@ -221,7 +226,9 @@ export function TicketDetailModal({
                                   className="w-5 h-5 object-contain"
                                   onError={(e) => {
                                     // Fallback if image fails to load
-                                    (e.target as HTMLImageElement).style.display = "none";
+                                    (
+                                      e.target as HTMLImageElement
+                                    ).style.display = "none";
                                   }}
                                 />
                                 <span className="text-xs font-semibold text-foreground">
@@ -253,12 +260,23 @@ export function TicketDetailModal({
                                 isUser ? "justify-end" : "justify-start"
                               }`}
                             >
-                              <span>{msg.timestamp.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</span>
+                              <span>
+                                {msg.timestamp.toLocaleTimeString([], {
+                                  hour: "2-digit",
+                                  minute: "2-digit",
+                                })}
+                              </span>
                               {isUser && msg.isRead && (
-                                <CheckCheck size={14} className="text-primary" />
+                                <CheckCheck
+                                  size={14}
+                                  className="text-primary"
+                                />
                               )}
                               {isUser && !msg.isRead && (
-                                <Check size={14} className="text-muted-foreground" />
+                                <Check
+                                  size={14}
+                                  className="text-muted-foreground"
+                                />
                               )}
                             </div>
                           </div>
@@ -278,8 +296,14 @@ export function TicketDetailModal({
                     <div className="bg-primary/20 text-primary-foreground rounded-lg px-3 py-2 rounded-br-none">
                       <div className="flex gap-1">
                         <div className="w-2 h-2 bg-primary rounded-full animate-bounce"></div>
-                        <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: "0.1s" }}></div>
-                        <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: "0.2s" }}></div>
+                        <div
+                          className="w-2 h-2 bg-primary rounded-full animate-bounce"
+                          style={{ animationDelay: "0.1s" }}
+                        ></div>
+                        <div
+                          className="w-2 h-2 bg-primary rounded-full animate-bounce"
+                          style={{ animationDelay: "0.2s" }}
+                        ></div>
                       </div>
                     </div>
                   </div>
