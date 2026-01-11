@@ -413,14 +413,7 @@ export default function AdminPanel() {
         </div>
 
         {loading ? (
-          <div className="flex items-center justify-center py-12">
-            <div className="text-center">
-              <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary mb-4" />
-              <p className="text-sm text-muted-foreground">
-                Loading admin data...
-              </p>
-            </div>
-          </div>
+          <Loader text="Loading admin data" />
         ) : activeTab === "users" ? (
           <div className="space-y-4">
             {/* Search - Smaller */}
