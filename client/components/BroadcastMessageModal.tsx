@@ -27,6 +27,7 @@ export function BroadcastMessageModal({
   senderName,
   senderId,
   users,
+  onSuccess,
 }: BroadcastMessageModalProps) {
   const [title, setTitle] = useState("");
   const [message, setMessage] = useState("");
