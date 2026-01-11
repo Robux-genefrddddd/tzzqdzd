@@ -281,3 +281,67 @@ export async function assignTicket(
     throw error;
   }
 }
+
+/**
+ * Get count of unread support ticket messages for a user
+ */
+export async function getUnreadTicketCount(userId: string): Promise<number> {
+  try {
+    const q = query(
+      collection(db, TICKETS_COLLECTION),
+      where("userId", "==", userId),
+    );
+
+    const querySnapshot = await getDocs(q);
+    let unreadCount = 0;
+
+    querySnapshot.docs.forEach((doc) => {
+      const messages = doc.data().messages || [];
+      messages.forEach((msg: TicketMessage) => {
+        // Count messages from support staff that are unread
+        if (msg.senderRole !== "user" && !msg.isRead) {
+          unreadCount++;
+        }
+      });
+    });
+
+    return unreadCount;
+  } catch (error) {
+    console.error("Error getting unread ticket count:", error);
+    return 0;
+  }
+}
+
+/**
+ * Subscribe to unread ticket count updates
+ */
+export function subscribeToUnreadTicketCount(
+  userId: string,
+  onCountUpdate: (count: number) => void,
+): Unsubscribe {
+  try {
+    const q = query(
+      collection(db, TICKETS_COLLECTION),
+      where("userId", "==", userId),
+    );
+
+    return onSnapshot(q, (snapshot) => {
+      let unreadCount = 0;
+
+      snapshot.docs.forEach((doc) => {
+        const messages = doc.data().messages || [];
+        messages.forEach((msg: any) => {
+          // Count messages from support staff that are unread
+          if (msg.senderRole !== "user" && !msg.isRead) {
+            unreadCount++;
+          }
+        });
+      });
+
+      onCountUpdate(unreadCount);
+    });
+  } catch (error) {
+    console.error("Error subscribing to unread ticket count:", error);
+    return () => {};
+  }
+}
