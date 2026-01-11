@@ -287,14 +287,16 @@ export default function AssetDetail() {
       for (const fileData of selectedFiles) {
         try {
           const fileName = fileData.name;
-          const blob = await downloadAssetFile(fileData.path);
+          // Pass both path and fileName to backend for proper naming
+          const blob = await downloadAssetFile(fileData.path, fileName);
           forceDownloadFile(blob, fileName);
 
           // Small delay between downloads to allow browser to process
           await new Promise((resolve) => setTimeout(resolve, 500));
-        } catch (err) {
+        } catch (err: any) {
+          const errorMsg = err?.message || String(err);
           console.error(`Error downloading file ${fileData.name}:`, err);
-          toast.error(`Failed to download file: ${fileData.name}`);
+          toast.error(errorMsg || `Failed to download file: ${fileData.name}`);
         }
       }
 

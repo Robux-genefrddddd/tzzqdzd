@@ -1,0 +1,21 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    // Allow anyone to read assets (public download)
+    match /assets/{assetId}/{file=**} {
+      allow read;
+      // Only authenticated users can write/upload
+      allow write: if request.auth != null;
+    }
+
+    // Allow authenticated users to write temporary files
+    match /temp/{userId}/{file=**} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // Default: deny everything else
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}

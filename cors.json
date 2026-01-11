@@ -1,0 +1,18 @@
+[
+  {
+    "origin": [
+      "http://localhost:8080",
+      "http://localhost:3000",
+      "http://localhost:5173",
+      "https://97317377ff054164a28036d64c06f1f4-vibe-haven.builderio.xyz"
+    ],
+    "method": ["GET", "HEAD", "DELETE"],
+    "responseHeader": [
+      "Content-Type",
+      "Access-Control-Allow-Origin",
+      "Content-Range",
+      "Accept-Ranges"
+    ],
+    "maxAgeSeconds": 3600
+  }
+]

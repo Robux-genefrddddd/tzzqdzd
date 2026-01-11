@@ -37,15 +37,65 @@ export async function uploadAssetFile(
   }
 }
 
-// Download asset file from Firebase Storage
-export async function downloadAssetFile(filePath: string): Promise<Blob> {
+// Download asset file from Firebase Storage via backend proxy
+// This bypasses CORS issues by routing through the app's backend server
+export async function downloadAssetFile(
+  filePath: string,
+  fileName?: string,
+): Promise<Blob> {
   try {
-    const fileRef = ref(storage, filePath);
-    const bytes = await getBytes(fileRef);
-    return new Blob([bytes]);
-  } catch (error) {
-    console.error("Error downloading file:", error);
-    throw error;
+    console.log("Downloading file via backend proxy:", filePath);
+
+    // Use backend proxy endpoint to avoid CORS issues
+    // The backend will fetch from Firebase Storage and return the file
+    const params = new URLSearchParams({
+      filePath: filePath,
+      fileName: fileName || filePath.split("/").pop() || "file",
+    });
+
+    const response = await fetch(`/api/download?${params.toString()}`);
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      const errorCode = errorData?.code || "unknown";
+
+      if (response.status === 404) {
+        console.error("File not found:", filePath);
+        throw new Error("File not found. It may have been deleted.");
+      } else if (response.status === 403) {
+        console.error("Access denied for file:", filePath);
+        throw new Error("You don't have permission to download this file.");
+      }
+
+      throw new Error(
+        `Download failed (${response.status}): ${errorData?.error || "Unknown error"}`,
+      );
+    }
+
+    // Get file as blob
+    const blob = await response.blob();
+    return blob;
+  } catch (error: any) {
+    console.error("Error downloading file:", filePath, error);
+
+    // If it's our custom error, re-throw it
+    if (error instanceof Error && error.message.includes("Download failed")) {
+      throw error;
+    }
+
+    // Provide user-friendly error messages for network issues
+    if (
+      error?.name === "TypeError" &&
+      error?.message?.includes("Failed to fetch")
+    ) {
+      throw new Error(
+        "Network error. Please check your connection and try again.",
+      );
+    }
+
+    throw new Error(
+      error?.message || "Failed to download file. Please try again.",
+    );
   }
 }
 
@@ -113,6 +163,8 @@ export async function uploadImageToStorage(
 export async function listAssetFiles(assetId: string): Promise<AssetFile[]> {
   try {
     const folderRef = ref(storage, `${ASSETS_BUCKET}/${assetId}`);
+    console.log("Listing files from path:", `${ASSETS_BUCKET}/${assetId}`);
+
     const result = await listAll(folderRef);
 
     const files: AssetFile[] = [];
@@ -130,14 +182,28 @@ export async function listAssetFiles(assetId: string): Promise<AssetFile[]> {
           size: metadata.size || 0,
           type: fileType,
         });
-      } catch (err) {
-        console.error(`Error getting metadata for ${fileRef.name}:`, err);
+      } catch (err: any) {
+        const errorCode = err?.code || "unknown";
+        console.error(
+          `Error getting metadata for ${fileRef.name}:`,
+          errorCode,
+          err,
+        );
       }
     }
 
+    if (files.length === 0) {
+      console.warn(
+        `No files found in asset folder: ${ASSETS_BUCKET}/${assetId}`,
+      );
+    }
+
     return files;
-  } catch (error) {
-    console.error("Error listing asset files:", error);
+  } catch (error: any) {
+    const errorCode = error?.code || "unknown";
+    console.error("Error listing asset files:", errorCode, error);
+
+    // Return empty array instead of throwing - allows graceful fallback
     return [];
   }
 }

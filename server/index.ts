@@ -2,6 +2,7 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import { handleDemo } from "./routes/demo";
+import { handleDownload } from "./routes/download";
 
 export function createServer() {
   const app = express();
@@ -18,6 +19,10 @@ export function createServer() {
   });
 
   app.get("/api/demo", handleDemo);
+
+  // Download proxy endpoint - bypasses CORS issues
+  // Usage: GET /api/download?filePath=assets/assetId/filename&fileName=display-name
+  app.get("/api/download", handleDownload);
 
   return app;
 }
