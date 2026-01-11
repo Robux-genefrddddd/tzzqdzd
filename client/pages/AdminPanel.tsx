@@ -625,10 +625,10 @@ export default function AdminPanel() {
                     >
                       <div className="flex items-start justify-between gap-3">
                         <div className="flex-1 min-w-0">
-                          <div className="flex items-center gap-2 flex-wrap">
-                            <h3 className="text-sm font-medium text-foreground group-hover:text-primary transition-colors truncate">
-                              {ticket.subject}
-                            </h3>
+                          <div className="flex items-center gap-2 flex-wrap mb-2">
+                            <span className={`px-2 py-1 rounded border text-xs font-semibold ${getCategoryColor(ticket.category)}`}>
+                              {ticket.category.replace(/-/g, " ").toUpperCase()}
+                            </span>
                             <span
                               className={`px-2 py-0.5 rounded text-xs font-medium ${
                                 ticket.status === "open"
@@ -645,17 +645,20 @@ export default function AdminPanel() {
                               {ticket.status}
                             </span>
                           </div>
+                          <h3 className="text-sm font-medium text-foreground group-hover:text-primary transition-colors truncate mb-1">
+                            {ticket.subject}
+                          </h3>
                           <p className="text-xs text-muted-foreground mt-1">
                             From {ticket.userName} ({ticket.userEmail})
                           </p>
                           <p className="text-xs text-muted-foreground/70 mt-1">
-                            Category: {ticket.category} • Priority:{" "}
+                            Priority:{" "}
                             <span
                               className={
                                 ticket.priority === "critical"
-                                  ? "text-red-400"
+                                  ? "text-red-400 font-semibold"
                                   : ticket.priority === "high"
-                                    ? "text-orange-400"
+                                    ? "text-orange-400 font-semibold"
                                     : ticket.priority === "normal"
                                       ? "text-blue-400"
                                       : "text-gray-400"
