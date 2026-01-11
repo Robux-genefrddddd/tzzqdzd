@@ -4,8 +4,9 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useGroup } from "@/hooks/useGroups";
 import GroupChat from "@/components/groups/GroupChat";
 import GroupMembers from "@/components/groups/GroupMembers";
-import { Loader, ArrowLeft } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Loader } from "@/components/ui/loader";
 
 export default function GroupDetail() {
   const { id } = useParams<{ id: string }>();
