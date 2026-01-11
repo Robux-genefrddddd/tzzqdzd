@@ -257,15 +257,18 @@ const mainHandler: Handler = async (event, context) => {
   const action = event.queryStringParameters?.action;
 
   if (action === "stats") {
-    return statsHandler(event, context);
+    const result = await statsHandler(event, context);
+    return result;
   }
 
   if (action === "audit") {
-    return auditHandler(event, context);
+    const result = await auditHandler(event, context);
+    return result;
   }
 
   // Default: NSFW check
-  return handler(event, context);
+  const result = await handler(event, context);
+  return result;
 };
 
 export { mainHandler as handler };
