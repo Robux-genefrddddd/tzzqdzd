@@ -37,34 +37,59 @@ export async function uploadAssetFile(
   }
 }
 
-// Download asset file from Firebase Storage
-export async function downloadAssetFile(filePath: string): Promise<Blob> {
+// Download asset file from Firebase Storage via backend proxy
+// This bypasses CORS issues by routing through the app's backend server
+export async function downloadAssetFile(filePath: string, fileName?: string): Promise<Blob> {
   try {
-    const fileRef = ref(storage, filePath);
+    console.log("Downloading file via backend proxy:", filePath);
 
-    // Log the path being accessed for debugging
-    console.log("Downloading file from path:", filePath);
+    // Use backend proxy endpoint to avoid CORS issues
+    // The backend will fetch from Firebase Storage and return the file
+    const params = new URLSearchParams({
+      filePath: filePath,
+      fileName: fileName || filePath.split("/").pop() || "file",
+    });
 
-    const bytes = await getBytes(fileRef);
-    return new Blob([bytes]);
+    const response = await fetch(`/api/download?${params.toString()}`);
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      const errorCode = errorData?.code || "unknown";
+
+      if (response.status === 404) {
+        console.error("File not found:", filePath);
+        throw new Error("File not found. It may have been deleted.");
+      } else if (response.status === 403) {
+        console.error("Access denied for file:", filePath);
+        throw new Error(
+          "You don't have permission to download this file."
+        );
+      }
+
+      throw new Error(
+        `Download failed (${response.status}): ${errorData?.error || "Unknown error"}`
+      );
+    }
+
+    // Get file as blob
+    const blob = await response.blob();
+    return blob;
   } catch (error: any) {
-    const errorCode = error?.code || "unknown";
-    const errorMessage = error?.message || String(error);
+    console.error("Error downloading file:", filePath, error);
 
-    // Provide user-friendly error messages
-    if (errorCode === "storage/object-not-found") {
-      console.error("File not found in storage:", filePath);
-      throw new Error("File not found. It may have been deleted.");
-    } else if (errorCode === "storage/unauthorized") {
-      console.error("Unauthorized to download file:", filePath);
-      throw new Error("You don't have permission to download this file. Please check Firebase Storage rules.");
-    } else if (errorCode === "storage/retry-limit-exceeded") {
-      console.error("Download failed due to network issues:", filePath);
+    // If it's our custom error, re-throw it
+    if (error instanceof Error && error.message.includes("Download failed")) {
+      throw error;
+    }
+
+    // Provide user-friendly error messages for network issues
+    if (error?.name === "TypeError" && error?.message?.includes("Failed to fetch")) {
       throw new Error("Network error. Please check your connection and try again.");
     }
 
-    console.error("Error downloading file:", filePath, errorCode, errorMessage);
-    throw error;
+    throw new Error(
+      error?.message || "Failed to download file. Please try again."
+    );
   }
 }
 
