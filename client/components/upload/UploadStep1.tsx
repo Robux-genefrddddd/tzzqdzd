@@ -252,10 +252,15 @@ export function UploadStep1({
       </div>
 
       {/* Files List */}
-      {files.length > 0 && (
+      {(files.length > 0 || isValidatingFiles) && (
         <div className="space-y-2">
           <label className="text-xs font-medium text-foreground">
-            Uploaded Files ({files.length})
+            Asset Files ({files.length})
+            {isValidatingFiles && (
+              <span className="ml-2 text-xs text-muted-foreground/60 animate-pulse">
+                Validating...
+              </span>
+            )}
           </label>
           <div className="space-y-1.5">
             {files.map((file) => (
@@ -264,10 +269,13 @@ export function UploadStep1({
                 className="flex items-center justify-between p-2.5 bg-secondary/10 border border-border/20 rounded-lg"
               >
                 <div className="flex-1 min-w-0">
-                  <p className="text-xs font-medium text-foreground truncate">
-                    {file.name}
-                  </p>
-                  <p className="text-xs text-muted-foreground/60">
+                  <div className="flex items-center gap-1.5">
+                    <CheckCircle size={14} className="text-green-500/60 flex-shrink-0" />
+                    <p className="text-xs font-medium text-foreground truncate">
+                      {file.name}
+                    </p>
+                  </div>
+                  <p className="text-xs text-muted-foreground/60 ml-5">
                     {formatFileSize(file.size)}
                   </p>
                 </div>
