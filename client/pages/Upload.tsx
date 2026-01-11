@@ -48,15 +48,32 @@ export default function Upload() {
   });
 
   // Handlers for Step 1
-  const handleAddFiles = (newFiles: File[]) => {
-    const newPreviews: FilePreview[] = newFiles.map((file) => ({
-      id: Math.random().toString(36),
-      name: file.name,
-      size: file.size,
-      type: file.type,
-      file: file, // Store the actual file for upload
-    }));
-    setFiles((prev) => [...prev, ...newPreviews]);
+  const handleAddFiles = async (newFiles: File[]) => {
+    const validFiles: FilePreview[] = [];
+
+    for (const file of newFiles) {
+      // Validate image before adding
+      if (file.type.startsWith("image/")) {
+        const validationResult = await validateImage(file);
+        if (!validationResult.approved) {
+          const errorMsg = getValidationErrorMessage(validationResult);
+          toast.error(`${file.name}: ${errorMsg}`);
+          continue;
+        }
+        toast.success(`${file.name} is safe to upload`);
+      }
+
+      const filePreview: FilePreview = {
+        id: Math.random().toString(36),
+        name: file.name,
+        size: file.size,
+        type: file.type,
+        file: file, // Store the actual file for upload
+      };
+      validFiles.push(filePreview);
+    }
+
+    setFiles((prev) => [...prev, ...validFiles]);
   };
 
   const handleRemoveFile = (id: string) => {
