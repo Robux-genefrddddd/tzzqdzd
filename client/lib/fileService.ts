@@ -132,6 +132,8 @@ export async function uploadImageToStorage(
 export async function listAssetFiles(assetId: string): Promise<AssetFile[]> {
   try {
     const folderRef = ref(storage, `${ASSETS_BUCKET}/${assetId}`);
+    console.log("Listing files from path:", `${ASSETS_BUCKET}/${assetId}`);
+
     const result = await listAll(folderRef);
 
     const files: AssetFile[] = [];
@@ -149,14 +151,22 @@ export async function listAssetFiles(assetId: string): Promise<AssetFile[]> {
           size: metadata.size || 0,
           type: fileType,
         });
-      } catch (err) {
-        console.error(`Error getting metadata for ${fileRef.name}:`, err);
+      } catch (err: any) {
+        const errorCode = err?.code || "unknown";
+        console.error(`Error getting metadata for ${fileRef.name}:`, errorCode, err);
       }
     }
 
+    if (files.length === 0) {
+      console.warn(`No files found in asset folder: ${ASSETS_BUCKET}/${assetId}`);
+    }
+
     return files;
-  } catch (error) {
-    console.error("Error listing asset files:", error);
+  } catch (error: any) {
+    const errorCode = error?.code || "unknown";
+    console.error("Error listing asset files:", errorCode, error);
+
+    // Return empty array instead of throwing - allows graceful fallback
     return [];
   }
 }
