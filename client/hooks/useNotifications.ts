@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Notification } from "@shared/api";
 import * as notificationService from "@/lib/notificationService";
+import * as ticketService from "@/lib/ticketService";
 
 /**
  * Hook to get user notifications with real-time updates
