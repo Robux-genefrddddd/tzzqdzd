@@ -70,13 +70,26 @@ export function UploadStep1({
     }
   };
 
-  const handleBannerFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleBannerFileChange = async (
+    e: React.ChangeEvent<HTMLInputElement>,
+  ) => {
     if (e.target.files?.[0]) {
+      const file = e.target.files[0];
+
+      // Validate banner image
+      const validationResult = await validateImage(file);
+      if (!validationResult.approved) {
+        const errorMsg = getValidationErrorMessage(validationResult);
+        toast.error(`Banner image rejected: ${errorMsg}`);
+        e.target.value = ""; // Reset input
+        return;
+      }
+
       const reader = new FileReader();
       reader.onload = (event) => {
         onBannerChange(event.target?.result as string);
       };
-      reader.readAsDataURL(e.target.files[0]);
+      reader.readAsDataURL(file);
     }
   };
 
