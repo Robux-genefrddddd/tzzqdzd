@@ -85,6 +85,10 @@ export default function Marketplace() {
       }
     });
 
+  if (loading) {
+    return <Loader text="Loading assets..." />;
+  }
+
   return (
     <div className="min-h-screen bg-background">
       <div className="container mx-auto px-6 py-10 md:py-12">
