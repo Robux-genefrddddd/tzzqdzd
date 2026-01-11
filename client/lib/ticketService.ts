@@ -32,9 +32,10 @@ export interface TicketMessage {
   id: string;
   senderId: string;
   senderName: string;
-  senderRole: "user" | "support";
+  senderRole: "user" | "support" | "admin" | "founder";
   message: string;
   timestamp: Date;
+  isRead?: boolean;
 }
 
 export interface Ticket {
