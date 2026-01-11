@@ -88,9 +88,20 @@ export default function AdminPanel() {
       return;
     }
 
-    if (userProfile.role !== "founder" && userProfile.role !== "admin") {
+    if (
+      userProfile.role !== "founder" &&
+      userProfile.role !== "admin" &&
+      userProfile.role !== "support"
+    ) {
       navigate("/");
       return;
+    }
+
+    // If support, default to tickets tab
+    if (userProfile.role === "support") {
+      setActiveTab("tickets");
+    } else {
+      setActiveTab("users");
     }
 
     loadData();
