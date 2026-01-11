@@ -187,7 +187,7 @@ const handler: Handler = async (event, context): Promise<any> => {
  *
  * Returns NSFW detection statistics (admin only)
  */
-const statsHandler: Handler = async (event, context) => {
+const statsHandler: Handler = async (event, context): Promise<any> => {
   try {
     // In production, add admin authentication check
     const stats = getNSFWStats();
