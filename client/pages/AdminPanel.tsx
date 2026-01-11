@@ -858,10 +858,9 @@ export default function AdminPanel() {
       <BroadcastMessageModal
         isOpen={showBroadcastModal}
         onClose={() => setShowBroadcastModal(false)}
-        onSuccess={() => {
-          loadData();
-          setShowBroadcastModal(false);
-        }}
+        senderName={userProfile?.displayName || "Admin"}
+        senderId={user?.uid || ""}
+        users={users}
       />
 
       {/* Ticket Detail Modal */}
