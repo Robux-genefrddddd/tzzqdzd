@@ -91,8 +91,7 @@ const handler: Handler = async (event, context) => {
     const base64Body = Buffer.from(buffer).toString("base64");
 
     // Determine the display filename
-    const displayFileName =
-      fileName || filePath.split("/").pop() || "file";
+    const displayFileName = fileName || filePath.split("/").pop() || "file";
 
     // Determine content type
     const contentType =

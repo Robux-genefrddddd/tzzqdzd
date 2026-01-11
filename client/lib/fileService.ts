@@ -53,7 +53,9 @@ export async function downloadAssetFile(
       fileName: fileName || filePath.split("/").pop() || "file",
     });
 
-    const response = await fetch(`/.netlify/functions/download?${params.toString()}`);
+    const response = await fetch(
+      `/.netlify/functions/download?${params.toString()}`,
+    );
 
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}));

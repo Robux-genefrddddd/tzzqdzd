@@ -337,10 +337,13 @@ describe("Image Validation Service", () => {
       const file = createMockImageFile();
       await validateImage(file);
 
-      expect(global.fetch).toHaveBeenCalledWith("/.netlify/functions/nsfw-check", {
-        method: "POST",
-        body: expect.any(FormData),
-      });
+      expect(global.fetch).toHaveBeenCalledWith(
+        "/.netlify/functions/nsfw-check",
+        {
+          method: "POST",
+          body: expect.any(FormData),
+        },
+      );
     });
 
     it("should include file in FormData", async () => {
