@@ -13,6 +13,7 @@ import {
   ChevronRight,
   Activity,
   Toggle2,
+  MessageSquare,
 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
@@ -35,6 +36,8 @@ import {
   getAllBroadcastMessages,
   deleteBroadcastMessage,
 } from "@/lib/broadcastService";
+import { getAllTickets, Ticket } from "@/lib/ticketService";
+import { Loader } from "@/components/ui/loader";
 
 interface User {
   uid: string;
@@ -62,11 +65,13 @@ export default function AdminPanel() {
   const navigate = useNavigate();
   const { user, userProfile } = useAuth();
   const [activeTab, setActiveTab] = useState<
-    "users" | "logs" | "maintenance" | "messages"
+    "users" | "logs" | "maintenance" | "messages" | "tickets"
   >("users");
   const [users, setUsers] = useState<User[]>([]);
   const [auditLogs, setAuditLogs] = useState<AuditLog[]>([]);
+  const [tickets, setTickets] = useState<Ticket[]>([]);
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
+  const [selectedTicket, setSelectedTicket] = useState<Ticket | null>(null);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("");
   const [maintenanceStatus, setMaintenanceStatus] =
@@ -84,9 +89,20 @@ export default function AdminPanel() {
       return;
     }
 
-    if (userProfile.role !== "founder" && userProfile.role !== "admin") {
+    if (
+      userProfile.role !== "founder" &&
+      userProfile.role !== "admin" &&
+      userProfile.role !== "support"
+    ) {
       navigate("/");
       return;
+    }
+
+    // If support, default to tickets tab
+    if (userProfile.role === "support") {
+      setActiveTab("tickets");
+    } else {
+      setActiveTab("users");
     }
 
     loadData();
@@ -104,32 +120,43 @@ export default function AdminPanel() {
     try {
       setLoading(true);
 
-      // Fetch all users
-      const usersCollection = collection(db, "users");
-      const usersSnapshot = await getDocs(usersCollection);
-      const allUsers: User[] = usersSnapshot.docs.map((doc) => ({
-        uid: doc.id,
-        username: doc.data().username,
-        displayName: doc.data().displayName,
-        email: doc.data().email,
-        role: doc.data().role,
-        profileImage: doc.data().profileImage,
-        isBanned: doc.data().isBanned || false,
-        banReason: doc.data().banReason,
-        createdAt: doc.data().createdAt?.toDate?.() || new Date(),
-        memberRank: doc.data().memberRank,
-      }));
+      // Support staff can only see tickets
+      if (userProfile?.role === "support") {
+        const allTickets = await getAllTickets();
+        setTickets(allTickets);
+      } else {
+        // Admin and founder can see users, logs, and tickets
+        // Fetch all users
+        const usersCollection = collection(db, "users");
+        const usersSnapshot = await getDocs(usersCollection);
+        const allUsers: User[] = usersSnapshot.docs.map((doc) => ({
+          uid: doc.id,
+          username: doc.data().username,
+          displayName: doc.data().displayName,
+          email: doc.data().email,
+          role: doc.data().role,
+          profileImage: doc.data().profileImage,
+          isBanned: doc.data().isBanned || false,
+          banReason: doc.data().banReason,
+          createdAt: doc.data().createdAt?.toDate?.() || new Date(),
+          memberRank: doc.data().memberRank,
+        }));
 
-      setUsers(allUsers);
+        setUsers(allUsers);
 
-      // Fetch audit logs
-      const logs = await getAuditLogs();
-      setAuditLogs(logs as AuditLog[]);
+        // Fetch audit logs
+        const logs = await getAuditLogs();
+        setAuditLogs(logs as AuditLog[]);
 
-      // Fetch broadcast messages (founder only)
-      if (userProfile?.role === "founder") {
-        const messages = await getAllBroadcastMessages();
-        setBroadcastMessages(messages);
+        // Fetch tickets
+        const allTickets = await getAllTickets();
+        setTickets(allTickets);
+
+        // Fetch broadcast messages (founder only)
+        if (userProfile?.role === "founder") {
+          const messages = await getAllBroadcastMessages();
+          setBroadcastMessages(messages);
+        }
       }
     } catch (error) {
       console.error("Error loading data:", error);
@@ -189,7 +216,9 @@ export default function AdminPanel() {
 
   if (
     !userProfile ||
-    (userProfile.role !== "founder" && userProfile.role !== "admin")
+    (userProfile.role !== "founder" &&
+      userProfile.role !== "admin" &&
+      userProfile.role !== "support")
   ) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
@@ -301,32 +330,58 @@ export default function AdminPanel() {
 
         {/* Tabs - Reduced Height */}
         <div className="flex gap-0 mb-4 border-b border-border/20 overflow-x-auto">
-          <button
-            onClick={() => setActiveTab("users")}
-            className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${
-              activeTab === "users"
-                ? "border-primary text-primary"
-                : "border-transparent text-muted-foreground hover:text-foreground"
-            }`}
-          >
-            Users{" "}
-            {users.length > 0 && (
-              <span className="text-xs ml-1">({users.length})</span>
-            )}
-          </button>
-          <button
-            onClick={() => setActiveTab("logs")}
-            className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${
-              activeTab === "logs"
-                ? "border-primary text-primary"
-                : "border-transparent text-muted-foreground hover:text-foreground"
-            }`}
-          >
-            Audit Logs{" "}
-            {auditLogs.length > 0 && (
-              <span className="text-xs ml-1">({auditLogs.length})</span>
-            )}
-          </button>
+          {userProfile?.role !== "support" && (
+            <button
+              onClick={() => setActiveTab("users")}
+              className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${
+                activeTab === "users"
+                  ? "border-primary text-primary"
+                  : "border-transparent text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              Users{" "}
+              {users.length > 0 && (
+                <span className="text-xs ml-1">({users.length})</span>
+              )}
+            </button>
+          )}
+
+          {(userProfile?.role === "founder" ||
+            userProfile?.role === "admin") && (
+            <button
+              onClick={() => setActiveTab("logs")}
+              className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors whitespace-nowrap ${
+                activeTab === "logs"
+                  ? "border-primary text-primary"
+                  : "border-transparent text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              Audit Logs{" "}
+              {auditLogs.length > 0 && (
+                <span className="text-xs ml-1">({auditLogs.length})</span>
+              )}
+            </button>
+          )}
+
+          {(userProfile?.role === "founder" ||
+            userProfile?.role === "admin" ||
+            userProfile?.role === "support") && (
+            <button
+              onClick={() => setActiveTab("tickets")}
+              className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors whitespace-nowrap flex items-center gap-1 ${
+                activeTab === "tickets"
+                  ? "border-primary text-primary"
+                  : "border-transparent text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              <MessageSquare size={14} />
+              Tickets{" "}
+              {tickets.length > 0 && (
+                <span className="text-xs ml-1">({tickets.length})</span>
+              )}
+            </button>
+          )}
+
           {userProfile?.role === "founder" && (
             <>
               <button
@@ -359,14 +414,7 @@ export default function AdminPanel() {
         </div>
 
         {loading ? (
-          <div className="flex items-center justify-center py-12">
-            <div className="text-center">
-              <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary mb-4" />
-              <p className="text-sm text-muted-foreground">
-                Loading admin data...
-              </p>
-            </div>
-          </div>
+          <Loader text="Loading admin data" />
         ) : activeTab === "users" ? (
           <div className="space-y-4">
             {/* Search - Smaller */}
@@ -516,6 +564,96 @@ export default function AdminPanel() {
                 ))}
               </div>
             )}
+          </div>
+        ) : activeTab === "tickets" ? (
+          <div className="space-y-4">
+            {/* Search */}
+            <div className="relative">
+              <Search
+                size={16}
+                className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground"
+              />
+              <Input
+                placeholder="Search tickets by subject..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="pl-9 py-2 text-sm h-9"
+              />
+            </div>
+
+            {/* Tickets List */}
+            <div className="space-y-2">
+              {tickets.length === 0 ? (
+                <div className="text-center py-8">
+                  <MessageSquare
+                    size={32}
+                    className="mx-auto text-muted-foreground mb-2"
+                  />
+                  <p className="text-sm text-muted-foreground">
+                    No tickets yet
+                  </p>
+                </div>
+              ) : (
+                tickets
+                  .filter((t) =>
+                    t.subject.toLowerCase().includes(searchTerm.toLowerCase()),
+                  )
+                  .map((ticket) => (
+                    <div
+                      key={ticket.id}
+                      onClick={() => setSelectedTicket(ticket)}
+                      className="p-3 bg-card border border-border/30 rounded-lg hover:border-border/60 hover:bg-card/80 transition-all cursor-pointer group"
+                    >
+                      <div className="flex items-start justify-between gap-3">
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2 flex-wrap">
+                            <h3 className="text-sm font-medium text-foreground group-hover:text-primary transition-colors truncate">
+                              {ticket.subject}
+                            </h3>
+                            <span
+                              className={`px-2 py-0.5 rounded text-xs font-medium ${
+                                ticket.status === "open"
+                                  ? "bg-blue-500/20 text-blue-400"
+                                  : ticket.status === "in-progress"
+                                    ? "bg-yellow-500/20 text-yellow-400"
+                                    : ticket.status === "waiting"
+                                      ? "bg-purple-500/20 text-purple-400"
+                                      : ticket.status === "resolved"
+                                        ? "bg-green-500/20 text-green-400"
+                                        : "bg-gray-500/20 text-gray-400"
+                              }`}
+                            >
+                              {ticket.status}
+                            </span>
+                          </div>
+                          <p className="text-xs text-muted-foreground mt-1">
+                            From {ticket.userName} ({ticket.userEmail})
+                          </p>
+                          <p className="text-xs text-muted-foreground/70 mt-1">
+                            Category: {ticket.category} • Priority:{" "}
+                            <span
+                              className={
+                                ticket.priority === "critical"
+                                  ? "text-red-400"
+                                  : ticket.priority === "high"
+                                    ? "text-orange-400"
+                                    : ticket.priority === "normal"
+                                      ? "text-blue-400"
+                                      : "text-gray-400"
+                              }
+                            >
+                              {ticket.priority}
+                            </span>
+                          </p>
+                        </div>
+                        <div className="text-xs text-muted-foreground whitespace-nowrap flex-shrink-0 text-right">
+                          <div>{ticket.updatedAt.toLocaleDateString()}</div>
+                        </div>
+                      </div>
+                    </div>
+                  ))
+              )}
+            </div>
           </div>
         ) : activeTab === "maintenance" && userProfile?.role === "founder" ? (
           <div className="space-y-4 max-w-md">

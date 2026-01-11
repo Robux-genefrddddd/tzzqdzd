@@ -10,6 +10,7 @@ import { NavBar } from "@/components/NavBar";
 import { Footer } from "@/components/Footer";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { WarningNotificationModal } from "@/components/WarningNotificationModal";
+import { Loader } from "@/components/ui/loader";
 import Index from "./pages/Index";
 import Marketplace from "./pages/Marketplace";
 import AssetDetail from "./pages/AssetDetail";
@@ -64,13 +65,7 @@ const BanGuard = ({ children }: { children: ReactNode }) => {
   }, [user, loading, navigate]);
 
   if (loading) {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary" />
-        </div>
-      </div>
-    );
+    return <Loader text="Initializing" />;
   }
 
   return <>{children}</>;
