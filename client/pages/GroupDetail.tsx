@@ -22,11 +22,7 @@ export default function GroupDetail() {
   }, [authLoading, userProfile, navigate]);
 
   if (authLoading || loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <Loader size={32} className="animate-spin text-primary" />
-      </div>
-    );
+    return <Loader text="Loading group..." />;
   }
 
   if (!group) {
