@@ -41,10 +41,29 @@ export async function uploadAssetFile(
 export async function downloadAssetFile(filePath: string): Promise<Blob> {
   try {
     const fileRef = ref(storage, filePath);
+
+    // Log the path being accessed for debugging
+    console.log("Downloading file from path:", filePath);
+
     const bytes = await getBytes(fileRef);
     return new Blob([bytes]);
-  } catch (error) {
-    console.error("Error downloading file:", error);
+  } catch (error: any) {
+    const errorCode = error?.code || "unknown";
+    const errorMessage = error?.message || String(error);
+
+    // Provide user-friendly error messages
+    if (errorCode === "storage/object-not-found") {
+      console.error("File not found in storage:", filePath);
+      throw new Error("File not found. It may have been deleted.");
+    } else if (errorCode === "storage/unauthorized") {
+      console.error("Unauthorized to download file:", filePath);
+      throw new Error("You don't have permission to download this file. Please check Firebase Storage rules.");
+    } else if (errorCode === "storage/retry-limit-exceeded") {
+      console.error("Download failed due to network issues:", filePath);
+      throw new Error("Network error. Please check your connection and try again.");
+    }
+
+    console.error("Error downloading file:", filePath, errorCode, errorMessage);
     throw error;
   }
 }
