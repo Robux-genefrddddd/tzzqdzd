@@ -132,7 +132,9 @@ export function TicketDetailModal({
                   getStatusColor(ticket.status).split(" ")[1]
                 }`}
               >
-                <span className={`px-2 py-0.5 rounded text-xs font-medium ${getStatusColor(ticket.status)}`}>
+                <span
+                  className={`px-2 py-0.5 rounded text-xs font-medium ${getStatusColor(ticket.status)}`}
+                >
                   {ticket.status}
                 </span>
               </p>
@@ -162,7 +164,9 @@ export function TicketDetailModal({
           {/* User Info */}
           <div className="bg-secondary/20 border border-border/20 rounded p-3">
             <p className="text-xs text-muted-foreground mb-1">From</p>
-            <p className="text-sm font-medium text-foreground">{ticket.userName}</p>
+            <p className="text-sm font-medium text-foreground">
+              {ticket.userName}
+            </p>
             <p className="text-xs text-muted-foreground">{ticket.userEmail}</p>
             <div className="flex gap-2 mt-2 text-xs text-muted-foreground">
               <Clock size={14} className="flex-shrink-0" />
@@ -194,7 +198,9 @@ export function TicketDetailModal({
                         </span>
                         <span className="text-xs text-muted-foreground">
                           {msg.senderRole === "support" && (
-                            <span className="text-primary ml-2">🛠️ Support</span>
+                            <span className="text-primary ml-2">
+                              🛠️ Support
+                            </span>
                           )}
                         </span>
                         <span className="text-xs text-muted-foreground ml-auto">

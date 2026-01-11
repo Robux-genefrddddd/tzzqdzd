@@ -30,7 +30,11 @@ export default function SupportTicketDetail() {
 
   useEffect(() => {
     // Auto-scroll only if user hasn't manually scrolled or if there are new messages
-    if (ticket?.messages && !hasUserScrolled && ticket.messages.length > previousMessageCount.current) {
+    if (
+      ticket?.messages &&
+      !hasUserScrolled &&
+      ticket.messages.length > previousMessageCount.current
+    ) {
       setTimeout(() => {
         scrollToBottom();
       }, 100);
@@ -41,7 +45,8 @@ export default function SupportTicketDetail() {
   const handleScroll = () => {
     if (!messagesContainerRef.current) return;
 
-    const { scrollTop, scrollHeight, clientHeight } = messagesContainerRef.current;
+    const { scrollTop, scrollHeight, clientHeight } =
+      messagesContainerRef.current;
     const isAtBottom = scrollHeight - scrollTop - clientHeight < 50;
 
     setHasUserScrolled(!isAtBottom);
