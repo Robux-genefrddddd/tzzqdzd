@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/AuthContext";
 import { logoutUser } from "@/lib/auth";
 import { getUserWarnings, Warning } from "@/lib/warningService";
+import { Loader } from "@/components/ui/loader";
 
 export default function BanNotice() {
   const navigate = useNavigate();
