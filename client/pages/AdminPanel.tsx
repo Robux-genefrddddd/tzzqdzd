@@ -863,6 +863,23 @@ export default function AdminPanel() {
           setShowBroadcastModal(false);
         }}
       />
+
+      {/* Ticket Detail Modal */}
+      <TicketDetailModal
+        ticket={selectedTicket}
+        onClose={() => setSelectedTicket(null)}
+        currentUserRole={userProfile?.role}
+        currentUserName={userProfile?.displayName}
+        currentUserId={user?.uid}
+        onMessageAdded={async () => {
+          if (selectedTicket) {
+            const updatedTicket = await getTicket(selectedTicket.id);
+            if (updatedTicket) {
+              setSelectedTicket(updatedTicket);
+            }
+          }
+        }}
+      />
     </div>
   );
 }
