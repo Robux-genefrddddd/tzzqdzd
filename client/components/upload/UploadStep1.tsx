@@ -1,5 +1,7 @@
 import { Upload as UploadIcon, X, Image as ImageIcon } from "lucide-react";
 import { useState } from "react";
+import { validateImage, getValidationErrorMessage } from "@/lib/imageValidationService";
+import { toast } from "sonner";
 
 interface FilePreview {
   id: string;
