@@ -1,15 +1,15 @@
 /**
  * NSFW Validation Endpoint
- * 
+ *
  * POST /api/nsfw-check
- * 
- * Validates image for NSFW content before allowing upload.
- * This endpoint MUST be called server-side for all image uploads.
- * 
+ *
+ * Validates image format and size before allowing upload.
+ * This endpoint validates all images before storage.
+ *
  * Security:
- * - Requires authentication
+ * - File format validation (magic bytes)
+ * - Size limits enforced
  * - Rate limited per user
- * - No direct client access (use image validation service)
  */
 
 import { RequestHandler } from 'express';
