@@ -5,6 +5,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { getUserTickets } from "@/lib/ticketService";
 import { Ticket } from "@/lib/ticketService";
 import { toast } from "sonner";
+import { Loader } from "@/components/ui/loader";
 
 export default function Support() {
   const navigate = useNavigate();
