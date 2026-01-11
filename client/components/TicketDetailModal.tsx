@@ -1,9 +1,10 @@
-import { X, Clock, AlertTriangle } from "lucide-react";
+import { X, Clock, AlertTriangle, Check, CheckCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { toast } from "sonner";
 import { addMessageToTicket, Ticket } from "@/lib/ticketService";
+import { getRoleLogo } from "@/lib/roleLogos";
 
 interface TicketDetailModalProps {
   ticket: Ticket | null;
@@ -24,6 +25,7 @@ export function TicketDetailModal({
 }: TicketDetailModalProps) {
   const [messageText, setMessageText] = useState("");
   const [sending, setSending] = useState(false);
+  const [isTyping, setIsTyping] = useState(false);
 
   if (!ticket) return null;
 
@@ -49,13 +51,14 @@ export function TicketDetailModal({
     }
 
     setSending(true);
+    setIsTyping(true);
 
     try {
       await addMessageToTicket(
         ticket.id,
         currentUserId,
         currentUserName,
-        "support",
+        currentUserRole as "user" | "support" | "admin" | "founder",
         messageText,
       );
 
@@ -67,6 +70,7 @@ export function TicketDetailModal({
       toast.error("Failed to send message");
     } finally {
       setSending(false);
+      setIsTyping(false);
     }
   };
 
@@ -101,6 +105,14 @@ export function TicketDetailModal({
         return "text-gray-400";
     }
   };
+
+  const getRoleBadge = (role: string) => {
+    return getRoleLogo(role);
+  };
+
+  const isUserMessage = (msg: any) => msg.senderRole === "user";
+  const isStaffMessage = (msg: any) =>
+    ["support", "admin", "founder"].includes(msg.senderRole);
 
   return (
     <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4">
@@ -190,34 +202,111 @@ export function TicketDetailModal({
               {/* Messages List */}
               <div className="space-y-3 mb-4 max-h-64 overflow-y-auto">
                 {ticket.messages && ticket.messages.length > 0 ? (
-                  ticket.messages.map((msg) => (
-                    <div key={msg.id} className="text-sm">
-                      <div className="flex items-baseline justify-between mb-1">
-                        <span className="font-medium text-foreground">
-                          {msg.senderName}
-                        </span>
-                        <span className="text-xs text-muted-foreground">
-                          {msg.senderRole === "support" && (
-                            <span className="text-primary ml-2">
-                              🛠️ Support
-                            </span>
-                          )}
-                        </span>
-                        <span className="text-xs text-muted-foreground ml-auto">
-                          {msg.timestamp.toLocaleString()}
-                        </span>
+                  ticket.messages.map((msg) => {
+                    const isUser = isUserMessage(msg);
+                    const isStaff = isStaffMessage(msg);
+                    const badge = getRoleBadge(msg.senderRole);
+
+                    return (
+                      <div
+                        key={msg.id}
+                        className={`flex ${isUser ? "justify-end" : "justify-start"}`}
+                      >
+                        <div
+                          className={`flex gap-2 max-w-xs ${isUser ? "flex-row-reverse" : ""}`}
+                        >
+                          {/* Message Bubble */}
+                          <div className="flex flex-col gap-1 flex-1">
+                            {/* Sender Name with Role Logo */}
+                            {isStaff && !isUser && (
+                              <div className="flex items-center gap-1.5 px-1">
+                                <img
+                                  src={badge.url}
+                                  alt={badge.label}
+                                  className="w-5 h-5 object-contain"
+                                  onError={(e) => {
+                                    // Fallback if image fails to load
+                                    (
+                                      e.target as HTMLImageElement
+                                    ).style.display = "none";
+                                  }}
+                                />
+                                <span className="text-xs font-semibold text-foreground">
+                                  {msg.senderName}
+                                </span>
+                                <span className="text-xs text-muted-foreground">
+                                  {badge.label}
+                                </span>
+                              </div>
+                            )}
+
+                            <div
+                              className={`rounded-lg px-3 py-2 ${
+                                isUser
+                                  ? "bg-primary text-primary-foreground rounded-br-none"
+                                  : isStaff
+                                    ? "bg-secondary/50 text-foreground border border-border/30 rounded-bl-none"
+                                    : "bg-secondary/30 text-foreground/90 rounded-bl-none"
+                              }`}
+                            >
+                              <p className="text-sm break-words whitespace-pre-wrap">
+                                {msg.message}
+                              </p>
+                            </div>
+
+                            {/* Timestamp and Read Status */}
+                            <div
+                              className={`flex items-center gap-1 text-xs text-muted-foreground px-1 ${
+                                isUser ? "justify-end" : "justify-start"
+                              }`}
+                            >
+                              <span>
+                                {msg.timestamp.toLocaleTimeString([], {
+                                  hour: "2-digit",
+                                  minute: "2-digit",
+                                })}
+                              </span>
+                              {isUser && msg.isRead && (
+                                <CheckCheck
+                                  size={14}
+                                  className="text-primary"
+                                />
+                              )}
+                              {isUser && !msg.isRead && (
+                                <Check
+                                  size={14}
+                                  className="text-muted-foreground"
+                                />
+                              )}
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                      <div className="bg-secondary/30 border border-border/20 rounded px-3 py-2">
-                        <p className="text-foreground/90 break-words">
-                          {msg.message}
-                        </p>
-                      </div>
-                    </div>
-                  ))
+                    );
+                  })
                 ) : (
                   <p className="text-xs text-muted-foreground text-center py-4">
                     No messages yet
                   </p>
+                )}
+
+                {/* Typing Indicator */}
+                {isTyping && (
+                  <div className="flex justify-end">
+                    <div className="bg-primary/20 text-primary-foreground rounded-lg px-3 py-2 rounded-br-none">
+                      <div className="flex gap-1">
+                        <div className="w-2 h-2 bg-primary rounded-full animate-bounce"></div>
+                        <div
+                          className="w-2 h-2 bg-primary rounded-full animate-bounce"
+                          style={{ animationDelay: "0.1s" }}
+                        ></div>
+                        <div
+                          className="w-2 h-2 bg-primary rounded-full animate-bounce"
+                          style={{ animationDelay: "0.2s" }}
+                        ></div>
+                      </div>
+                    </div>
+                  </div>
                 )}
               </div>
 

@@ -18,6 +18,7 @@ interface BroadcastMessageModalProps {
   senderName: string;
   senderId: string;
   users: User[];
+  onSuccess?: () => void;
 }
 
 export function BroadcastMessageModal({
@@ -26,6 +27,7 @@ export function BroadcastMessageModal({
   senderName,
   senderId,
   users,
+  onSuccess,
 }: BroadcastMessageModalProps) {
   const [title, setTitle] = useState("");
   const [message, setMessage] = useState("");
@@ -62,6 +64,7 @@ export function BroadcastMessageModal({
       setMessage("");
       setSelectedUsers([]);
       setRecipientType("all");
+      onSuccess?.();
       onClose();
     } catch (error) {
       console.error("Error sending message:", error);

@@ -8,6 +8,8 @@ import {
   Timestamp,
   deleteDoc,
   doc,
+  getDoc,
+  updateDoc,
 } from "firebase/firestore";
 
 export interface BroadcastMessage {
@@ -77,6 +79,36 @@ export async function getAllBroadcastMessages(): Promise<BroadcastMessage[]> {
   }
 }
 
+// Get broadcast messages for a specific user
+export async function getUserBroadcastMessages(
+  userId: string,
+): Promise<BroadcastMessage[]> {
+  try {
+    const q = query(
+      collection(db, BROADCAST_COLLECTION),
+      orderBy("createdAt", "desc"),
+    );
+    const querySnapshot = await getDocs(q);
+
+    const messages = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+      createdAt: doc.data().createdAt?.toDate?.() || new Date(),
+    })) as BroadcastMessage[];
+
+    return messages.filter((msg) => {
+      // Include if sent to all users or sent to this specific user
+      if (msg.recipientType === "all") {
+        return true;
+      }
+      return msg.recipientIds?.includes(userId) || false;
+    });
+  } catch (error) {
+    console.error("Error fetching user broadcast messages:", error);
+    return [];
+  }
+}
+
 // Delete broadcast message (founder only)
 export async function deleteBroadcastMessage(messageId: string): Promise<void> {
   try {
@@ -95,13 +127,13 @@ export async function markBroadcastMessageAsRead(
 ): Promise<void> {
   try {
     const docRef = doc(db, BROADCAST_COLLECTION, messageId);
-    const docSnap = await getDocs(query(collection(db, BROADCAST_COLLECTION)));
+    const docSnap = await getDoc(docRef);
 
-    const message = docSnap.docs.find((d) => d.id === messageId);
-    if (message) {
-      const readBy = message.data().readBy || [];
+    if (docSnap.exists()) {
+      const readBy = docSnap.data().readBy || [];
       if (!readBy.includes(userId)) {
         readBy.push(userId);
+        await updateDoc(docRef, { readBy });
       }
     }
   } catch (error) {

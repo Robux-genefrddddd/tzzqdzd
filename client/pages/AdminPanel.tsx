@@ -37,7 +37,12 @@ import {
   getAllBroadcastMessages,
   deleteBroadcastMessage,
 } from "@/lib/broadcastService";
-import { getAllTickets, Ticket, getTicket } from "@/lib/ticketService";
+import {
+  getAllTickets,
+  Ticket,
+  getTicket,
+  markTicketMessagesAsRead,
+} from "@/lib/ticketService";
 import { Loader } from "@/components/ui/loader";
 
 interface User {
@@ -172,6 +177,16 @@ export default function AdminPanel() {
     await loadData();
   };
 
+  const handleSelectTicket = async (ticket: Ticket) => {
+    setSelectedTicket(ticket);
+    // Mark messages as read when ticket is viewed
+    try {
+      await markTicketMessagesAsRead(ticket.id);
+    } catch (error) {
+      console.error("Error marking messages as read:", error);
+    }
+  };
+
   const handleMaintenanceModeChange = async () => {
     if (userProfile?.role !== "founder") {
       toast.error("Only founders can change maintenance mode");
@@ -214,6 +229,24 @@ export default function AdminPanel() {
       u.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
       u.email.toLowerCase().includes(searchTerm.toLowerCase()),
   );
+
+  // Get category color for tickets
+  const getCategoryColor = (category: string) => {
+    switch (category) {
+      case "bug-report":
+        return "bg-red-500/20 text-red-400 border-red-500/30";
+      case "account-issue":
+        return "bg-orange-500/20 text-orange-400 border-orange-500/30";
+      case "payment":
+        return "bg-green-500/20 text-green-400 border-green-500/30";
+      case "content-removal":
+        return "bg-purple-500/20 text-purple-400 border-purple-500/30";
+      case "abuse-report":
+        return "bg-red-600/20 text-red-500 border-red-600/30";
+      default:
+        return "bg-blue-500/20 text-blue-400 border-blue-500/30";
+    }
+  };
 
   if (
     !userProfile ||
@@ -602,15 +635,17 @@ export default function AdminPanel() {
                   .map((ticket) => (
                     <div
                       key={ticket.id}
-                      onClick={() => setSelectedTicket(ticket)}
+                      onClick={() => handleSelectTicket(ticket)}
                       className="p-3 bg-card border border-border/30 rounded-lg hover:border-border/60 hover:bg-card/80 transition-all cursor-pointer group"
                     >
                       <div className="flex items-start justify-between gap-3">
                         <div className="flex-1 min-w-0">
-                          <div className="flex items-center gap-2 flex-wrap">
-                            <h3 className="text-sm font-medium text-foreground group-hover:text-primary transition-colors truncate">
-                              {ticket.subject}
-                            </h3>
+                          <div className="flex items-center gap-2 flex-wrap mb-2">
+                            <span
+                              className={`px-2 py-1 rounded border text-xs font-semibold ${getCategoryColor(ticket.category)}`}
+                            >
+                              {ticket.category.replace(/-/g, " ").toUpperCase()}
+                            </span>
                             <span
                               className={`px-2 py-0.5 rounded text-xs font-medium ${
                                 ticket.status === "open"
@@ -627,17 +662,20 @@ export default function AdminPanel() {
                               {ticket.status}
                             </span>
                           </div>
+                          <h3 className="text-sm font-medium text-foreground group-hover:text-primary transition-colors truncate mb-1">
+                            {ticket.subject}
+                          </h3>
                           <p className="text-xs text-muted-foreground mt-1">
                             From {ticket.userName} ({ticket.userEmail})
                           </p>
                           <p className="text-xs text-muted-foreground/70 mt-1">
-                            Category: {ticket.category} • Priority:{" "}
+                            Priority:{" "}
                             <span
                               className={
                                 ticket.priority === "critical"
-                                  ? "text-red-400"
+                                  ? "text-red-400 font-semibold"
                                   : ticket.priority === "high"
-                                    ? "text-orange-400"
+                                    ? "text-orange-400 font-semibold"
                                     : ticket.priority === "normal"
                                       ? "text-blue-400"
                                       : "text-gray-400"
@@ -858,6 +896,9 @@ export default function AdminPanel() {
       <BroadcastMessageModal
         isOpen={showBroadcastModal}
         onClose={() => setShowBroadcastModal(false)}
+        senderName={userProfile?.displayName || "Admin"}
+        senderId={user?.uid || ""}
+        users={users}
         onSuccess={() => {
           loadData();
           setShowBroadcastModal(false);
