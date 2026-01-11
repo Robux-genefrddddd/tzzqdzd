@@ -172,6 +172,16 @@ export default function AdminPanel() {
     await loadData();
   };
 
+  const handleSelectTicket = async (ticket: Ticket) => {
+    setSelectedTicket(ticket);
+    // Mark messages as read when ticket is viewed
+    try {
+      await markTicketMessagesAsRead(ticket.id);
+    } catch (error) {
+      console.error("Error marking messages as read:", error);
+    }
+  };
+
   const handleMaintenanceModeChange = async () => {
     if (userProfile?.role !== "founder") {
       toast.error("Only founders can change maintenance mode");
